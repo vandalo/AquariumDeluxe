@@ -52,7 +52,7 @@ public class MainMenuScreen implements Screen {
 			public void clicked(InputEvent event, float x, float y) {
 				//game.setScreen(new testGame(game));
 	            //dispose();
-				//game.setScreen(new StageSelector(mmScreen));
+				game.setScreen(new testGame(game));
 			}
 		});
 		
