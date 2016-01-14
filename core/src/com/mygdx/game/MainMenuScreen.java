@@ -32,7 +32,7 @@ public class MainMenuScreen implements Screen {
 	
     public MainMenuScreen(final AquariumDeluxe gam) {
         game = gam;
-        mmScreen = this;
+        mmScreen = this; 
     }
     
 	@Override
