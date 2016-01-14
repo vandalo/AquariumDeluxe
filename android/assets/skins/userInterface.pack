@@ -1,0 +1,177 @@
+
+userInterface.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+fondoNombre
+  rotate: false
+  xy: 0, 4
+  size: 84, 60
+  split: 41, 41, 9, 16
+  orig: 84, 60
+  offset: 0, 0
+  index: -1
+backArrow
+  rotate: false
+  xy: 84, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+backArrowPressed
+  rotate: false
+  xy: 148, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+butonAzul
+  rotate: false
+  xy: 212, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+butonRojo
+  rotate: false
+  xy: 276, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+threeStars
+  rotate: false
+  xy: 340, 32
+  size: 90, 32
+  orig: 90, 32
+  offset: 0, 0
+  index: -1
+twoStars
+  rotate: false
+  xy: 340, 0
+  size: 90, 32
+  orig: 90, 32
+  offset: 0, 0
+  index: -1
+button1
+  rotate: false
+  xy: 430, 9
+  size: 64, 55
+  split: 12, 14, 16, 17
+  orig: 64, 55
+  offset: 0, 0
+  index: -1
+button2
+  rotate: false
+  xy: 494, 9
+  size: 64, 55
+  split: 12, 14, 16, 17
+  orig: 64, 55
+  offset: 0, 0
+  index: -1
+button3
+  rotate: false
+  xy: 558, 9
+  size: 64, 55
+  split: 12, 14, 16, 17
+  orig: 64, 55
+  offset: 0, 0
+  index: -1
+Padlock_locked
+  rotate: false
+  xy: 622, 11
+  size: 36, 53
+  orig: 36, 53
+  offset: 0, 0
+  index: -1
+fondoyborde
+  rotate: false
+  xy: 658, 37
+  size: 60, 27
+  split: 6, 7, 6, 6
+  orig: 60, 27
+  offset: 0, 0
+  index: -1
+zlock
+  rotate: false
+  xy: 718, 29
+  size: 34, 35
+  split: 6, 6, 25, 6
+  orig: 34, 35
+  offset: 0, 0
+  index: -1
+zunlock
+  rotate: false
+  xy: 752, 29
+  size: 34, 35
+  split: 6, 6, 25, 6
+  orig: 34, 35
+  offset: 0, 0
+  index: -1
+button_blanco_peke
+  rotate: false
+  xy: 786, 32
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+dissabledbutton
+  rotate: false
+  xy: 786, 0
+  size: 32, 32
+  split: 0, 0, 0, 0
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+focusedbutton
+  rotate: false
+  xy: 818, 32
+  size: 32, 32
+  split: 0, 0, 0, 0
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+normalbutton
+  rotate: false
+  xy: 818, 0
+  size: 32, 32
+  split: 0, 0, 0, 0
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+pressedbutton
+  rotate: false
+  xy: 850, 32
+  size: 32, 32
+  split: 0, 0, 0, 0
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+shadow
+  rotate: false
+  xy: 850, 0
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+vozOff
+  rotate: false
+  xy: 882, 32
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+vozOn
+  rotate: false
+  xy: 882, 0
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+oneStars
+  rotate: false
+  xy: 914, 37
+  size: 27, 27
+  orig: 27, 27
+  offset: 0, 0
+  index: -1

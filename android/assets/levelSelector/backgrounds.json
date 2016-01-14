@@ -1,0 +1,12 @@
+{
+	"com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle":  {
+		"field": { "imageUp": "fondoField", "imageDown": "fondoField", 
+			 "pressedOffsetX": 1, "pressedOffsetY": -1 },
+		 "iceberg": { "imageUp": "fondoIceberg", "imageDown": "fondoIceberg", 
+			 "pressedOffsetX": 1, "pressedOffsetY": -1 },
+		 "hill": { "imageUp": "fondoHill", "imageDown": "fondoHill", 
+			 "pressedOffsetX": 1, "pressedOffsetY": -1 },
+		 "volcano": { "imageUp": "fondoVolcano", "imageDown": "fondoVolcano", 
+			 "pressedOffsetX": 1, "pressedOffsetY": -1 },
+	}, 
+}

@@ -1,0 +1,166 @@
+
+entities.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+explosionBlue3
+  rotate: false
+  xy: 0, 24
+  size: 39, 37
+  orig: 39, 37
+  offset: 0, 0
+  index: -1
+explosionPurple3
+  rotate: false
+  xy: 39, 24
+  size: 39, 37
+  orig: 39, 37
+  offset: 0, 0
+  index: -1
+explosionRed3
+  rotate: false
+  xy: 78, 24
+  size: 39, 37
+  orig: 39, 37
+  offset: 0, 0
+  index: -1
+explosionBlue2
+  rotate: false
+  xy: 117, 27
+  size: 35, 34
+  orig: 35, 34
+  offset: 0, 0
+  index: -1
+explosionPurple2
+  rotate: false
+  xy: 152, 27
+  size: 35, 34
+  orig: 35, 34
+  offset: 0, 0
+  index: -1
+explosionRed2
+  rotate: false
+  xy: 187, 27
+  size: 35, 34
+  orig: 35, 34
+  offset: 0, 0
+  index: -1
+shieldBall
+  rotate: false
+  xy: 222, 29
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+ballDefenderBlue
+  rotate: false
+  xy: 254, 25
+  size: 26, 36
+  orig: 26, 36
+  offset: 0, 0
+  index: -1
+ballDefenderPurple
+  rotate: false
+  xy: 280, 25
+  size: 26, 36
+  orig: 26, 36
+  offset: 0, 0
+  index: -1
+ballDefenderRed
+  rotate: false
+  xy: 306, 25
+  size: 26, 36
+  orig: 26, 36
+  offset: 0, 0
+  index: -1
+explosionBlue1
+  rotate: false
+  xy: 332, 33
+  size: 29, 28
+  orig: 29, 28
+  offset: 0, 0
+  index: -1
+explosionPurple1
+  rotate: false
+  xy: 361, 33
+  size: 29, 28
+  orig: 29, 28
+  offset: 0, 0
+  index: -1
+explosionRed1
+  rotate: false
+  xy: 390, 33
+  size: 29, 28
+  orig: 29, 28
+  offset: 0, 0
+  index: -1
+ballAuxBlue
+  rotate: false
+  xy: 0, 0
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: -1
+ballAuxPurple
+  rotate: false
+  xy: 419, 37
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: -1
+ballAuxRed
+  rotate: false
+  xy: 24, 0
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: -1
+ballBasicBlue
+  rotate: false
+  xy: 443, 37
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: -1
+ballBasicPurple
+  rotate: false
+  xy: 48, 0
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: -1
+ballBasicRed
+  rotate: false
+  xy: 467, 37
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: -1
+ballBoss
+  rotate: false
+  xy: 72, 0
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: -1
+ballFastBlue
+  rotate: false
+  xy: 96, 0
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: -1
+ballFastPurple
+  rotate: false
+  xy: 120, 3
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: -1
+ballFastRed
+  rotate: false
+  xy: 144, 3
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: -1
