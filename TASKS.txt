@@ -10,3 +10,4 @@
 -Hacer menu de arriba (slots de las casillas), al pulsar la 1a ha de añadir un pez (justo en medio y empiece la ia, ha de caer)
 -Cambiar color cuando tienen hambre
 -Otro sprite al morir el pez (cae hasta desaparecer)
+-Corregir gitignore
