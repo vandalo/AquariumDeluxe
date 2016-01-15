@@ -5,6 +5,8 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -14,7 +16,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.Scaling;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.mygdx.game.peces.Pez;
+import com.mygdx.game.peces.PezBasic;
 
 public class testGame implements Screen {
 	public OrthographicCamera camera;
@@ -24,38 +29,35 @@ public class testGame implements Screen {
 	World world;
 	Box2DDebugRenderer debugRenderer;
 	Stage stage;
+    private Sprite mapSprite;
 	public Array<Body> bodiesToDestroy = new Array<Body>(false, 16);
 	private TextureAtlas gameUI, entities;
 	private Table container, table;
 	private ScrollPane scrollPane;
 	private Skin skin;
+	private Pez pez;
 	
 	public testGame(final AquariumDeluxe game) {
 		this.game = game;
 		float w = Gdx.graphics.getWidth();
-		
+		mapSprite = new Sprite(new Texture("backgroundd.png"));
+        mapSprite.setPosition(0, 0);                                            
+        mapSprite.setSize(w, Gdx.graphics.getHeight()-100); 
 		//setting up camera and world
 	    camera = new OrthographicCamera();
-	    camera.setToOrtho(false,w+w,0);
+	    camera.setToOrtho(false,w,Gdx.graphics.getHeight());
 		touchPos = new Vector3();
 		world = new World(new Vector2(0, 0),true);
 		//world.setContactListener(new ContListener(this));
 		gameUI = new TextureAtlas(Gdx.files.internal("skins/gameUI.pack"));
 		entities = new TextureAtlas(Gdx.files.internal("skins/entities.pack"));
 		
-		setupBalls();
+		pez = new PezBasic(entities.createSprite("ballBasicBlue"), world);
+		pez.setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
+		pez.initBody(world, 0);
+		
         debugRenderer = new Box2DDebugRenderer();
         setupActors();
-        
-        //AI PART//or evade        
-        /*final Flee<Vector2> reachB = new Flee<Vector2>(((BallBasicAI)balls[0].body.getUserData()), 
-        		((BallBasicAI)balls[1].body.getUserData()));
-        ((BallBasicAI)balls[0].body.getUserData()).setBehavior(reachB);*/
-        
-        /*final Pursue<Vector2> seekSB = new Pursue<Vector2>(((BallBasicAI)balls[1].body.getUserData()), 
-        		((BallBasicAI)balls[0].body.getUserData()));
-        ((BallBasicAI)balls[1].body.getUserData()).setBehavior(seekSB);
-        balls[1].usingAI = true;*/
         
       //setting up processors
   		InputMultiplexer inp = new InputMultiplexer();
@@ -66,16 +68,8 @@ public class testGame implements Screen {
 	}
 
 
-	private void setupBalls() {
-        /*balls = new Ball[3];
-		balls[0] = new BallBasicAI(entities.createSprite("ballBasicRed"), lay1, world, loadingBarBackground, loadingBar,
-				regionsRed);
-		initBodys(ply.balls, 5);*/
-	}
-
-
 	private void setupActors() {
-		stage = new Stage(new ExtendViewport(800, 480));
+		stage = new Stage(new StretchViewport(800, 480));
 		skin = new Skin(gameUI);
 		container = new Table(skin);
 		table = new Table();
@@ -91,8 +85,7 @@ public class testGame implements Screen {
 //			table.add(image[i]).minSize(Gdx.graphics.getWidth()/16, Gdx.graphics.getWidth()/16).spaceRight(20);
 			table.add(image[i]).minSize(60, 60).spaceRight(20);
 		}	*/
-//		container.setBounds(Gdx.graphics.getWidth()/6.5f, Gdx.graphics.getWidth()/32, Gdx.graphics.getWidth() - 200, Gdx.graphics.getWidth()/16);//was 150, 25, 600, 
-		container.setBounds(150, 10, 800 - 200, 64);
+		container.setBounds(0, Gdx.graphics.getHeight()-100, 800, 100);
 		container.bottom();
 		container.add(scrollPane).padLeft(10).padRight(10);
 		container.getColor().mul(1, 1, 1, 0.65f);
@@ -100,18 +93,9 @@ public class testGame implements Screen {
 	}
 
 
-	/*private void initBodys(Array<Ball> player1, int level) {
-		for (int i = 0; i < player1.size; i++){
-	        player1.get(i).initBody(world, 0);
-	        player1.get(i).setGame(this);
-		}	
-		balls[1].initBody(world, 1);
-	}*/
-
-
 	@Override
 	public void render(float delta) {
-		//delta = Math.min(0.06f, delta);
+		delta = Math.min(0.06f, delta);
 		Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
@@ -123,20 +107,12 @@ public class testGame implements Screen {
 			body.setActive(false);
 			bodiesToDestroy.removeValue(body, true);
 		}
-		//if (touchingPad) ((Ball)balls[2].body.getUserData()).stopMoving = false; //TODO WITH SELECTED BALL
-		//game.batch.enableBlending();
 		camera.update();
-		//renderer.render();
-		//camera.rotate(-0.25f, 0, 0, 1);
-		/*renderer.getBatch().begin();
-			renderer.renderTileLayer((TiledMapTileLayer) map.getLayers().get(0));
-			renderer.customRender(lay1, coords, ply.balls);
-			renderer.renderTileLayer((TiledMapTileLayer) map.getLayers().get(2));
-			balls[1].draw(renderer.getBatch());
-			//player.setColor(0, 0, 1, 1);			
-			renderer.getBatch().setProjectionMatrix(camera.projection);
-			game.font.draw(renderer.getBatch(), "fps: " + Gdx.graphics.getFramesPerSecond(), 280 *camera.zoom, 260*camera.zoom);
-		renderer.getBatch().end();*/
+		game.batch.begin();
+			mapSprite.draw(game.batch);
+			pez.draw(game.batch);
+		game.batch.end();
+		
 		debugRenderer.render(world, camera.combined);
 		container.debugTable();
 		stage.getViewport().apply();
@@ -147,12 +123,12 @@ public class testGame implements Screen {
 
 
 	public void resize (int width, int height) { 
-		//((ScalingViewport)stage.getViewport()).setScaling(Scaling.fit);
 		stage.getViewport().update(width, height,true);
-		//container.invalidateHierarchy();
-		//stage.getCamera().update();
 		camera.viewportHeight = height;
 		camera.viewportWidth = width;
+		camera = new OrthographicCamera();
+	    camera.setToOrtho(false,width,Gdx.graphics.getHeight());
+	    new Stage(new StretchViewport(width,Gdx.graphics.getHeight()));
 	}
 
 	public void pause () { 
@@ -168,6 +144,7 @@ public class testGame implements Screen {
     	gameUI.dispose();
     	entities.dispose();
     	debugRenderer.dispose();
+    	mapSprite.getTexture().dispose();
     }
 
 	@Override
