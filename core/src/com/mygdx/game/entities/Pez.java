@@ -1,54 +1,44 @@
-package com.mygdx.game.peces;
+package com.mygdx.game.entities;
 
 
 import java.util.Random;
 
-import sun.rmi.runtime.Log;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 
 public abstract class Pez extends Sprite {
 	
 	private Vector2 velocity = new Vector2();
 	private float spriteW, spriteH;
-	public boolean alive, stopMoving, usingAI;
+	public boolean alive;
 	protected boolean collisionX, collisionY;
 	public Body body;
 	final short PECES = 0x1;    // 0001
     final short COMIDA = 0x1 << 1; // 0010 or 0x2 in hex
-    final short ENEMIGO = 0x1 << 2; // 0010 or 0x2 in hex
+    final short ENEMIGO = 0x11 << 1; // 0010 or 0x2 in hex
     protected int tamanoPez;
     protected float tiempoDesdeComida;
     private Random ran;
     private float dirX, dirY;
     private int steps;
-    private boolean collided;
     protected float xSpeed, ySpeed;
     Sprite spriteDer, spriteIzq;
 	
 	public Pez(Sprite sprite, World world, Sprite derecha, Sprite izquierda){
 		super(sprite);
 		alive = true;
-		stopMoving = true;
 		spriteW = getWidth(); 
 		spriteH = getHeight(); 
-		collided = false;
 		tamanoPez = 0;
 		tiempoDesdeComida = 0f;
 		ran = new Random();
 		steps = 0;
 		dirX = 10;
 		dirY = 5;
-		collided = false;
 		spriteDer = derecha;
 		spriteIzq = izquierda;
 	}
@@ -83,7 +73,6 @@ public abstract class Pez extends Sprite {
 				collisionX = collidesRight(getX() + velocity.x * deltaTime, getY());
 			}
 			if (collisionX) {
-				collided = true;
 				if (body.getLinearVelocity().x < 0) {
 					
 					//HA CHOCADO CON LA IZQUIERDA, VAMOS HACIA LA DERECHA
@@ -109,7 +98,6 @@ public abstract class Pez extends Sprite {
 			}
 			
 			if (collisionY) {
-				collided = true;
 				if (body.getLinearVelocity().y < 0) {
 					body.setLinearVelocity(body.getLinearVelocity().x, -body.getLinearVelocity().y);
 					body.setTransform(body.getPosition().x, body.getPosition().y + 1, body.getAngle()); 

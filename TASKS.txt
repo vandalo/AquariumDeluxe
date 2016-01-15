@@ -1,0 +1,12 @@
+-Comentar codigo
+-Mejorar IA
+-Que los peces no tengan el mismo numero de steps (random en la clase pez)
+-Cuadrar body con imagen
+-Los peces han de comerse la comida (si estan hambrientos, si lo estan, la IA les envia hacia la comida)
+-Los bodys que estan muertos (comida), desaparezcan
+-Añadir lo que falte al dispose (textures, sprites)
+-Corregir resize
+-Vector de peces, enemigos, comida, el vector de comida ha de estar inicializado o buscar alternativa a pintar comida para que si dejo de pintar 1 comida no deje de pintarlas todas
+-Hacer menu de arriba (slots de las casillas), al pulsar la 1a ha de añadir un pez (justo en medio y empiece la ia, ha de caer)
+-Cambiar color cuando tienen hambre
+-Otro sprite al morir el pez (cae hasta desaparecer)

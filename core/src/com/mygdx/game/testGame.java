@@ -16,26 +16,29 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.mygdx.game.peces.Pez;
-import com.mygdx.game.peces.PezBasic;
+import com.mygdx.game.entities.Comida;
+import com.mygdx.game.entities.Pez;
+import com.mygdx.game.entities.PezBasic;
+import com.mygdx.game.listeners.InpListener;
 
 public class testGame implements Screen {
 	public OrthographicCamera camera;
 	final AquariumDeluxe game;
 	//public Ball[] balls;
 	public Vector3 touchPos, last_touch_down = new Vector3();
-	World world;
+	public World world;
 	Box2DDebugRenderer debugRenderer;
 	Stage stage;
     private Sprite mapSprite;
 	public Array<Body> bodiesToDestroy = new Array<Body>(false, 16);
-	private TextureAtlas gameUI, entities;
+	public TextureAtlas gameUI, entities;
 	private Table container, table;
 	private ScrollPane scrollPane;
 	private Skin skin;
 	private Pez pez, pez2;
+	public Comida comida1;
+	static public boolean pintarComida;
 	
 	public testGame(final AquariumDeluxe game) {
 		this.game = game;
@@ -58,7 +61,7 @@ public class testGame implements Screen {
 		
 		pez2 = new PezBasic(entities.createSprite("ballDefenderPurple"), world, entities);
 		pez2.setPosition(Gdx.graphics.getWidth()/2 + 20, Gdx.graphics.getHeight()/2);
-		pez2.initBody(world, 0);
+		pez2.initBody(world, 1);
 		
         debugRenderer = new Box2DDebugRenderer();
         setupActors();
@@ -66,9 +69,10 @@ public class testGame implements Screen {
       //setting up processors
   		InputMultiplexer inp = new InputMultiplexer();
   		inp.addProcessor(stage);
-  		//inp.addProcessor(new InpListener(this));
+  		inp.addProcessor(new InpListener(this));
   		//inp.addProcessor(new GestureDetector(new GestListener(this)));
   		Gdx.input.setInputProcessor(inp);
+  		pintarComida = false;
 	}
 
 
@@ -116,6 +120,7 @@ public class testGame implements Screen {
 			mapSprite.draw(game.batch);
 			pez.draw(game.batch);
 			pez2.draw(game.batch);
+			if (pintarComida) comida1.draw(game.batch);
 		game.batch.end();
 		
 		debugRenderer.render(world, camera.combined);
