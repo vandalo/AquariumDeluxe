@@ -35,7 +35,7 @@ public class testGame implements Screen {
 	private Table container, table;
 	private ScrollPane scrollPane;
 	private Skin skin;
-	private Pez pez;
+	private Pez pez, pez2;
 	
 	public testGame(final AquariumDeluxe game) {
 		this.game = game;
@@ -52,9 +52,13 @@ public class testGame implements Screen {
 		gameUI = new TextureAtlas(Gdx.files.internal("skins/gameUI.pack"));
 		entities = new TextureAtlas(Gdx.files.internal("skins/entities.pack"));
 		
-		pez = new PezBasic(entities.createSprite("ballBasicBlue"), world);
-		pez.setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
+		pez = new PezBasic(entities.createSprite("ballBasicBlue"), world, entities);
+		pez.setPosition(Gdx.graphics.getWidth()/2 - 10, Gdx.graphics.getHeight()/2);
 		pez.initBody(world, 0);
+		
+		pez2 = new PezBasic(entities.createSprite("ballDefenderPurple"), world, entities);
+		pez2.setPosition(Gdx.graphics.getWidth()/2 + 20, Gdx.graphics.getHeight()/2);
+		pez2.initBody(world, 0);
 		
         debugRenderer = new Box2DDebugRenderer();
         setupActors();
@@ -111,6 +115,7 @@ public class testGame implements Screen {
 		game.batch.begin();
 			mapSprite.draw(game.batch);
 			pez.draw(game.batch);
+			pez2.draw(game.batch);
 		game.batch.end();
 		
 		debugRenderer.render(world, camera.combined);

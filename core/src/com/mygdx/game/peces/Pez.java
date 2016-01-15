@@ -32,8 +32,10 @@ public abstract class Pez extends Sprite {
     private float dirX, dirY;
     private int steps;
     private boolean collided;
+    protected float xSpeed, ySpeed;
+    Sprite spriteDer, spriteIzq;
 	
-	public Pez(Sprite sprite, World world){
+	public Pez(Sprite sprite, World world, Sprite derecha, Sprite izquierda){
 		super(sprite);
 		alive = true;
 		stopMoving = true;
@@ -47,6 +49,8 @@ public abstract class Pez extends Sprite {
 		dirX = 10;
 		dirY = 5;
 		collided = false;
+		spriteDer = derecha;
+		spriteIzq = izquierda;
 	}
 	
 	public abstract void initBody(World world, int playerNum);
@@ -118,6 +122,8 @@ public abstract class Pez extends Sprite {
 		//}
 		
 		//SET POSITION DE LA IMAGEN K ACOMPANA AL BODY
+		if (body.getLinearVelocity().x < 0) set(spriteIzq);
+		else set(spriteDer);
 		setPosition(body.getPosition().x - spriteW/2, body.getPosition().y - spriteH/2);
 	}
 	

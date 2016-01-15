@@ -2,6 +2,7 @@ package com.mygdx.game.peces;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -12,8 +13,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 
 public class PezBasic extends Pez{
 	
-	public PezBasic(Sprite sprite, World world) {
-		super(sprite, world);
+	public PezBasic(Sprite sprite, World world, TextureAtlas entities) {
+		super(sprite, world, entities.createSprite("ballBoss"), entities.createSprite("ballFastBlue"));
+		xSpeed = 35;
+		ySpeed = 20;
 	}
 	
 	
