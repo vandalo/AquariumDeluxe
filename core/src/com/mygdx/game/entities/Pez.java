@@ -136,11 +136,11 @@ public abstract class Pez extends Sprite {
 		//random vertical
 		else if (steps % (randomSteep/2) == 0){
 			dirY = ran.nextFloat();	
-			if (dirY < 0.2) dirY = -200;
-			else if(dirY < 0.4) dirY = -100;	
+			if (dirY < 0.2) dirY = -20;
+			else if(dirY < 0.4) dirY = -10;	
 			else if (dirY < 0.6) dirY = 0;
-			else if(dirY < 0.8) dirY = 100;
-			else dirY = 200;
+			else if(dirY < 0.8) dirY = 10;
+			else dirY = 20;
 			body.setLinearVelocity(dirX, dirY);
 		}
 		
