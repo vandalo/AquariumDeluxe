@@ -146,6 +146,7 @@ public abstract class Pez extends Sprite {
 		
 		if (steps % 360000 == 0) steps = 0;
 		steps++;
+		tiempoDesdeComida++;
 		
 	}
 
