@@ -21,7 +21,7 @@ public class PezBasic extends Pez{
 		BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         //bodyDef.fixedRotation = true;
-        bodyDef.linearDamping = 0.1f;
+        bodyDef.linearDamping = 0.0f;
         bodyDef.position.set(getX() + getWidth()/2, getY() + getHeight()/2);
         body = world.createBody(bodyDef);
         body.setUserData(this);

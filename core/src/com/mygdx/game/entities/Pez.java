@@ -27,6 +27,7 @@ public abstract class Pez extends Sprite {
     private int steps;
     protected float xSpeed, ySpeed;
     Sprite spriteDer, spriteIzq;
+    private int randomSteep;
 	
 	public Pez(Sprite sprite, World world, Sprite derecha, Sprite izquierda){
 		super(sprite);
@@ -41,6 +42,8 @@ public abstract class Pez extends Sprite {
 		dirY = 5;
 		spriteDer = derecha;
 		spriteIzq = izquierda;
+		randomSteep = (int) (680 + (ran.nextFloat() * 100));
+		
 	}
 	
 	public abstract void initBody(World world, int playerNum);
@@ -118,15 +121,17 @@ public abstract class Pez extends Sprite {
 	
 	private void choseDirection() {
 		//random horizontal
-		if (steps % 360 == 0){
+		if (steps % randomSteep == 0){
 			dirX = (ran.nextFloat() > 0.5) ? 35 : -35;	
 			body.setLinearVelocity(dirX, dirY);
 		}
 		//random vertical
-		else if (steps % 180 == 0){
+		else if (steps % (randomSteep/3) == 0){
 			dirY = ran.nextFloat();	
-			if (dirY < 0.33) dirY = -20;
-			else if (dirY < 0.66) dirY = 0;
+			if (dirY < 0.2) dirY = -20;
+			else if(dirY < 0.4) dirY = -10;	
+			else if (dirY < 0.6) dirY = 0;
+			else if(dirY < 0.8) dirY = 10;
 			else dirY = 20;
 			body.setLinearVelocity(dirX, dirY);
 		}
