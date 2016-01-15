@@ -43,7 +43,7 @@ public abstract class Pez extends Sprite {
 		dirY = 5;
 		spriteDer = derecha;
 		spriteIzq = izquierda;
-		randomSteep = (int) (150 + ran.nextInt(100));
+		randomSteep = (int) (650 + ran.nextInt(100));
 		if (randomSteep % 2 != 0) randomSteep++;
 		width = Gdx.graphics.getWidth()*9/10;
 		height = Gdx.graphics.getHeight()*3/4;
@@ -134,7 +134,7 @@ public abstract class Pez extends Sprite {
 			body.setLinearVelocity(dirX, dirY);
 		}
 		//random vertical
-		else if (steps % (randomSteep/2) == 0){
+		else if (steps % (randomSteep/3) == 0){
 			dirY = ran.nextFloat();	
 			if (dirY < 0.2) dirY = -20;
 			else if(dirY < 0.4) dirY = -10;	
