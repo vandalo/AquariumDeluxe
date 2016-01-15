@@ -28,6 +28,7 @@ public abstract class Pez extends Sprite {
     protected float xSpeed, ySpeed;
     Sprite spriteDer, spriteIzq;
     private int randomSteep;
+    protected int width, height;
 	
 	public Pez(Sprite sprite, World world, Sprite derecha, Sprite izquierda){
 		super(sprite);
@@ -42,12 +43,19 @@ public abstract class Pez extends Sprite {
 		dirY = 5;
 		spriteDer = derecha;
 		spriteIzq = izquierda;
-		randomSteep = (int) (680 + (ran.nextFloat() * 100));
+		randomSteep = (int) (150 + ran.nextInt(100));
+		if (randomSteep % 2 != 0) randomSteep++;
+		width = Gdx.graphics.getWidth()*9/10;
+		height = Gdx.graphics.getHeight()*3/4;
 		
 	}
 	
 	public abstract void initBody(World world, int playerNum);
 	
+	public void updateSizes(int width, int height){
+		/*this.width = width * 5 / 10;
+		this.height = height * 2/4;*/
+	}
 
 	public void draw(Batch spriteBatch){
 		update(Gdx.graphics.getDeltaTime());
@@ -126,13 +134,13 @@ public abstract class Pez extends Sprite {
 			body.setLinearVelocity(dirX, dirY);
 		}
 		//random vertical
-		else if (steps % (randomSteep/3) == 0){
+		else if (steps % (randomSteep/2) == 0){
 			dirY = ran.nextFloat();	
-			if (dirY < 0.2) dirY = -20;
-			else if(dirY < 0.4) dirY = -10;	
+			if (dirY < 0.2) dirY = -200;
+			else if(dirY < 0.4) dirY = -100;	
 			else if (dirY < 0.6) dirY = 0;
-			else if(dirY < 0.8) dirY = 10;
-			else dirY = 20;
+			else if(dirY < 0.8) dirY = 100;
+			else dirY = 200;
 			body.setLinearVelocity(dirX, dirY);
 		}
 		
@@ -142,7 +150,7 @@ public abstract class Pez extends Sprite {
 	}
 
 	private boolean isCellBlocked(float x, float y){
-		if (x < 5 || x > Gdx.graphics.getWidth() - 5 || y > Gdx.graphics.getHeight()-120 || y < 10) return true;
+		if (x < 5 || (x > width) || (y > height) || y < 10) return true;
 		return false;
 	}
 	

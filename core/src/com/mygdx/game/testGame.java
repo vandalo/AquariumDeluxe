@@ -104,7 +104,7 @@ public class testGame implements Screen {
 	@Override
 	public void render(float delta) {
 		delta = Math.min(0.06f, delta);
-		Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		Gdx.gl.glViewport(0, 0, 800, Gdx.graphics.getHeight());
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
@@ -134,11 +134,17 @@ public class testGame implements Screen {
 
 	public void resize (int width, int height) { 
 		stage.getViewport().update(width, height,true);
+		/*pez.updateSizes(width, height);
+		pez2.updateSizes(width, height);*/
+	    //
+	    //new Stage(new StretchViewport(width,Gdx.graphics.getHeight()));
+	    //pez.body.setTransform(pez.getX(), pez.getY(), pez.body.getAngle());
+	    /*camera.viewportWidth = width;
 		camera.viewportHeight = height;
-		camera.viewportWidth = width;
-		camera = new OrthographicCamera();
-	    camera.setToOrtho(false,width,Gdx.graphics.getHeight());
-	    new Stage(new StretchViewport(width,Gdx.graphics.getHeight()));
+		camera.setToOrtho(false,width,Gdx.graphics.getHeight());
+		camera.update();
+
+		game.batch.setProjectionMatrix(camera.combined);*/
 	}
 
 	public void pause () { 
