@@ -5,6 +5,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+//Primera classe que se llama, solo hace setScreen al Logo de NoxerGames
 public class AquariumDeluxe extends Game {
 	public SpriteBatch batch;
 	public BitmapFont font;	

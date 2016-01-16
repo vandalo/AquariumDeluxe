@@ -13,6 +13,8 @@ import static com.badlogic.gdx.math.Interpolation.*;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
+//Carga el logo de Noxer y lo mueve al final de todo
+//setScreen MainMenu
 public class LogoScreen implements Screen {
 
 	private OrthographicCamera camera;
