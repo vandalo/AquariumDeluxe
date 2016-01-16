@@ -1,11 +1,10 @@
-package com.mygdx.game;
+package com.mygdx.game.partidas;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
@@ -17,35 +16,33 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.mygdx.game.AquariumDeluxe;
 import com.mygdx.game.entities.Comida;
 import com.mygdx.game.entities.Pez;
-import com.mygdx.game.entities.PezBasic;
 import com.mygdx.game.listeners.InpListener;
 
 public class testGame implements Screen {
 	public OrthographicCamera camera;
 	final AquariumDeluxe game;
-	//public Ball[] balls;
 	public Vector3 touchPos, last_touch_down = new Vector3();
 	public World world;
 	Box2DDebugRenderer debugRenderer;
 	Stage stage;
-    private Sprite mapSprite;
+	protected float w;
+    protected Sprite mapSprite;
 	public Array<Body> bodiesToDestroy = new Array<Body>(false, 16);
 	public TextureAtlas gameUI, entities;
 	private Table container, table;
 	private ScrollPane scrollPane;
 	private Skin skin;
-	private Pez pez, pez2;
-	public Comida comida1;
 	static public boolean pintarComida;
+	
+	protected Array<Pez> peces;
+	public Array<Comida> comidas;
 	
 	public testGame(final AquariumDeluxe game) {
 		this.game = game;
-		float w = Gdx.graphics.getWidth();
-		mapSprite = new Sprite(new Texture("backgroundd.png"));
-        mapSprite.setPosition(0, 0);                                            
-        mapSprite.setSize(w, Gdx.graphics.getHeight()-100); 
+		 w = Gdx.graphics.getWidth();
 		//setting up camera and world
 	    camera = new OrthographicCamera();
 	    camera.setToOrtho(false,w,Gdx.graphics.getHeight());
@@ -54,14 +51,6 @@ public class testGame implements Screen {
 		//world.setContactListener(new ContListener(this));
 		gameUI = new TextureAtlas(Gdx.files.internal("skins/gameUI.pack"));
 		entities = new TextureAtlas(Gdx.files.internal("skins/entities.pack"));
-		
-		pez = new PezBasic(entities.createSprite("ballBasicBlue"), world, entities);
-		pez.setPosition(Gdx.graphics.getWidth()/2 - 10, Gdx.graphics.getHeight()/2);
-		pez.initBody(world, 0);
-		
-		pez2 = new PezBasic(entities.createSprite("ballDefenderPurple"), world, entities);
-		pez2.setPosition(Gdx.graphics.getWidth()/2 + 20, Gdx.graphics.getHeight()/2);
-		pez2.initBody(world, 1);
 		
         debugRenderer = new Box2DDebugRenderer();
         setupActors();
@@ -118,9 +107,10 @@ public class testGame implements Screen {
 		camera.update();
 		game.batch.begin();
 			mapSprite.draw(game.batch);
-			pez.draw(game.batch);
-			pez2.draw(game.batch);
-			if (pintarComida) comida1.draw(game.batch);
+			for (int i = 0; i < peces.size; i++){
+				peces.get(i).draw(game.batch);
+			}
+			if (pintarComida) comidas.get(0).draw(game.batch);
 		game.batch.end();
 		
 		debugRenderer.render(world, camera.combined);

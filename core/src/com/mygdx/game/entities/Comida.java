@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
-import com.mygdx.game.testGame;
+import com.mygdx.game.partidas.testGame;
 
 public abstract class Comida extends Sprite {
 	
@@ -16,7 +16,7 @@ public abstract class Comida extends Sprite {
 	final short PECES = 0x1;    // 0001
     final short COMIDA = 0x1 << 1; // 0010 or 0x2 in hex
     final short ENEMIGO = 0x1 << 2; // 0010 or 0x2 in hex
-    protected int poderComida;
+    protected int poderComida, estado; //activo 1, inactivo 0
     protected float xSpeed, ySpeed;
 	
 	public Comida(Sprite sprite, World world){

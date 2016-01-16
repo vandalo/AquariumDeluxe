@@ -13,6 +13,7 @@ public class ComidaBasic extends Comida{
 		super(sprite, world);
 		xSpeed = 35;
 		ySpeed = -20;
+		estado = 0;
 	}
 	
 	
