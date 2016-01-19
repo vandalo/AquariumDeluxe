@@ -11,7 +11,9 @@ import com.badlogic.gdx.physics.box2d.World;
 public class PezBasic extends Pez{
 	
 	public PezBasic(Sprite sprite, World world, TextureAtlas entities) {
-		super(sprite, world, entities.createSprite("ballBoss"), entities.createSprite("ballFastBlue"));
+		super(sprite, world, entities.createSprite("ballBoss"), 
+							 entities.createSprite("ballFastBlue"),
+							 entities.createSprite("ballFastBlue"));
 		xSpeed = 35;
 		ySpeed = 20;
 	}

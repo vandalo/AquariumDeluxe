@@ -10,6 +10,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 
+import sun.rmi.runtime.Log;
+
 public abstract class Pez extends Sprite {
 	
 	private Vector2 velocity = new Vector2();
@@ -26,11 +28,12 @@ public abstract class Pez extends Sprite {
     private float dirX, dirY;
     private int steps;
     protected float xSpeed, ySpeed;
-    Sprite spriteDer, spriteIzq;
+    Sprite spriteDer, spriteIzq, spriteMuerto;
     private int randomSteep;
     protected int width, height;
 	
-	public Pez(Sprite sprite, World world, Sprite derecha, Sprite izquierda){
+	public Pez(Sprite sprite, World world, Sprite derecha, Sprite izquierda,
+			Sprite muerto){
 		super(sprite);
 		alive = true;
 		spriteW = getWidth(); 
@@ -43,6 +46,7 @@ public abstract class Pez extends Sprite {
 		dirY = 5;
 		spriteDer = derecha;
 		spriteIzq = izquierda;
+		spriteMuerto = muerto;
 		randomSteep = (int) (650 + ran.nextInt(100));
 		if (randomSteep % 2 != 0) randomSteep++;
 		width = Gdx.graphics.getWidth()*9/10;
@@ -69,9 +73,8 @@ public abstract class Pez extends Sprite {
 		choseDirection();
 		collisionX = false;
 		collisionY = false;
-		//TODO 
-		//SEGUN LA DIRECCION K LLEVE, COMPROBAR LIMITES PANTALLA
-		//SI ESTA CERCA LIMITES, CAMBIAR IMAGEN Y DIRECCION Y VELOCIDAD
+		tiempoDesdeComida += deltaTime;
+
 		
 		//CALCULATE VELOCITY AND COLLISIONS FOR AI
 		//COLISIONES HORIZONTALES
@@ -121,33 +124,39 @@ public abstract class Pez extends Sprite {
 		//}
 		
 		//SET POSITION DE LA IMAGEN K ACOMPANA AL BODY
-		if (body.getLinearVelocity().x < 0) set(spriteIzq);
+		if(tiempoDesdeComida > 5){
+			set(spriteMuerto);
+			alive = false;
+		}
+		else if (body.getLinearVelocity().x < 0) set(spriteIzq);
 		else set(spriteDer);
 		setPosition(body.getPosition().x - spriteW/2, body.getPosition().y - spriteH/2);
 	}
 	
 	
 	private void choseDirection() {
+		if(alive){
 		//random horizontal
-		if (steps % randomSteep == 0){
-			dirX = (ran.nextFloat() > 0.65) ? -dirX : dirX;	
-			body.setLinearVelocity(dirX, dirY);
+			if (steps % randomSteep == 0){
+				dirX = (ran.nextFloat() > 0.65) ? -dirX : dirX;	
+				body.setLinearVelocity(dirX, dirY);
+			}
+			//random vertical
+			else if (steps % (randomSteep/3) == 0){
+				dirY = ran.nextFloat();	
+				if (dirY < 0.2) dirY = -20;
+				else if(dirY < 0.4) dirY = -10;	
+				else if (dirY < 0.6) dirY = 0;
+				else if(dirY < 0.8) dirY = 10;
+				else dirY = 20;
+				body.setLinearVelocity(dirX, dirY);
+			}
 		}
-		//random vertical
-		else if (steps % (randomSteep/3) == 0){
-			dirY = ran.nextFloat();	
-			if (dirY < 0.2) dirY = -20;
-			else if(dirY < 0.4) dirY = -10;	
-			else if (dirY < 0.6) dirY = 0;
-			else if(dirY < 0.8) dirY = 10;
-			else dirY = 20;
-			body.setLinearVelocity(dirX, dirY);
-		}
-		
+		else{
+			body.setLinearVelocity(0, -15);
+		}	
 		if (steps % 360000 == 0) steps = 0;
 		steps++;
-		tiempoDesdeComida++;
-		
 	}
 
 	private boolean isCellBlocked(float x, float y){
