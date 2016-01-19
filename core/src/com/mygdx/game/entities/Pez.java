@@ -39,7 +39,7 @@ public abstract class Pez extends Sprite {
 		tiempoDesdeComida = 0f;
 		ran = new Random();
 		steps = 0;
-		dirX = 10;
+		dirX = 35;
 		dirY = 5;
 		spriteDer = derecha;
 		spriteIzq = izquierda;
@@ -130,7 +130,7 @@ public abstract class Pez extends Sprite {
 	private void choseDirection() {
 		//random horizontal
 		if (steps % randomSteep == 0){
-			dirX = (ran.nextFloat() > 0.5) ? 35 : -35;	
+			dirX = (ran.nextFloat() > 0.65) ? -dirX : dirX;	
 			body.setLinearVelocity(dirX, dirY);
 		}
 		//random vertical
@@ -151,7 +151,10 @@ public abstract class Pez extends Sprite {
 	}
 
 	private boolean isCellBlocked(float x, float y){
-		if (x < 5 || (x > width) || (y > height) || y < 10) return true;
+		if (x < 5 || (x > width) || (y > height) || y < 10){
+			steps = 1; 
+			return true;
+		}
 		return false;
 	}
 	
