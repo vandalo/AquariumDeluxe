@@ -19,6 +19,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.mygdx.game.AquariumDeluxe;
 import com.mygdx.game.entities.Comida;
 import com.mygdx.game.entities.Pez;
+import com.mygdx.game.listeners.ContListener;
 import com.mygdx.game.listeners.InpListener;
 
 public class testGame implements Screen {
@@ -35,7 +36,7 @@ public class testGame implements Screen {
 	private Table container, table;
 	private ScrollPane scrollPane;
 	private Skin skin;
-	static public boolean pintarComida;
+	public int numComidasMax, numComidasActual;
 	
 	protected Array<Pez> peces;
 	public Array<Comida> comidas;
@@ -61,7 +62,8 @@ public class testGame implements Screen {
   		inp.addProcessor(new InpListener(this));
   		//inp.addProcessor(new GestureDetector(new GestListener(this)));
   		Gdx.input.setInputProcessor(inp);
-  		pintarComida = false;
+  		world.setContactListener(new ContListener(this));
+  		numComidasActual = 0;
 	}
 
 
@@ -99,7 +101,7 @@ public class testGame implements Screen {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 		world.step(1f/30f, 6, 2);
 		for (Body body : bodiesToDestroy){
-			//world.destroyBody(body);
+			world.destroyBody(body);
 			//body.getBody().destroyFixture(body);
 			body.setActive(false);
 			bodiesToDestroy.removeValue(body, true);
@@ -110,7 +112,9 @@ public class testGame implements Screen {
 			for (int i = 0; i < peces.size; i++){
 				peces.get(i).draw(game.batch);
 			}
-			if (pintarComida) comidas.get(0).draw(game.batch);
+			for (int i = 0; i < comidas.size; ++i){
+				if (comidas.get(i) != null) comidas.get(i).draw(game.batch);
+			}
 		game.batch.end();
 		
 		debugRenderer.render(world, camera.combined);

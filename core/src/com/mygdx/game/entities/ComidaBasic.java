@@ -6,11 +6,12 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
+import com.mygdx.game.partidas.testGame;
 
 public class ComidaBasic extends Comida{
 	
-	public ComidaBasic(Sprite sprite, World world) {
-		super(sprite, world);
+	public ComidaBasic(Sprite sprite, World world, testGame game) {
+		super(sprite, world, game);
 		xSpeed = 35;
 		ySpeed = -20;
 		estado = 0;

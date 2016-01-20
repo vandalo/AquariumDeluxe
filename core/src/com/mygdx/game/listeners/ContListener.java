@@ -1,0 +1,59 @@
+package com.mygdx.game.listeners;
+
+import com.badlogic.gdx.physics.box2d.Contact;
+import com.badlogic.gdx.physics.box2d.ContactImpulse;
+import com.badlogic.gdx.physics.box2d.Manifold;
+import com.mygdx.game.entities.Comida;
+import com.mygdx.game.entities.Pez;
+import com.mygdx.game.partidas.testGame;
+
+public class ContListener implements com.badlogic.gdx.physics.box2d.ContactListener{
+	private testGame game;
+	
+	public ContListener(testGame game){
+		this.game = game;
+	}
+	
+	@Override
+    public void beginContact(Contact contact) {
+    	contact.setRestitution(0);
+    }
+
+    @Override
+    public void endContact(Contact contact) {}
+
+    @Override
+    public void preSolve(Contact contact, Manifold oldManifold) {
+    	/*((Ball)contact.getFixtureA().getBody().getUserData()).stopMoving = true;
+    	((Ball)contact.getFixtureB().getBody().getUserData()).stopMoving = true;
+    	
+    	((BallBasic)contact.getFixtureA().getBody().getUserData()).timeFromCollision = 0;
+    	((BallBasic)contact.getFixtureB().getBody().getUserData()).timeFromCollision = 0;*/
+    	//if balls.equalTeam --> contact.setEnabled(false);
+    }
+
+    @Override
+    public void postSolve(Contact contact, ContactImpulse impulse) {
+    	Pez pez = null;
+    	Comida comida = null;
+    	boolean hayComida = false;
+    	if (contact.getFixtureA().getBody().getUserData() instanceof Pez) {
+    		pez = (Pez) contact.getFixtureA().getBody().getUserData();
+    		comida = (Comida) contact.getFixtureB().getBody().getUserData();
+    		game.bodiesToDestroy.add(contact.getFixtureB().getBody());
+    		hayComida = true;
+		}
+    	else if (contact.getFixtureA().getBody().getUserData() instanceof Comida){
+    		comida = (Comida) contact.getFixtureA().getBody().getUserData();
+    		game.bodiesToDestroy.add(contact.getFixtureA().getBody());
+    		pez = (Pez) contact.getFixtureB().getBody().getUserData();
+    		hayComida = true;
+    	}
+    	if (hayComida)pez.tiempoDesdeComida = 0;
+    	if (hayComida){
+    		comida.alive = false;
+    		game.numComidasActual--;
+    	}
+    	
+    }
+}

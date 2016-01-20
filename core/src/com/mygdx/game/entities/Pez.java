@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
+import com.mygdx.game.partidas.testGame;
 
 import sun.rmi.runtime.Log;
 
@@ -16,14 +17,14 @@ public abstract class Pez extends Sprite {
 	
 	private Vector2 velocity = new Vector2();
 	private float spriteW, spriteH;
-	public boolean alive;
+	public boolean alive, aliveShown;
 	protected boolean collisionX, collisionY;
 	public Body body;
 	final short PECES = 0x1;    // 0001
     final short COMIDA = 0x1 << 1; // 0010 or 0x2 in hex
     final short ENEMIGO = 0x11 << 1; // 0010 or 0x2 in hex
     protected int tamanoPez;
-    protected float tiempoDesdeComida;
+    public float tiempoDesdeComida;
     private Random ran;
     private float dirX, dirY;
     private int steps;
@@ -51,7 +52,7 @@ public abstract class Pez extends Sprite {
 		if (randomSteep % 2 != 0) randomSteep++;
 		width = Gdx.graphics.getWidth()*9/10;
 		height = Gdx.graphics.getHeight()*3/4;
-		
+		aliveShown = false;
 	}
 	
 	public abstract void initBody(World world, int playerNum);
@@ -62,8 +63,8 @@ public abstract class Pez extends Sprite {
 	}
 
 	public void draw(Batch spriteBatch){
-		update(Gdx.graphics.getDeltaTime());
 		if (alive) {
+			update(Gdx.graphics.getDeltaTime());
 			super.draw(spriteBatch);
 		}
 	}
@@ -106,6 +107,10 @@ public abstract class Pez extends Sprite {
 			if (body.getLinearVelocity().y < 0) {
 				//Bottom left
 				collisionY = collidesBottom(valX, getY() + body.getLinearVelocity().y * deltaTime);
+				if (aliveShown && collisionY) {
+					body.setActive(false);
+					alive = false;
+				}
 			} else if (body.getLinearVelocity().y > 0) {
 				//Top Left
 				collisionY = collidesTop(valX, getY() + body.getLinearVelocity().y * deltaTime);
@@ -124,9 +129,10 @@ public abstract class Pez extends Sprite {
 		//}
 		
 		//SET POSITION DE LA IMAGEN K ACOMPANA AL BODY
+		
 		if(tiempoDesdeComida > 5){
 			set(spriteMuerto);
-			alive = false;
+			aliveShown = true;
 		}
 		else if (body.getLinearVelocity().x < 0) set(spriteIzq);
 		else set(spriteDer);
@@ -135,7 +141,7 @@ public abstract class Pez extends Sprite {
 	
 	
 	private void choseDirection() {
-		if(alive){
+		if(alive && !aliveShown){
 		//random horizontal
 			if (steps % randomSteep == 0){
 				dirX = (ran.nextFloat() > 0.65) ? -dirX : dirX;	
@@ -152,7 +158,7 @@ public abstract class Pez extends Sprite {
 				body.setLinearVelocity(dirX, dirY);
 			}
 		}
-		else{
+		else if (aliveShown){
 			body.setLinearVelocity(0, -15);
 		}	
 		if (steps % 360000 == 0) steps = 0;

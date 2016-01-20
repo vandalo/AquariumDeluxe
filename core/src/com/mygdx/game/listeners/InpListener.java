@@ -17,12 +17,18 @@ public class InpListener extends InputAdapter{
 	
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		testGame.pintarComida = true;
-		game.comidas.add(new ComidaBasic(game.entities.createSprite("ballBasicBlue"), game.world));
-		game.comidas.get(0).setPosition(screenX - game.comidas.get(0).getWidth()/2, 
-				Gdx.graphics.getHeight() - screenY - game.comidas.get(0).getHeight()/2);
-		game.comidas.get(0).initBody(game.world);
-		game.comidas.get(0).setSpeed();
+		int i = game.numComidasActual;
+		if (i < game.numComidasMax){
+			ComidaBasic cb = new ComidaBasic(game.entities.createSprite("ballBasicBlue"), game.world, game);
+			game.comidas.add(cb);
+			i = game.comidas.indexOf(cb, true);
+			game.comidas.get(i).setPosition(screenX - game.comidas.get(i).getWidth()/2, 
+					Gdx.graphics.getHeight() - screenY - game.comidas.get(i).getHeight()/2);
+			game.comidas.get(i).initBody(game.world);
+			game.comidas.get(i).setSpeed();
+			game.numComidasActual++;
+		}
+
 		return true;
 	}
 

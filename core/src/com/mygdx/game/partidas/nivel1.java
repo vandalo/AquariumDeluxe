@@ -19,6 +19,7 @@ public class nivel1 extends testGame{
         mapSprite.setSize(w, Gdx.graphics.getHeight()-100); 
         peces = new Array<Pez>(false, ops.numPeces);
         comidas = new Array<Comida>(false, ops.numComidas);
+        numComidasMax = ops.numComidas;
         peces.add( new PezBasic(entities.createSprite("ballBasicBlue"), world, entities));
         peces.get(0).setPosition(Gdx.graphics.getWidth()/2 - 10, Gdx.graphics.getHeight()/2);
         peces.get(0).initBody(world, 0);

@@ -18,21 +18,23 @@ public abstract class Comida extends Sprite {
     final short ENEMIGO = 0x1 << 2; // 0010 or 0x2 in hex
     protected int poderComida, estado; //activo 1, inactivo 0
     protected float xSpeed, ySpeed;
+    testGame game;
 	
-	public Comida(Sprite sprite, World world){
+	public Comida(Sprite sprite, World world, testGame game){
 		super(sprite);
 		alive = true;
 		spriteW = getWidth(); 
 		spriteH = getHeight(); 
 		poderComida = 0;
+		this.game = game;
 	}
 	
 	public abstract void initBody(World world);
 	
 
 	public void draw(Batch spriteBatch){
-		update(Gdx.graphics.getDeltaTime());
 		if (alive) {
+			update(Gdx.graphics.getDeltaTime());
 			super.draw(spriteBatch);
 		}
 	}
@@ -43,7 +45,8 @@ public abstract class Comida extends Sprite {
 		if(collidesBottom(getX(), getY() + body.getLinearVelocity().y * deltaTime)){
 			alive = false;
 			body.setActive(false);
-			testGame.pintarComida = false;
+			game.comidas.removeValue(this, true);
+			game.numComidasActual--;
 		}
 		
 		setPosition(body.getPosition().x - spriteW/2, body.getPosition().y - spriteH/2);
