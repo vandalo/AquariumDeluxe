@@ -24,12 +24,13 @@ public class ContListener implements com.badlogic.gdx.physics.box2d.ContactListe
 
     @Override
     public void preSolve(Contact contact, Manifold oldManifold) {
-    	/*((Ball)contact.getFixtureA().getBody().getUserData()).stopMoving = true;
-    	((Ball)contact.getFixtureB().getBody().getUserData()).stopMoving = true;
-    	
-    	((BallBasic)contact.getFixtureA().getBody().getUserData()).timeFromCollision = 0;
-    	((BallBasic)contact.getFixtureB().getBody().getUserData()).timeFromCollision = 0;*/
-    	//if balls.equalTeam --> contact.setEnabled(false);
+    	Pez pez = null;
+    	Comida comida = null;
+    	if (contact.getFixtureA().getBody().getUserData() instanceof Pez) {
+    		pez = (Pez) contact.getFixtureA().getBody().getUserData();
+		}
+    	else pez = (Pez) contact.getFixtureB().getBody().getUserData();
+    	if (pez.aliveShown) contact.setEnabled(false);
     }
 
     @Override

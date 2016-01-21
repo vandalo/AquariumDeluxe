@@ -32,8 +32,9 @@ public abstract class Pez extends Sprite {
     Sprite spriteDer, spriteIzq, spriteMuerto;
     private int randomSteep;
     protected int width, height;
+    testGame game;
 	
-	public Pez(Sprite sprite, World world, Sprite derecha, Sprite izquierda,
+	public Pez(Sprite sprite, World world, testGame game, Sprite derecha, Sprite izquierda,
 			Sprite muerto){
 		super(sprite);
 		alive = true;
@@ -53,6 +54,7 @@ public abstract class Pez extends Sprite {
 		width = Gdx.graphics.getWidth()*9/10;
 		height = Gdx.graphics.getHeight()*3/4;
 		aliveShown = false;
+		this.game = game;
 	}
 	
 	public abstract void initBody(World world, int playerNum);
@@ -107,9 +109,12 @@ public abstract class Pez extends Sprite {
 			if (body.getLinearVelocity().y < 0) {
 				//Bottom left
 				collisionY = collidesBottom(valX, getY() + body.getLinearVelocity().y * deltaTime);
+				
+				//SI EL PEZ MUERE BORRAMOS EL BODY
 				if (aliveShown && collisionY) {
 					body.setActive(false);
 					alive = false;
+					game.bodiesToDestroy.add(body);
 				}
 			} else if (body.getLinearVelocity().y > 0) {
 				//Top Left

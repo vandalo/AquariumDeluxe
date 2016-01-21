@@ -7,11 +7,12 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
+import com.mygdx.game.partidas.testGame;
 
 public class PezBasic extends Pez{
 	
-	public PezBasic(Sprite sprite, World world, TextureAtlas entities) {
-		super(sprite, world, entities.createSprite("ballBoss"), 
+	public PezBasic(Sprite sprite, World world, testGame game, TextureAtlas entities) {
+		super(sprite, world, game, entities.createSprite("ballBoss"), 
 							 entities.createSprite("ballFastBlue"),
 							 entities.createSprite("ballFastBlue"));
 		xSpeed = 35;

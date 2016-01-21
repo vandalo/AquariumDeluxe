@@ -47,6 +47,7 @@ public abstract class Comida extends Sprite {
 			body.setActive(false);
 			game.comidas.removeValue(this, true);
 			game.numComidasActual--;
+			game.bodiesToDestroy.add(body);
 		}
 		
 		setPosition(body.getPosition().x - spriteW/2, body.getPosition().y - spriteH/2);

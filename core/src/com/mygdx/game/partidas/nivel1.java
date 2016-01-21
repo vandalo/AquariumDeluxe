@@ -20,11 +20,11 @@ public class nivel1 extends testGame{
         peces = new Array<Pez>(false, ops.numPeces);
         comidas = new Array<Comida>(false, ops.numComidas);
         numComidasMax = ops.numComidas;
-        peces.add( new PezBasic(entities.createSprite("ballBasicBlue"), world, entities));
+        peces.add( new PezBasic(entities.createSprite("ballBasicBlue"), world, this, entities));
         peces.get(0).setPosition(Gdx.graphics.getWidth()/2 - 10, Gdx.graphics.getHeight()/2);
         peces.get(0).initBody(world, 0);
         
-        peces.add(new PezBasic(entities.createSprite("ballBasicPurple"), world, entities));
+        peces.add(new PezBasic(entities.createSprite("ballBasicPurple"), world, this, entities));
         peces.get(1).setPosition(Gdx.graphics.getWidth()/2 + 20, Gdx.graphics.getHeight()/2);
         peces.get(1).initBody(world, 0);
 	}
