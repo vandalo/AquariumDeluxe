@@ -25,7 +25,7 @@ public abstract class Pez extends Sprite {
     final short ENEMIGO = 0x11 << 1; // 0010 or 0x2 in hex
     protected int tamanoPez;
     public float tiempoDesdeComida;
-    private Random ran;
+    protected Random ran;
     private float dirX, dirY;
     private int steps;
     protected float xSpeed, ySpeed;
@@ -33,6 +33,7 @@ public abstract class Pez extends Sprite {
     private int randomSteep;
     protected int width, height;
     testGame game;
+    protected int tiempoUltimaMoneda;
 	
 	public Pez(Sprite sprite, World world, testGame game, Sprite derecha, Sprite izquierda,
 			Sprite muerto){
@@ -55,9 +56,11 @@ public abstract class Pez extends Sprite {
 		height = Gdx.graphics.getHeight()*3/4;
 		aliveShown = false;
 		this.game = game;
+		tiempoUltimaMoneda = 100 + ran.nextInt(200);
 	}
 	
 	public abstract void initBody(World world, int playerNum);
+	public abstract void crearMoneda(World world);
 	
 	public void updateSizes(int width, int height){
 		/*this.width = width * 5 / 10;
@@ -77,7 +80,9 @@ public abstract class Pez extends Sprite {
 		collisionX = false;
 		collisionY = false;
 		tiempoDesdeComida += deltaTime;
-
+		tiempoUltimaMoneda -= deltaTime;
+		System.out.println(tiempoUltimaMoneda);
+		crearMoneda(game.world);
 		
 		//CALCULATE VELOCITY AND COLLISIONS FOR AI
 		//COLISIONES HORIZONTALES
@@ -135,7 +140,7 @@ public abstract class Pez extends Sprite {
 		
 		//SET POSITION DE LA IMAGEN K ACOMPANA AL BODY
 		
-		if(tiempoDesdeComida > 5){
+		if(tiempoDesdeComida > 10){
 			set(spriteMuerto);
 			aliveShown = true;
 		}
@@ -171,7 +176,7 @@ public abstract class Pez extends Sprite {
 	}
 
 	private boolean isCellBlocked(float x, float y){
-		if (x < 5 || (x > width) || (y > height) || y < 10){
+		if (x < 85 || (x > width) || (y > height) || y < 5){
 			steps = 1; 
 			return true;
 		}
@@ -203,16 +208,5 @@ public abstract class Pez extends Sprite {
         return false;
 	}
 }
-/*
- * float speedNow = body.getLinearVelocity().len();
-recentSpeed = 0.1 * speedNow + 0.9 * recentSpeed;
-if ( recentSpeed < someThreshold )
-    ... do something ...
-/*
- * float speedNow = body.getLinearVelocity().len();
-recentSpeed = 0.1 * speedNow + 0.9 * recentSpeed;
-if ( recentSpeed < someThreshold )
-    ... do something ...
-    ----------------------
- */
+
 

@@ -18,6 +18,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.mygdx.game.AquariumDeluxe;
 import com.mygdx.game.entities.Comida;
+import com.mygdx.game.entities.Moneda;
 import com.mygdx.game.entities.Pez;
 import com.mygdx.game.listeners.ContListener;
 import com.mygdx.game.listeners.InpListener;
@@ -36,10 +37,11 @@ public class testGame implements Screen {
 	private Table container, table;
 	private ScrollPane scrollPane;
 	private Skin skin;
-	public int numComidasMax, numComidasActual;
-	
+	public int numComidasMax, numComidasActual, numMonedasMax, numMonedasActual;
+	public int dinero;
 	protected Array<Pez> peces;
 	public Array<Comida> comidas;
+	public Array<Moneda> monedas;
 	
 	public testGame(final AquariumDeluxe game) {
 		this.game = game;
@@ -84,7 +86,7 @@ public class testGame implements Screen {
 //			table.add(image[i]).minSize(Gdx.graphics.getWidth()/16, Gdx.graphics.getWidth()/16).spaceRight(20);
 			table.add(image[i]).minSize(60, 60).spaceRight(20);
 		}	*/
-		container.setBounds(0, Gdx.graphics.getHeight()-100, 800, 100);
+		container.setBounds(0, 0, 80, 480);
 		container.bottom();
 		container.add(scrollPane).padLeft(10).padRight(10);
 		container.getColor().mul(1, 1, 1, 0.65f);
@@ -114,6 +116,9 @@ public class testGame implements Screen {
 			}
 			for (int i = 0; i < comidas.size; ++i){
 				if (comidas.get(i) != null) comidas.get(i).draw(game.batch);
+			}
+			for (int i = 0; i < monedas.size; ++i){
+				if (monedas.get(i) != null) monedas.get(i).draw(game.batch);
 			}
 		game.batch.end();
 		

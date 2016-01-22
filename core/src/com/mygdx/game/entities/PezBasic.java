@@ -1,5 +1,6 @@
 package com.mygdx.game.entities;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -57,5 +58,24 @@ public class PezBasic extends Pez{
     public void draw(Batch batch) {
 		super.draw(batch);
     }
+
+
+	@Override
+	public void crearMoneda(World world) {
+		if(tamanoPez == 0 && tiempoUltimaMoneda == 0){
+			tiempoUltimaMoneda = 100 + ran.nextInt(200);
+			int i = game.numMonedasActual;
+			if (i < game.numMonedasMax){
+				Moneda m = new Moneda(game.entities.createSprite("ballBasicBlue"), game.world, game);
+				game.monedas.add(m);
+				i = game.monedas.indexOf(m, true);
+				game.monedas.get(i).setPosition(getX(), getY()-5);
+				game.monedas.get(i).initBody(game.world);
+				game.monedas.get(i).setSpeed();
+				game.numMonedasActual++;
+			}
+		}
+		
+	}
 
 }
