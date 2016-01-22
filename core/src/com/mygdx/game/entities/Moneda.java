@@ -1,7 +1,6 @@
 package com.mygdx.game.entities;
 
 
-import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -14,11 +13,9 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.partidas.testGame;
 
-import sun.rmi.runtime.Log;
 
 public class Moneda extends Sprite {
-	
-	private Vector2 velocity = new Vector2();
+
 	private float spriteW, spriteH;
 	public boolean alive;
 	public Body body;
@@ -27,7 +24,6 @@ public class Moneda extends Sprite {
     final short ENEMIGO = 0x11 << 1; // 0010 or 0x2 in hex
     protected int valor;
     public float tiempoDesdeCaida;
-    private float dirX, dirY;
     Sprite spriteMoneda;
     protected int width, height;
     testGame game;
@@ -40,8 +36,6 @@ public class Moneda extends Sprite {
 		spriteH = getHeight(); 
 		valor = 0;
 		tiempoDesdeCaida = 0f;
-		dirX = 0;
-		dirY = -15;
 		spriteMoneda = sprite;
 		width = Gdx.graphics.getWidth()*9/10;
 		height = Gdx.graphics.getHeight()*3/4;

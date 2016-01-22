@@ -19,7 +19,7 @@ public class InpListener extends InputAdapter{
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		int i = game.numComidasActual;
 		if (i < game.numComidasMax){
-			ComidaBasic cb = new ComidaBasic(game.entities.createSprite("ballBasicBlue"), game.world, game);
+			ComidaBasic cb = new ComidaBasic(game.entities.createSprite("ballDefenderPurple"), game.world, game);
 			game.comidas.add(cb);
 			i = game.comidas.indexOf(cb, true);
 			game.comidas.get(i).setPosition(screenX - game.comidas.get(i).getWidth()/2, 

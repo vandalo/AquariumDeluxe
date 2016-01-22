@@ -29,14 +29,14 @@ public abstract class Pez extends Sprite {
     private float dirX, dirY;
     private int steps;
     protected float xSpeed, ySpeed;
-    Sprite spriteDer, spriteIzq, spriteMuerto;
+    Sprite spriteDer, spriteIzq, spriteMuerto, spriteHambDer, spriteHambIzq;
     private int randomSteep;
     protected int width, height;
     testGame game;
     protected int tiempoUltimaMoneda;
 	
 	public Pez(Sprite sprite, World world, testGame game, Sprite derecha, Sprite izquierda,
-			Sprite muerto){
+			Sprite hambrientoDerecha, Sprite hambrientoIzquierda, Sprite muerto){
 		super(sprite);
 		alive = true;
 		spriteW = getWidth(); 
@@ -49,6 +49,8 @@ public abstract class Pez extends Sprite {
 		dirY = 5;
 		spriteDer = derecha;
 		spriteIzq = izquierda;
+		spriteHambDer = hambrientoDerecha;
+		spriteHambIzq = hambrientoIzquierda;
 		spriteMuerto = muerto;
 		randomSteep = (int) (650 + ran.nextInt(100));
 		if (randomSteep % 2 != 0) randomSteep++;
@@ -61,6 +63,8 @@ public abstract class Pez extends Sprite {
 	
 	public abstract void initBody(World world, int playerNum);
 	public abstract void crearMoneda(World world);
+	public abstract void ir_a_comida();
+	public abstract int comida_cercana();
 	
 	public void updateSizes(int width, int height){
 		/*this.width = width * 5 / 10;
@@ -81,12 +85,14 @@ public abstract class Pez extends Sprite {
 		collisionY = false;
 		tiempoDesdeComida += deltaTime;
 		tiempoUltimaMoneda -= deltaTime;
-		System.out.println(tiempoUltimaMoneda);
 		crearMoneda(game.world);
 		
 		//CALCULATE VELOCITY AND COLLISIONS FOR AI
 		//COLISIONES HORIZONTALES
-		//if (!collided){
+		if (tiempoDesdeComida > 10){
+			
+		}
+		else{
 			if (body.getLinearVelocity().x < 0) {
 				collisionX = collidesLeft(getX() + velocity.x * deltaTime, getY());
 	
@@ -136,13 +142,18 @@ public abstract class Pez extends Sprite {
 					body.setTransform(body.getPosition().x, body.getPosition().y - 1, body.getAngle());
 				}
 			}
+		}
 		//}
 		
 		//SET POSITION DE LA IMAGEN K ACOMPANA AL BODY
 		
-		if(tiempoDesdeComida > 10){
+		if(tiempoDesdeComida > 20){
 			set(spriteMuerto);
 			aliveShown = true;
+		}
+		else if(tiempoDesdeComida > 10){
+			if (body.getLinearVelocity().x < 0) set(spriteHambIzq);
+			else set(spriteHambDer);
 		}
 		else if (body.getLinearVelocity().x < 0) set(spriteIzq);
 		else set(spriteDer);

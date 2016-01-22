@@ -13,9 +13,11 @@ import com.mygdx.game.partidas.testGame;
 public class PezBasic extends Pez{
 	
 	public PezBasic(Sprite sprite, World world, testGame game, TextureAtlas entities) {
-		super(sprite, world, game, entities.createSprite("ballBoss"), 
-							 entities.createSprite("ballFastBlue"),
-							 entities.createSprite("ballFastBlue"));
+		super(sprite, world, game, entities.createSprite("ballBasicBlue"), 
+							 entities.createSprite("ballBasicBlue"),
+							 entities.createSprite("ballBasicRed"),
+							 entities.createSprite("ballBasicRed"),
+							 entities.createSprite("ballBasicPurple"));
 		xSpeed = 35;
 		ySpeed = 20;
 	}
@@ -62,7 +64,7 @@ public class PezBasic extends Pez{
 
 	@Override
 	public void crearMoneda(World world) {
-		if(tamanoPez == 0 && tiempoUltimaMoneda == 0){
+		if(tamanoPez == 0 && tiempoUltimaMoneda <= 0 && !aliveShown){
 			tiempoUltimaMoneda = 100 + ran.nextInt(200);
 			int i = game.numMonedasActual;
 			if (i < game.numMonedasMax){
@@ -76,6 +78,31 @@ public class PezBasic extends Pez{
 			}
 		}
 		
+	}
+
+	@Override
+	public int comida_cercana() {
+		float x, y;
+		x = getX();
+		y = getY();
+		float dist = 999999999;
+		int res = -1;
+		for(int i = 0; i < game.comidas.size; i++){
+			float xc, yc;
+			xc = game.comidas.get(i).getX();
+			yc = game.comidas.get(i).getY();
+			float distAux = (x-xc)*(x-xc)+(y-yc)*(y-yc);
+			if (distAux < dist){
+				dist = distAux;
+				res = i;
+			}
+		}
+		return res;		
+	}
+	
+	@Override
+	public void ir_a_comida() {
+		int i = comida_cercana();		
 	}
 
 }

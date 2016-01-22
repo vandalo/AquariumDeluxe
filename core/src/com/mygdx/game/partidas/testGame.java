@@ -176,39 +176,4 @@ public class testGame implements Screen {
 
 
 
-/*
- * 
- * Matrix4 uiMatrix = cam.combined.cpy();
-uiMatrix.setToOrtho2D(0, 0, WIDTH, HEIGHT);
-batch.setProjectionMatrix(uiMatrix);
-batch.begin();
- * 
- * 
-//Access the sprite
-//((Sprite)body.getUserData()).setPosition(body.getPosition().x,body.getPosition().y);
-
-DistanceJointDef distJoint = new DistanceJointDef();
-distJoint.bodyA = body;
-distJoint.bodyB = body2;
-distJoint.dampingRatio = 0.5f;
-distJoint.frequencyHz = 4;
-distJoint.length = 230;
-//world.createJoint(distJoint);
-
-RopeJointDef ropeJoint = new RopeJointDef();
-ropeJoint.bodyA = body;
-ropeJoint.bodyB = body2;
-ropeJoint.maxLength = balls[1].getWidth()*2;
-ropeJoint.localAnchorA.set(0, 0);
-ropeJoint.localAnchorB.set(0, 0);
-//world.createJoint(ropeJoint);
- * 
- * Pixmap pixmap = new Pixmap( 64, 64, Format.RGBA8888 );
-pixmap.setColor( 0, 1, 0, 0.75f );
-pixmap.fillCircle( 32, 32, 32 );
-Texture pixmaptex = new Texture( pixmap );
-pixmap.dispose();
- * 
- * */
-
 
