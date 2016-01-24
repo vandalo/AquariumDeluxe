@@ -4,7 +4,6 @@ import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.mygdx.game.entities.Comida;
-import com.mygdx.game.entities.Moneda;
 import com.mygdx.game.entities.Pez;
 import com.mygdx.game.partidas.testGame;
 
@@ -26,21 +25,14 @@ public class ContListener implements com.badlogic.gdx.physics.box2d.ContactListe
     @Override
     public void preSolve(Contact contact, Manifold oldManifold) {
     	Pez pez = null;
-    	//Comida comida = null;
-    	if (contact.getFixtureA().getBody().getUserData() instanceof Moneda
-    			|| contact.getFixtureB().getBody().getUserData() instanceof Moneda){
-    		contact.setEnabled(false);
-    	}
-    	else{
-	    	if (contact.getFixtureA().getBody().getUserData() instanceof Pez) {
-	    		pez = (Pez) contact.getFixtureA().getBody().getUserData();
-			}
-	    	else if (contact.getFixtureB().getBody().getUserData() instanceof Pez) {
-	    		pez = (Pez) contact.getFixtureB().getBody().getUserData();
-	    		
-	    	}   
-	    	if (pez.aliveShown || pez.tiempoDesdeComida < 5) contact.setEnabled(false);
-    	}
+    	if (contact.getFixtureA().getBody().getUserData() instanceof Pez) {
+    		pez = (Pez) contact.getFixtureA().getBody().getUserData();
+		}
+    	else if (contact.getFixtureB().getBody().getUserData() instanceof Pez) {
+    		pez = (Pez) contact.getFixtureB().getBody().getUserData();
+    		
+    	}   
+    	if (pez.aliveShown || pez.tiempoDesdeComida < pez.TIME_HASTA_HAMBRE/2) contact.setEnabled(false);
     }
 
     @Override
@@ -60,10 +52,11 @@ public class ContListener implements com.badlogic.gdx.physics.box2d.ContactListe
     		pez = (Pez) contact.getFixtureB().getBody().getUserData();
     		hayComida = true;
     	}
-    	if (hayComida)pez.tiempoDesdeComida = 0;
     	if (hayComida){
+    		pez.tiempoDesdeComida = 0;
     		comida.alive = false;
     		game.numComidasActual--;
+    		game.comidas.removeValue(comida, true);
     	}
     	
     }

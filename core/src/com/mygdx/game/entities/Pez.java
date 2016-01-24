@@ -11,7 +11,6 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.partidas.testGame;
 
-import sun.rmi.runtime.Log;
 
 public abstract class Pez extends Sprite {
 	
@@ -34,6 +33,7 @@ public abstract class Pez extends Sprite {
     protected int width, height;
     testGame game;
     protected int tiempoUltimaMoneda;
+    public static int TIME_HASTA_HAMBRE = 2, TIME_HASTA_MUERTE = 5;
 	
 	public Pez(Sprite sprite, World world, testGame game, Sprite derecha, Sprite izquierda,
 			Sprite hambrientoDerecha, Sprite hambrientoIzquierda, Sprite muerto){
@@ -58,7 +58,7 @@ public abstract class Pez extends Sprite {
 		height = Gdx.graphics.getHeight()*3/4;
 		aliveShown = false;
 		this.game = game;
-		tiempoUltimaMoneda = 100 + ran.nextInt(200);
+		tiempoUltimaMoneda = 300 + ran.nextInt(300);
 	}
 	
 	public abstract void initBody(World world, int playerNum);
@@ -80,7 +80,7 @@ public abstract class Pez extends Sprite {
 
 
 	protected void update(float deltaTime) {		
-		choseDirection();
+		
 		collisionX = false;
 		collisionY = false;
 		tiempoDesdeComida += deltaTime;
@@ -89,10 +89,21 @@ public abstract class Pez extends Sprite {
 		
 		//CALCULATE VELOCITY AND COLLISIONS FOR AI
 		//COLISIONES HORIZONTALES
-		if (tiempoDesdeComida > 10){
+		if (tiempoDesdeComida > TIME_HASTA_MUERTE){
+			body.setLinearVelocity(0,15);
+			if (collidesTop(getX(), getY()-50)){
+				alive = false;
+				game.bodiesToDestroy.add(body);
+				body.setActive(false);
+				game.peces.removeValue(this, true);
+			}
+		}
+		
+		else if (tiempoDesdeComida > TIME_HASTA_HAMBRE && game.numComidasActual > 0){
 			ir_a_comida();
 		}
 		else{
+			choseDirection();
 			if (body.getLinearVelocity().x < 0) {
 				collisionX = collidesLeft(getX() + velocity.x * deltaTime, getY());
 	
@@ -147,11 +158,11 @@ public abstract class Pez extends Sprite {
 		
 		//SET POSITION DE LA IMAGEN K ACOMPANA AL BODY
 		
-		if(tiempoDesdeComida > 20){
+		if(tiempoDesdeComida > TIME_HASTA_MUERTE){
 			set(spriteMuerto);
 			aliveShown = true;
 		}
-		else if(tiempoDesdeComida > 10){
+		else if(tiempoDesdeComida > TIME_HASTA_HAMBRE){
 			if (body.getLinearVelocity().x < 0) set(spriteHambIzq);
 			else set(spriteHambDer);
 		}

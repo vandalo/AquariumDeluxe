@@ -5,7 +5,6 @@ package com.mygdx.game.entities;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -21,7 +20,8 @@ public class Moneda extends Sprite {
 	public Body body;
 	final short PECES = 0x1;    // 0001
     final short COMIDA = 0x1 << 1; // 0010 or 0x2 in hex
-    final short ENEMIGO = 0x11 << 1; // 0010 or 0x2 in hex
+    final short ENEMIGO = 0x11 << 1; // 00110 or 0x2 in hex
+    final short MONEDA = 0x1 << 3; //1000
     protected int valor;
     public float tiempoDesdeCaida;
     Sprite spriteMoneda;
@@ -67,6 +67,7 @@ public class Moneda extends Sprite {
 			if (tiempoDesdeCaida > 5) {
 				body.setActive(false);
 				alive = false;
+				game.monedas.removeValue(this, true);
 				game.bodiesToDestroy.add(body);
 				game.numMonedasActual--;
 			}
@@ -112,8 +113,8 @@ public class Moneda extends Sprite {
         fixtureDef.density = 1.1f;
         fixtureDef.restitution = 0.6f;
         fixtureDef.friction = 0.0f;
-    	fixtureDef.filter.categoryBits = COMIDA;
-    	fixtureDef.filter.maskBits = ENEMIGO;
+    	fixtureDef.filter.categoryBits = MONEDA;
+    	fixtureDef.filter.maskBits = 0x0;
   
         //fixtureDef.isSensor = true; --> use it on towers not to react but detect collision
         body.createFixture(fixtureDef);

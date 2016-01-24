@@ -39,7 +39,7 @@ public class testGame implements Screen {
 	private Skin skin;
 	public int numComidasMax, numComidasActual, numMonedasMax, numMonedasActual;
 	public int dinero;
-	protected Array<Pez> peces;
+	public Array<Pez> peces;
 	public Array<Comida> comidas;
 	public Array<Moneda> monedas;
 	
@@ -169,7 +169,7 @@ public class testGame implements Screen {
 
 	@Override
 	public void hide() {
-		dispose();		
+		//dispose();		
 	}
 	
 }

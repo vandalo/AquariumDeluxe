@@ -1,6 +1,5 @@
 package com.mygdx.game.entities;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -11,6 +10,8 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.partidas.testGame;
 
 public class PezBasic extends Pez{
+	private float xc, yc, distAux, dist, xComida, yComida, Vel, x, y;
+	int res, i;
 	
 	public PezBasic(Sprite sprite, World world, testGame game, TextureAtlas entities) {
 		super(sprite, world, game, entities.createSprite("ballBasicBlue"), 
@@ -65,7 +66,7 @@ public class PezBasic extends Pez{
 	@Override
 	public void crearMoneda(World world) {
 		if(tamanoPez == 0 && tiempoUltimaMoneda <= 0 && !aliveShown){
-			tiempoUltimaMoneda = 100 + ran.nextInt(200);
+			tiempoUltimaMoneda = 300 + ran.nextInt(300);
 			int i = game.numMonedasActual;
 			if (i < game.numMonedasMax){
 				Moneda m = new Moneda(game.entities.createSprite("ballBasicBlue"), game.world, game);
@@ -82,19 +83,19 @@ public class PezBasic extends Pez{
 
 	@Override
 	public int comida_cercana() {
-		float x, y;
 		x = getX();
 		y = getY();
-		float dist = 999999999;
-		int res = -1;
+		dist = 999999999;
+		res = -1;
 		for(int i = 0; i < game.comidas.size; i++){
-			float xc, yc;
-			xc = game.comidas.get(i).getX();
-			yc = game.comidas.get(i).getY();
-			float distAux = (x-xc)*(x-xc)+(y-yc)*(y-yc);
-			if (distAux < dist){
-				dist = distAux;
-				res = i;
+			if (game.comidas.get(i) != null){
+				xc = game.comidas.get(i).getX();
+				yc = game.comidas.get(i).getY();
+				distAux = (x-xc)*(x-xc)+(y-yc)*(y-yc);
+				if (distAux < dist){
+					dist = distAux;
+					res = i;
+				}
 			}
 		}
 		return res;		
@@ -102,13 +103,14 @@ public class PezBasic extends Pez{
 	
 	@Override
 	public void ir_a_comida() {
-		int i = comida_cercana();	
+		i = comida_cercana();	
 		if(i >= 0){
-			Comida Comida = game.comidas.get(i);
-			float xComida = Comida.getX();
-			float yComida = Comida.getY();
-			float Vel = 60/xComida+yComida;
-			body.setLinearVelocity(Vel*xComida, Vel*yComida);
+			xComida = game.comidas.get(i).getX();
+			yComida = game.comidas.get(i).getY();
+			Vel = 20;
+			body.setLinearVelocity(-((getX()-xComida) * Vel), -((getY()-yComida) * Vel));
+			//System.out.println("Entra x: " + getX() + ". XComida: " + xComida + ". Val i: " + i);
+			//body.setLinearVelocity(xSpeed*3, ySpeed*3);
 		}
 	}
 
