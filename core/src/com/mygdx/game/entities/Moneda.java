@@ -81,7 +81,7 @@ public class Moneda extends Sprite {
 	
 
 	private boolean isCellBlocked(float x, float y){
-		if (x < 85 || (x > width) || (y > height) || y < 5){
+		if (x < 85 || (x > width) || (y > height) || y < 55){
 			return true;
 		}
 		return false;

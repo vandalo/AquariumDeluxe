@@ -66,10 +66,10 @@ public class PezBasic extends Pez{
 	@Override
 	public void crearMoneda(World world) {
 		if(tamanoPez == 0 && tiempoUltimaMoneda <= 0 && !aliveShown){
-			tiempoUltimaMoneda = 300 + ran.nextInt(300);
+			tiempoUltimaMoneda = 300 + ran.nextInt(450);
 			int i = game.numMonedasActual;
 			if (i < game.numMonedasMax){
-				Moneda m = new Moneda(game.entities.createSprite("ballBasicBlue"), game.world, game);
+				Moneda m = new Moneda(game.entities.createSprite("shieldBall"), game.world, game);
 				game.monedas.add(m);
 				i = game.monedas.indexOf(m, true);
 				game.monedas.get(i).setPosition(getX(), getY()-5);

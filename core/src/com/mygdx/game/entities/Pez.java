@@ -16,7 +16,7 @@ public abstract class Pez extends Sprite {
 	
 	private Vector2 velocity = new Vector2();
 	private float spriteW, spriteH;
-	public boolean alive, aliveShown;
+	public boolean alive, aliveShown, haHabidoComida;
 	protected boolean collisionX, collisionY;
 	public Body body;
 	final short PECES = 0x1;    // 0001
@@ -33,7 +33,7 @@ public abstract class Pez extends Sprite {
     protected int width, height;
     testGame game;
     protected int tiempoUltimaMoneda;
-    public static int TIME_HASTA_HAMBRE = 2, TIME_HASTA_MUERTE = 5;
+    public static int TIME_HASTA_HAMBRE = 10, TIME_HASTA_MUERTE = 25;
 	
 	public Pez(Sprite sprite, World world, testGame game, Sprite derecha, Sprite izquierda,
 			Sprite hambrientoDerecha, Sprite hambrientoIzquierda, Sprite muerto){
@@ -52,13 +52,14 @@ public abstract class Pez extends Sprite {
 		spriteHambDer = hambrientoDerecha;
 		spriteHambIzq = hambrientoIzquierda;
 		spriteMuerto = muerto;
-		randomSteep = (int) (650 + ran.nextInt(100));
+		randomSteep = (int) (530 + ran.nextInt(150));
 		if (randomSteep % 2 != 0) randomSteep++;
 		width = Gdx.graphics.getWidth()*9/10;
 		height = Gdx.graphics.getHeight()*3/4;
 		aliveShown = false;
 		this.game = game;
-		tiempoUltimaMoneda = 300 + ran.nextInt(300);
+		tiempoUltimaMoneda = ran.nextInt(500);
+		haHabidoComida = false;
 	}
 	
 	public abstract void initBody(World world, int playerNum);
@@ -89,6 +90,10 @@ public abstract class Pez extends Sprite {
 		
 		//CALCULATE VELOCITY AND COLLISIONS FOR AI
 		//COLISIONES HORIZONTALES
+		if (haHabidoComida && game.numComidasActual < 1){
+			haHabidoComida = false;
+			steps = 0;
+		}
 		if (tiempoDesdeComida > TIME_HASTA_MUERTE){
 			body.setLinearVelocity(0,15);
 			if (collidesTop(getX(), getY()-50)){
@@ -100,6 +105,7 @@ public abstract class Pez extends Sprite {
 		}
 		
 		else if (tiempoDesdeComida > TIME_HASTA_HAMBRE && game.numComidasActual > 0){
+			haHabidoComida = true;
 			ir_a_comida();
 		}
 		else{
@@ -198,7 +204,7 @@ public abstract class Pez extends Sprite {
 	}
 
 	private boolean isCellBlocked(float x, float y){
-		if (x < 85 || (x > width) || (y > height) || y < 5){
+		if (x < 85 || (x > width) || (y > height) || y < 55){
 			steps = 1; 
 			return true;
 		}

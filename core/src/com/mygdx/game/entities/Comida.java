@@ -18,6 +18,7 @@ public abstract class Comida extends Sprite {
     final short ENEMIGO = 0x1 << 2; // 0010 or 0x2 in hex
     protected int poderComida, estado; //activo 1, inactivo 0
     protected float xSpeed, ySpeed;
+    protected int width, height;
     testGame game;
 	
 	public Comida(Sprite sprite, World world, testGame game){
@@ -26,6 +27,8 @@ public abstract class Comida extends Sprite {
 		spriteW = getWidth(); 
 		spriteH = getHeight(); 
 		poderComida = 0;
+		width = Gdx.graphics.getWidth()*9/10;
+		height = Gdx.graphics.getHeight()*3/4;
 		this.game = game;
 	}
 	
@@ -55,7 +58,7 @@ public abstract class Comida extends Sprite {
 	
 
 	private boolean isCellBlocked(float x, float y){
-		if (y < 1) return true;
+		if (y < 55) return true;
 		return false;
 	}
 	
