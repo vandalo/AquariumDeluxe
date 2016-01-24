@@ -45,6 +45,7 @@ public class testGame implements Screen {
 	public Array<Comida> comidas;
 	public Array<Moneda> monedas;
 	protected float tiempoJugado, tiempoTotal;
+	private int width, height;
 	
 	public testGame(final AquariumDeluxe game) {
 		this.game = game;
@@ -68,6 +69,8 @@ public class testGame implements Screen {
   		Gdx.input.setInputProcessor(inp);
   		world.setContactListener(new ContListener(this));
   		numComidasActual = 0;
+  		width = Gdx.graphics.getWidth();
+  		height = Gdx.graphics.getHeight();
 	}
 
 
@@ -118,33 +121,46 @@ public class testGame implements Screen {
 			bodiesToDestroy.removeValue(body, true);
 		}
 		tiempoJugado+=delta;
-		camera.update();
-		game.batch.begin();
-			mapSprite.draw(game.batch);
-			for (int i = 0; i < peces.size; i++){
-				peces.get(i).draw(game.batch);
-			}
-			for (int i = 0; i < comidas.size; ++i){
-				if (comidas.get(i) != null) comidas.get(i).draw(game.batch);
-			}
-			for (int i = 0; i < monedas.size; ++i){
-				if (monedas.get(i) != null) monedas.get(i).draw(game.batch);
-			}
-			loadingBarBackground.draw(game.batch, 200, 10, 550, 40);
-	        loadingBar.draw(game.batch, 200, 10, 550*(1-tiempoJugado/tiempoTotal), 40);//progress * 700
-		game.batch.end();
 		
-		debugRenderer.render(world, camera.combined);
-		container.debugTable();
-		stage.getViewport().apply();
-		stage.draw();
-		stage.act(delta);
+		//COMPROBAMOS SI HEMOS PERDIDO
+		if(!checkLost()){
+			camera.update();
+			game.batch.begin();
+				mapSprite.draw(game.batch);
+				for (int i = 0; i < peces.size; i++){
+					peces.get(i).draw(game.batch);
+				}
+				for (int i = 0; i < comidas.size; ++i){
+					if (comidas.get(i) != null) comidas.get(i).draw(game.batch);
+				}
+				for (int i = 0; i < monedas.size; ++i){
+					if (monedas.get(i) != null) monedas.get(i).draw(game.batch);
+				}
+				loadingBarBackground.draw(game.batch, (int)(width*0.25), (int)(height*0.02), (int)(width*0.6875), (int)(height*0.08));
+		        loadingBar.draw(game.batch, (int)(width*0.25), (int)(height*0.02), (int)(width*0.6875)*(1-tiempoJugado/tiempoTotal), (int)(height*0.08));//progress * 700
+			game.batch.end();
+			
+			debugRenderer.render(world, camera.combined);
+			container.debugTable();
+			stage.getViewport().apply();
+			stage.draw();
+			stage.act(delta);
+		}
 	}
 	
 
 
+	private boolean checkLost() {
+		if (tiempoJugado > tiempoTotal) return true;
+		if (peces.size == 0) return true;
+		else return false;
+	}
+
+
 	public void resize (int width, int height) { 
 		stage.getViewport().update(width, height,true);
+		//this.width = width;
+		//this.height = height;
 		/*pez.updateSizes(width, height);
 		pez2.updateSizes(width, height);*/
 	    //
