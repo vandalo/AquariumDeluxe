@@ -56,6 +56,7 @@ public class ContListener implements com.badlogic.gdx.physics.box2d.ContactListe
     		pez.tiempoDesdeComida = 0;
     		comida.alive = false;
     		game.numComidasActual--;
+    		pez.steps = 0;
     		game.comidas.removeValue(comida, true);
     	}
     	

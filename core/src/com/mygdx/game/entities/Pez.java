@@ -26,7 +26,7 @@ public abstract class Pez extends Sprite {
     public float tiempoDesdeComida;
     protected Random ran;
     private float dirX, dirY;
-    private int steps;
+    public int steps;
     protected float xSpeed, ySpeed;
     Sprite spriteDer, spriteIzq, spriteMuerto, spriteHambDer, spriteHambIzq;
     private int randomSteep;
