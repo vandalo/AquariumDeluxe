@@ -102,7 +102,14 @@ public class PezBasic extends Pez{
 	
 	@Override
 	public void ir_a_comida() {
-		int i = comida_cercana();		
+		int i = comida_cercana();	
+		if(i >= 0){
+			Comida Comida = game.comidas.get(i);
+			float xComida = Comida.getX();
+			float yComida = Comida.getY();
+			float Vel = 60/xComida+yComida;
+			body.setLinearVelocity(Vel*xComida, Vel*yComida);
+		}
 	}
 
 }

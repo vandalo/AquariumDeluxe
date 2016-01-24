@@ -90,7 +90,7 @@ public abstract class Pez extends Sprite {
 		//CALCULATE VELOCITY AND COLLISIONS FOR AI
 		//COLISIONES HORIZONTALES
 		if (tiempoDesdeComida > 10){
-			
+			ir_a_comida();
 		}
 		else{
 			if (body.getLinearVelocity().x < 0) {
