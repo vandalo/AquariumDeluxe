@@ -46,6 +46,7 @@ public class testGame implements Screen {
 	public Array<Moneda> monedas;
 	protected float tiempoJugado, tiempoTotal;
 	private int width, height;
+	public Array<Pez> pecesDisponibles;
 	
 	public testGame(final AquariumDeluxe game) {
 		this.game = game;
@@ -87,7 +88,7 @@ public class testGame implements Screen {
 		//scrollPane.setFlickScroll(false);
 		ImageUI[] image = new ImageUI[6];
 		for (int i = 0; i < 6; i++){
-			image[i] = new ImageUI(gameUI.findRegion("dissabledbutton"), entities.findRegion("ballBasicRed"), true, i);
+			image[i] = new ImageUI(gameUI.findRegion("dissabledbutton"), entities.findRegion("ballBasicRed"), true, i, this);
 //			table.add(image[i]).minSize(Gdx.graphics.getWidth()/16, Gdx.graphics.getWidth()/16).spaceRight(20);
 			table.add(image[i]).minSize(60, 60).spaceBottom(10);
 			table.row();

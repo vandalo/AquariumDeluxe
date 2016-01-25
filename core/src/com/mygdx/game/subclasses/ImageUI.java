@@ -7,17 +7,21 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.mygdx.game.partidas.testGame;
 
 public class ImageUI extends Image{
 	private Sprite ball;
 	private boolean draw;
-	public int position;
+	final public int position;
+	private testGame game;
 	
-	public ImageUI(TextureRegion region, TextureRegion ball, boolean draw, int position){
+	public ImageUI(TextureRegion region, TextureRegion ball, boolean draw, final int position, final testGame game){
 		super(region);
 		addListener(new InputListener(){
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons){
                 System.out.println("Touched: " + event.getListenerActor().getY());
+                if (game.pecesDisponibles.size > position && game.pecesDisponibles.get(position) != null)
+                	System.out.println("Pos: " + position+ ". Tipo Pez: " + game.pecesDisponibles.get(position));
                 //setVisible(false);
                 return true;
             }
@@ -27,6 +31,7 @@ public class ImageUI extends Image{
 		this.position = position;
 		this.ball.setSize(getWidth(), getHeight());
 		this.ball.setAlpha(0.8f);
+		this.game = game;
 	}
 	
 	@Override

@@ -33,6 +33,8 @@ public class nivel1 extends testGame{
         peces.get(1).initBody(world, 0);
         tiempoJugado = 0;
         tiempoTotal = ops.timepoPartida;
+        pecesDisponibles = new Array<Pez>(1); //en vez de 6 sera el array k le pasemos a nivel
+        pecesDisponibles.add(new PezBasic(entities.createSprite("ballBasicBlue"), world, this, entities));
 	}
 
 }
