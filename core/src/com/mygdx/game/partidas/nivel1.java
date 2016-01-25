@@ -12,7 +12,7 @@ import com.mygdx.game.entities.PezBasic;
 
 public class nivel1 extends testGame{
 
-	public nivel1(AquariumDeluxe game) {
+	public nivel1(AquariumDeluxe game) {//le pasamos num de opciones partida, array de peces
 		super(game);
 		OpcionesPartida ops = new OpcionesPartida(1);
 		mapSprite = new Sprite(new Texture("backgroundd.png"));
