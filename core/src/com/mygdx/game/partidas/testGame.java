@@ -11,7 +11,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
@@ -36,7 +35,6 @@ public class testGame implements Screen {
 	public Array<Body> bodiesToDestroy = new Array<Body>(false, 16);
 	public TextureAtlas gameUI, entities;
 	private Table container, table;
-	private ScrollPane scrollPane;
 	private Skin skin;
 	public int numComidasMax, numComidasActual, numMonedasMax, numMonedasActual;
 	public int dinero;
@@ -45,8 +43,9 @@ public class testGame implements Screen {
 	public Array<Comida> comidas;
 	public Array<Moneda> monedas;
 	protected float tiempoJugado, tiempoTotal;
-	private int width, height;
-	public Array<Pez> pecesDisponibles;
+	private int width;
+	public int height;
+	public Array<Integer> pecesDisponibles;
 	
 	public testGame(final AquariumDeluxe game) {
 		this.game = game;

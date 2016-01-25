@@ -32,7 +32,7 @@ public class ContListener implements com.badlogic.gdx.physics.box2d.ContactListe
     		pez = (Pez) contact.getFixtureB().getBody().getUserData();
     		
     	}   
-    	if (pez.aliveShown || pez.tiempoDesdeComida < pez.TIME_HASTA_HAMBRE/2) contact.setEnabled(false);
+    	if (pez.aliveShown || pez.tiempoDesdeComida < Pez.TIME_HASTA_HAMBRE/2) contact.setEnabled(false);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.mygdx.game.listeners;
 
-import com.badlogic.gdx.Gdx;
+
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.entities.ComidaBasic;
@@ -21,14 +21,16 @@ public class InpListener extends InputAdapter{
 		int i = game.numComidasActual;
 		if (i < game.numComidasMax){
 			Vector3 v = game.camera.unproject(new Vector3((float)screenX,(float)screenY,0));
-			ComidaBasic cb = new ComidaBasic(game.entities.createSprite("ballDefenderPurple"), game.world, game);
-			game.comidas.add(cb);
-			i = game.comidas.indexOf(cb, true);
-			game.comidas.get(i).setPosition(v.x - game.comidas.get(i).getWidth()/2, 
-					v.y - game.comidas.get(i).getHeight()/2);
-			game.comidas.get(i).initBody(game.world);
-			game.comidas.get(i).setSpeed();
-			game.numComidasActual++;
+			if(v.x > 85 && v.y < game.height - 20){
+				ComidaBasic cb = new ComidaBasic(game.entities.createSprite("ballDefenderPurple"), game.world, game);
+				game.comidas.add(cb);
+				i = game.comidas.indexOf(cb, true);
+				game.comidas.get(i).setPosition(v.x - game.comidas.get(i).getWidth()/2, 
+						v.y - game.comidas.get(i).getHeight()/2);
+				game.comidas.get(i).initBody(game.world);
+				game.comidas.get(i).setSpeed();
+				game.numComidasActual++;
+			}
 		}
 
 		return true;

@@ -16,7 +16,7 @@ public abstract class Pez extends Sprite {
 	
 	private Vector2 velocity = new Vector2();
 	private float spriteW, spriteH;
-	public boolean alive, aliveShown, haHabidoComida;
+	public boolean alive, aliveShown, haHabidoComida, recentCreat;
 	protected boolean collisionX, collisionY;
 	public Body body;
 	final short PECES = 0x1;    // 0001
@@ -34,12 +34,13 @@ public abstract class Pez extends Sprite {
     testGame game;
     protected int tiempoUltimaMoneda;
     public static int TIME_HASTA_HAMBRE = 10, TIME_HASTA_MUERTE = 25;
-    public static int precioPez;
+    public int precioPez;
 	
 	public Pez(Sprite sprite, World world, testGame game, Sprite derecha, Sprite izquierda,
 			Sprite hambrientoDerecha, Sprite hambrientoIzquierda, Sprite muerto){
 		super(sprite);
 		alive = true;
+		recentCreat = false;
 		spriteW = getWidth(); 
 		spriteH = getHeight(); 
 		tamanoPez = 0;
@@ -100,7 +101,11 @@ public abstract class Pez extends Sprite {
 			haHabidoComida = false;
 			steps = 0;
 		}
-		if (tiempoDesdeComida > TIME_HASTA_MUERTE){
+		if(recentCreat == true){
+			body.setLinearVelocity(0, (getY()-(height/2))*(-10));
+			if(getY() < height/2)recentCreat = false;
+		}
+		else if (tiempoDesdeComida > TIME_HASTA_MUERTE){
 			body.setLinearVelocity(0,15);
 			if (collidesTop(getX(), getY()-50)){
 				alive = false;
@@ -210,7 +215,8 @@ public abstract class Pez extends Sprite {
 	}
 
 	private boolean isCellBlocked(float x, float y){
-		if (x < 85 || (x > width) || (y > height) || y < 55){
+		if(recentCreat)return false;
+		if (x < 85 || (x > width) || (y > height) || y < 20){
 			steps = 1; 
 			return true;
 		}
