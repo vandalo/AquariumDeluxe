@@ -21,6 +21,7 @@ public class PezBasic extends Pez{
 							 entities.createSprite("ballBasicPurple"));
 		xSpeed = 35;
 		ySpeed = 20;
+		precioPez = 200;
 	}
 	
 	

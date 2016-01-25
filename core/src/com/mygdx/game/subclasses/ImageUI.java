@@ -17,7 +17,7 @@ public class ImageUI extends Image{
 		super(region);
 		addListener(new InputListener(){
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons){
-                System.out.println("Touched: " + event.getListenerActor().getX());
+                System.out.println("Touched: " + event.getListenerActor().getY());
                 //setVisible(false);
                 return true;
             }

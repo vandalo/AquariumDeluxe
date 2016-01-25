@@ -34,6 +34,7 @@ public abstract class Pez extends Sprite {
     testGame game;
     protected int tiempoUltimaMoneda;
     public static int TIME_HASTA_HAMBRE = 10, TIME_HASTA_MUERTE = 25;
+    public static int precioPez;
 	
 	public Pez(Sprite sprite, World world, testGame game, Sprite derecha, Sprite izquierda,
 			Sprite hambrientoDerecha, Sprite hambrientoIzquierda, Sprite muerto){
@@ -43,6 +44,7 @@ public abstract class Pez extends Sprite {
 		spriteH = getHeight(); 
 		tamanoPez = 0;
 		tiempoPez = 0;
+		precioPez = 0;
 		tiempoDesdeComida = 0f;
 		ran = new Random();
 		steps = 0;

@@ -85,7 +85,7 @@ public class testGame implements Screen {
 		//VerticalGroup v = new VerticalGroup();
 		//scrollPane = new ScrollPane(table);
 		//scrollPane.setFlickScroll(false);
-		ImageUI[] image = new ImageUI[12];
+		ImageUI[] image = new ImageUI[6];
 		for (int i = 0; i < 6; i++){
 			image[i] = new ImageUI(gameUI.findRegion("dissabledbutton"), entities.findRegion("ballBasicRed"), true, i);
 //			table.add(image[i]).minSize(Gdx.graphics.getWidth()/16, Gdx.graphics.getWidth()/16).spaceRight(20);
@@ -145,7 +145,6 @@ public class testGame implements Screen {
 			stage.getViewport().apply();
 			stage.draw();
 			stage.act(delta);
-			System.out.println(dinero);
 		}
 	}
 	
@@ -153,7 +152,6 @@ public class testGame implements Screen {
 
 	private boolean checkLost() {
 		if (tiempoJugado > tiempoTotal) return true;
-		if (peces.size == 0) return true;
 		else return false;
 	}
 
