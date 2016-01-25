@@ -65,11 +65,13 @@ public class PezBasic extends Pez{
 
 	@Override
 	public void crearMoneda(World world) {
-		if(tamanoPez == 0 && tiempoUltimaMoneda <= 0 && !aliveShown){
+		if(tamanoPez > 0 && tiempoUltimaMoneda <= 0 && !aliveShown){
 			tiempoUltimaMoneda = 300 + ran.nextInt(450);
 			int i = game.numMonedasActual;
 			if (i < game.numMonedasMax){
 				Moneda m = new Moneda(game.entities.createSprite("shieldBall"), game.world, game);
+				int valMoneda = getValueMoneda();
+				m.valor = valMoneda;
 				game.monedas.add(m);
 				i = game.monedas.indexOf(m, true);
 				game.monedas.get(i).setPosition(getX(), getY()-5);
@@ -81,6 +83,20 @@ public class PezBasic extends Pez{
 		
 	}
 
+	public void setNivelPez(){
+		if(tiempoPez > 180)tamanoPez = 3;
+		else if(tiempoPez > 70)tamanoPez = 2;
+		else if(tiempoPez > 30)tamanoPez = 1;	
+	}
+	
+	public int getValueMoneda(){
+		int value = 0;
+		if(tamanoPez == 1) value = 50;
+		else if(tamanoPez == 2)value = 100;
+		else if(tamanoPez == 3)value = 175;
+		return value;		
+	}
+	
 	@Override
 	public int comida_cercana() {
 		x = getX();

@@ -145,6 +145,7 @@ public class testGame implements Screen {
 			stage.getViewport().apply();
 			stage.draw();
 			stage.act(delta);
+			System.out.println(dinero);
 		}
 	}
 	

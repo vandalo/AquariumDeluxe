@@ -32,7 +32,7 @@ public class nivel1 extends testGame{
         peces.get(1).setPosition(Gdx.graphics.getWidth()/2 + 20, Gdx.graphics.getHeight()/2);
         peces.get(1).initBody(world, 0);
         tiempoJugado = 0;
-        tiempoTotal = 300;
+        tiempoTotal = ops.timepoPartida;
 	}
 
 }

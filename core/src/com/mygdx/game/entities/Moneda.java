@@ -65,6 +65,7 @@ public class Moneda extends Sprite {
 			body.setLinearVelocity(0, 0);
 			tiempoDesdeCaida += deltaTime;
 			if (tiempoDesdeCaida > 5) {
+				game.dinero += valor;
 				body.setActive(false);
 				alive = false;
 				game.monedas.removeValue(this, true);

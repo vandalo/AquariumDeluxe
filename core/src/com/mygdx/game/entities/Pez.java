@@ -23,7 +23,7 @@ public abstract class Pez extends Sprite {
     final short COMIDA = 0x1 << 1; // 0010 or 0x2 in hex
     final short ENEMIGO = 0x11 << 1; // 0010 or 0x2 in hex
     protected int tamanoPez;
-    public float tiempoDesdeComida;
+    public float tiempoDesdeComida, tiempoPez;
     protected Random ran;
     private float dirX, dirY;
     public int steps;
@@ -42,6 +42,7 @@ public abstract class Pez extends Sprite {
 		spriteW = getWidth(); 
 		spriteH = getHeight(); 
 		tamanoPez = 0;
+		tiempoPez = 0;
 		tiempoDesdeComida = 0f;
 		ran = new Random();
 		steps = 0;
@@ -66,6 +67,8 @@ public abstract class Pez extends Sprite {
 	public abstract void crearMoneda(World world);
 	public abstract void ir_a_comida();
 	public abstract int comida_cercana();
+	public abstract int getValueMoneda();
+	public abstract void setNivelPez();
 	
 	public void updateSizes(int width, int height){
 		/*this.width = width * 5 / 10;
@@ -81,11 +84,12 @@ public abstract class Pez extends Sprite {
 
 
 	protected void update(float deltaTime) {		
-		
+		setNivelPez();
 		collisionX = false;
 		collisionY = false;
 		tiempoDesdeComida += deltaTime;
 		tiempoUltimaMoneda -= deltaTime;
+		tiempoPez += deltaTime;
 		crearMoneda(game.world);
 		
 		//CALCULATE VELOCITY AND COLLISIONS FOR AI
