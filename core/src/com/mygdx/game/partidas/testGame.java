@@ -11,9 +11,11 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
@@ -24,6 +26,7 @@ import com.mygdx.game.entities.Pez;
 import com.mygdx.game.listeners.ContListener;
 import com.mygdx.game.listeners.InpListener;
 import com.mygdx.game.subclasses.ImageUI;
+import com.sun.glass.events.TouchEvent;
 
 public class testGame implements Screen {
 	public OrthographicCamera camera;
@@ -39,6 +42,7 @@ public class testGame implements Screen {
 	private Table container, table;
 	private Skin skin;
 	private TextButton monedasView;
+	protected ImageUI objetivo;
 	protected Skin skinButtons;
 	
 	public int numComidasMax, numComidasActual, numMonedasMax, numMonedasActual;
@@ -51,6 +55,8 @@ public class testGame implements Screen {
 	private int width;
 	public int height;
 	public Array<Integer> pecesDisponibles;
+	public int objetivoPartida;
+	public boolean win = false;
 	
 	public testGame(final AquariumDeluxe game) {
 		this.game = game;
@@ -113,9 +119,11 @@ public class testGame implements Screen {
 		
 		container.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		monedasView = new TextButton("PLAY", skinButtons, "mainMenuBlack");
-		monedasView.pad(20);
+		objetivo = new ImageUI(gameUI.findRegion("dissabledbutton"), entities.findRegion("ballBasicRed"), true, 7, this);
+		monedasView.pad(10);
 		container.add(monedasView);
-		container.getCell(monedasView).spaceBottom(15);
+		container.add(objetivo);
+		container.getCell(monedasView).spaceBottom(5);
 		stage.addActor(container);
 	}
 
@@ -137,7 +145,7 @@ public class testGame implements Screen {
 		tiempoJugado+=delta;
 		
 		//COMPROBAMOS SI HEMOS PERDIDO
-		if(!checkLost()){
+		if(!checkLost() && !win){
 			camera.update();
 			game.batch.begin();
 				mapSprite.draw(game.batch);
@@ -156,15 +164,16 @@ public class testGame implements Screen {
 			
 			debugRenderer.render(world, camera.combined);
 			//container.debugTable();
-			monedasView.setText("Balance: " + dinero);
+			monedasView.setPosition(100, height - 100);
+			monedasView.setText("Balance: " + dinero);	
+			objetivo.setPosition(100, 25);
 			stage.getViewport().apply();
 			stage.draw();
 			stage.act(delta);
 		}
 	}
 	
-
-
+	
 	private boolean checkLost() {
 		if (tiempoJugado > tiempoTotal) return true;
 		else return false;

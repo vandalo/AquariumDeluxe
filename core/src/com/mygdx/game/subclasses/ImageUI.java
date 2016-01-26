@@ -20,12 +20,12 @@ public class ImageUI extends Image{
 		super(region);
 		addListener(new InputListener(){
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons){
-                System.out.println("Touched: " + event.getListenerActor().getY());
+                System.out.println("Touched: " + event.getListenerActor().getY() + "position: " + position);
                 if (game.pecesDisponibles.size > position && game.pecesDisponibles.get(position) != null){
                 	switch (game.pecesDisponibles.get(position)) {
             		case 1:   
             			PezBasic pb = new PezBasic(game.entities.createSprite("ballBasicBlue"), game.world, game, game.entities);
-            			if(game.dinero > pb.precioPez){
+            			if(game.dinero >= pb.precioPez){
 	            			pb.recentCreat = true;
 	            			game.peces.add(pb);
 	            			int i = game.peces.indexOf(pb, true);
@@ -35,9 +35,12 @@ public class ImageUI extends Image{
             			}
             		default:
             			break;
-            		}
-                	
-                }          	
+            		}              	
+                }
+                else{
+                	//Objetivo de la partida
+                	if(game.dinero >= game.objetivoPartida) game.win = true;
+                }
                 //setVisible(false);
                 return true;
             }

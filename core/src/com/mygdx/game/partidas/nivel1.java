@@ -1,5 +1,6 @@
 package com.mygdx.game.partidas;
 
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -23,6 +24,7 @@ public class nivel1 extends testGame{
         monedas = new Array<Moneda>(false, ops.numMonedas);
         numComidasMax = ops.numComidas;
         numMonedasMax = ops.numMonedas;
+        objetivoPartida = ops.objetivo;
         
         peces.add( new PezBasic(entities.createSprite("ballBasicBlue"), world, this, entities));
         peces.get(0).setPosition(Gdx.graphics.getWidth()/2 - 10, Gdx.graphics.getHeight()/2);
