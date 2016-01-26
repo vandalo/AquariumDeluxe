@@ -62,8 +62,9 @@ public class MainMenuScreen implements Screen {
 		buttonExit.addListener(new ClickListener(){
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				dispose();
-	            Gdx.app.exit();
+				//dispose();
+	            //Gdx.app.exit();
+				game.setScreen(new StageSelector(mmScreen));
 			}
 		});
 		

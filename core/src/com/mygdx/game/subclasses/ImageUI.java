@@ -52,6 +52,22 @@ public class ImageUI extends Image{
 		this.ball.setAlpha(0.8f);
 	}
 	
+	//constructor para botones de escoger nivel
+	public ImageUI(TextureRegion region, TextureRegion ball, boolean draw, final int position){
+		super(region);
+		addListener(new InputListener(){
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons){
+               
+                return true;
+            }
+        });
+		this.draw = draw;
+		this.ball = new Sprite(ball);
+		this.position = position;
+		this.ball.setSize(getWidth(), getHeight());
+		this.ball.setAlpha(0.8f);
+	}
+	
 	@Override
 	public Actor hit(float x, float y, boolean touchable) {
 		//System.out.println("hitted");
