@@ -13,6 +13,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
@@ -33,9 +34,13 @@ public class testGame implements Screen {
 	protected float w;
     protected Sprite mapSprite;
 	public Array<Body> bodiesToDestroy = new Array<Body>(false, 16);
-	public TextureAtlas gameUI, entities;
+	public TextureAtlas gameUI, entities, atlas;
+	
 	private Table container, table;
 	private Skin skin;
+	private TextButton monedasView;
+	protected Skin skinButtons;
+	
 	public int numComidasMax, numComidasActual, numMonedasMax, numMonedasActual;
 	public int dinero;
 	private NinePatchDrawable loadingBarBackground, loadingBar;
@@ -77,7 +82,6 @@ public class testGame implements Screen {
 	private void setupActors() {
 		stage = new Stage(new StretchViewport(800, 480));
 		skin = new Skin(gameUI);
-		container = new Table(skin);
 		table = new Table();
 		table.setBounds(0, 0, 80, 480);
 		stage.addActor(table);
@@ -102,7 +106,17 @@ public class testGame implements Screen {
         NinePatch loadingBarPatch = new NinePatch(gameUI.findRegion("lifeRed"), 2, 2, 2, 2);
         loadingBar = new NinePatchDrawable(loadingBarPatch);
         loadingBarBackground = new NinePatchDrawable(loadingBarBackgroundPatch);
+        
+        atlas = new TextureAtlas("skins/userInterface.pack");
+		skinButtons = new Skin(Gdx.files.internal("skins/userInterface.json"), atlas);
+		container = new Table(skinButtons);
 		
+		container.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		monedasView = new TextButton("PLAY", skinButtons, "mainMenuBlack");
+		monedasView.pad(20);
+		container.add(monedasView);
+		container.getCell(monedasView).spaceBottom(15);
+		stage.addActor(container);
 	}
 
 
@@ -141,7 +155,8 @@ public class testGame implements Screen {
 			game.batch.end();
 			
 			debugRenderer.render(world, camera.combined);
-			container.debugTable();
+			//container.debugTable();
+			monedasView.setText("Balance: " + dinero);
 			stage.getViewport().apply();
 			stage.draw();
 			stage.act(delta);
@@ -187,6 +202,8 @@ public class testGame implements Screen {
     	entities.dispose();
     	debugRenderer.dispose();
     	mapSprite.getTexture().dispose();
+    	skin.dispose();
+    	skinButtons.dispose();
     }
 
 	@Override

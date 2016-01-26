@@ -39,8 +39,8 @@ public class LogoScreen implements Screen {
 		image.setPosition(Gdx.graphics.getWidth()/2- image.getWidth()/2, Gdx.graphics.getHeight()/2 - image.getHeight()/2);
 		image.setScale(0.4f);
 		image.addAction(fadeOut(0));
-		image.addAction(sequence(parallel(rotateBy(1080, 2f, swing), fadeIn(1.5f), scaleTo(2f, 2f, 2f)), delay(0.3f),
-				parallel(rotateBy(-720, 1f, Interpolation.pow2), scaleTo(0.1f, 0.1f, 1f)), scaleTo(1, 1), delay(0.5f),
+		image.addAction(sequence(parallel(rotateBy(780, 2f, swingOut), fadeIn(1.5f), scaleTo(1.8f, 1.8f, 1.8f)), delay(0.3f),
+				parallel(rotateBy(-420, 1f, Interpolation.pow2), scaleTo(0.1f, 0.1f, 1f)), scaleTo(1, 1), delay(0.5f),
 				run(new Runnable() {
 				    public void run () {
 				    	game.setScreen(new MainMenuScreen(game));
