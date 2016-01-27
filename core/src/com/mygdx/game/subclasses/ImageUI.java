@@ -25,7 +25,9 @@ public class ImageUI extends Image{
                 System.out.println("Touched: " + event.getListenerActor().getY() + "position: " + position);
                 if (game.pecesDisponibles.size > position && game.pecesDisponibles.get(position) != null){
                 	switch (game.pecesDisponibles.get(position)) {
+                	// game.pecesDisponibles.get(position) tendrea el id del pc que se deve crear
             		case 1:   
+            			//Pez Basic
             			PezBasic pb = new PezBasic(game.entities.createSprite("ballBasicBlue"), game.world, game, game.entities);
             			if(game.dinero >= pb.precioPez){
 	            			pb.recentCreat = true;
@@ -35,6 +37,19 @@ public class ImageUI extends Image{
 	            	        game.peces.get(i).initBody(game.world, 0);
 	            	        game.dinero -= pb.precioPez;
             			}
+            			break;
+            		case 2:
+            			//Pez ?? (basic too por el momento)
+            			PezBasic pb2 = new PezBasic(game.entities.createSprite("ballBasicBlue"), game.world, game, game.entities);
+            			if(game.dinero >= pb2.precioPez){
+	            			pb2.recentCreat = true;
+	            			game.peces.add(pb2);
+	            			int i = game.peces.indexOf(pb2, true);
+	            	        game.peces.get(i).setPosition(Gdx.graphics.getWidth()/2 - 10, Gdx.graphics.getHeight());
+	            	        game.peces.get(i).initBody(game.world, 0);
+	            	        game.dinero -= pb2.precioPez;
+            			}
+            			break;
             		default:
             			break;
             		}              	

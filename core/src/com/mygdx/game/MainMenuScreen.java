@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.partidas.nivel;
+import com.mygdx.game.subclasses.ImageUI;
 
 public class MainMenuScreen implements Screen {
 
@@ -26,8 +27,9 @@ public class MainMenuScreen implements Screen {
 	private Stage stage;
 	private Table table;
 	private Label heading;
-	private TextButton buttonPlay, buttonExit;
+	private TextButton buttonPlay, buttonExit, buttonInventory, buttonAquarium;
 	protected Sprite background;
+	private ImageUI menuOpciones;
 	//private List<String> list;
 	//private ScrollPane scrollPane;
 	
@@ -47,7 +49,9 @@ public class MainMenuScreen implements Screen {
 		table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		
 		buttonPlay = new TextButton("PLAY", skin, "mainMenuBlack");
-		buttonPlay.pad(20);
+		buttonPlay.pad(10);
+		buttonPlay.padRight(30);
+		buttonPlay.padLeft(30);
 		buttonPlay.addListener(new ClickListener(){
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
@@ -57,8 +61,36 @@ public class MainMenuScreen implements Screen {
 			}
 		});
 		
+		buttonInventory = new TextButton("INVENTORY", skin, "mainMenuBlack");
+		buttonInventory.pad(10);
+		buttonInventory.padRight(30);
+		buttonInventory.padLeft(30);
+		buttonInventory.addListener(new ClickListener(){
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				//game.setScreen(new testGame(game));
+	            //dispose();
+				game.setScreen(new nivel(game,1));
+			}
+		});
+		
+		buttonAquarium = new TextButton("AQUARIUM", skin, "mainMenuBlack");
+		buttonAquarium.pad(10);
+		buttonAquarium.padRight(30);
+		buttonAquarium.padLeft(30);
+		buttonAquarium.addListener(new ClickListener(){
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				//game.setScreen(new testGame(game));
+	            //dispose();
+				game.setScreen(new nivel(game,1));
+			}
+		});
+		
 		buttonExit = new TextButton("EXIT", skin, "mainMenuBlack");
-		buttonExit.pad(20);
+		buttonExit.pad(10);
+		buttonExit.padRight(30);
+		buttonExit.padLeft(30);
 		buttonExit.addListener(new ClickListener(){
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
@@ -68,15 +100,21 @@ public class MainMenuScreen implements Screen {
 			}
 		});
 		
-		heading = new Label("Tower Conquest", skin, "default");
+		heading = new Label("Aquarium Deluxe", skin, "default");
 		//heading.setFontScale(2);
 		
 		table.add(heading);
-		table.getCell(heading).padBottom(50);
+		table.getCell(heading).padBottom(30);
 		//table.setBackground(new Image(new Texture("globe.png")).getDrawable());
 		table.row();
 		table.add(buttonPlay);
-		table.getCell(buttonPlay).spaceBottom(15);
+		table.getCell(buttonPlay).spaceBottom(10);
+		table.row();
+		table.add(buttonInventory);
+		table.getCell(buttonInventory).spaceBottom(10);
+		table.row();
+		table.add(buttonAquarium);
+		table.getCell(buttonAquarium).spaceBottom(10);
 		table.row();
 		table.add(buttonExit);
 		//table.debug();

@@ -42,7 +42,7 @@ public class testGame implements Screen {
 	private Table container, table;
 	private Skin skin;
 	private TextButton monedasView;
-	protected ImageUI objetivo;
+	protected ImageUI objetivo, menu;
 	protected Skin skinButtons;
 	
 	public int numComidasMax, numComidasActual, numMonedasMax, numMonedasActual;
@@ -120,8 +120,10 @@ public class testGame implements Screen {
 		container.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		monedasView = new TextButton("PLAY", skinButtons, "mainMenuBlack");
 		objetivo = new ImageUI(gameUI.findRegion("dissabledbutton"), entities.findRegion("ballBasicRed"), true, 7, this);
+		menu = new ImageUI(gameUI.findRegion("dissabledbutton"), entities.findRegion("ballBasicRed"), true, 8, this);
 		monedasView.pad(10);
 		container.add(monedasView);
+		container.add(menu);
 		container.add(objetivo);
 		container.getCell(monedasView).spaceBottom(5);
 		stage.addActor(container);
@@ -167,6 +169,7 @@ public class testGame implements Screen {
 			monedasView.setPosition(100, height - 100);
 			monedasView.setText("Balance: " + dinero);	
 			objetivo.setPosition(100, 25);
+			menu.setPosition(width - 50, height - 50);
 			stage.getViewport().apply();
 			stage.draw();
 			stage.act(delta);
