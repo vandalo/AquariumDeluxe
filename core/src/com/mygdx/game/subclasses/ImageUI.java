@@ -8,7 +8,9 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.mygdx.game.AquariumDeluxe;
 import com.mygdx.game.entities.PezBasic;
+import com.mygdx.game.partidas.nivel;
 import com.mygdx.game.partidas.testGame;
 
 public class ImageUI extends Image{
@@ -53,12 +55,30 @@ public class ImageUI extends Image{
 	}
 	
 	//constructor para botones de escoger nivel
-	public ImageUI(TextureRegion region, TextureRegion ball, boolean draw, final int position){
+	public ImageUI(TextureRegion region, TextureRegion ball, boolean draw, final int position, final AquariumDeluxe game){
 		super(region);
 		addListener(new InputListener(){
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons){
-               
-                return true;
+            	switch (position) {
+        		case 0:  
+        			game.setScreen(new nivel(game,0));
+        			break;
+        		case 1:  
+        			game.setScreen(new nivel(game,1));
+        			break;
+        		case 2:  
+        			game.setScreen(new nivel(game,2));
+        			break;
+        		case 3:  
+        			game.setScreen(new nivel(game,3));
+        			break;
+        		case 4:  
+        			game.setScreen(new nivel(game,4));
+        			break;
+                default:
+                	break;
+            	}
+            	return true;
             }
         });
 		this.draw = draw;

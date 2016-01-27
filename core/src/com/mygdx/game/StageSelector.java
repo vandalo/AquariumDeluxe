@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.mygdx.game.partidas.nivel1;
+import com.mygdx.game.partidas.nivel;
 import com.mygdx.game.partidas.testGame;
 import com.mygdx.game.subclasses.ImageUI;
 
@@ -24,13 +24,16 @@ public class StageSelector implements Screen {
 	private ImageButton backArrow;
 	private TextureAtlas gameUI, atlas, entities;
 	private Skin skinButtons;
+	final AquariumDeluxe Agame;
 	
-	public StageSelector(MainMenuScreen game) {
+	
+	public StageSelector(MainMenuScreen game, AquariumDeluxe gam) {
 		this.game = game;
+		Agame = gam;
 	}
 
 	@Override
-	public void show() {//addActor lo añade al centro, add lo añade al medio 
+	public void show() {//addActor lo aï¿½ade al centro, add lo aï¿½ade al medio 
 		stage = new Stage(new StretchViewport(800, 400));
 		Gdx.input.setInputProcessor(stage);
 		gameUI = new TextureAtlas(Gdx.files.internal("skins/gameUI.pack"));
@@ -56,7 +59,7 @@ public class StageSelector implements Screen {
 		entities = new TextureAtlas(Gdx.files.internal("skins/entities.pack"));
 		ImageUI[] image = new ImageUI[6];
 		for (int i = 0; i < 6; i++){
-			image[i] = new ImageUI(gameUI.findRegion("dissabledbutton"), entities.findRegion("ballBasicRed"), true, i);
+			image[i] = new ImageUI(gameUI.findRegion("dissabledbutton"), entities.findRegion("ballBasicRed"), true, i, Agame);
 //			table.add(image[i]).minSize(Gdx.graphics.getWidth()/16, Gdx.graphics.getWidth()/16).spaceRight(20);
 			//table.add(image[i]).minSize(60, 60).spaceBottom(10);
 			stage.addActor(image[i]);

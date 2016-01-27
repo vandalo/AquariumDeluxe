@@ -11,11 +11,11 @@ import com.mygdx.game.entities.Moneda;
 import com.mygdx.game.entities.Pez;
 import com.mygdx.game.entities.PezBasic;
 
-public class nivel1 extends testGame{
+public class nivel extends testGame{
 
-	public nivel1(AquariumDeluxe game) {//le pasamos num de opciones partida, array de peces
+	public nivel(AquariumDeluxe game, int i) {//le pasamos num de opciones partida, array de peces
 		super(game);
-		OpcionesPartida ops = new OpcionesPartida(1);
+		OpcionesPartida ops = new OpcionesPartida(i);
 		mapSprite = new Sprite(new Texture("backgroundd.png"));
         mapSprite.setPosition(0, 0);                                            
         mapSprite.setSize(w, Gdx.graphics.getHeight()); 
@@ -25,6 +25,7 @@ public class nivel1 extends testGame{
         numComidasMax = ops.numComidas;
         numMonedasMax = ops.numMonedas;
         objetivoPartida = ops.objetivo;
+        dinero = ops.dineroInicial;
         
         peces.add( new PezBasic(entities.createSprite("ballBasicBlue"), world, this, entities));
         peces.get(0).setPosition(Gdx.graphics.getWidth()/2 - 10, Gdx.graphics.getHeight()/2);

@@ -15,7 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.mygdx.game.partidas.nivel1;
+import com.mygdx.game.partidas.nivel;
 
 public class MainMenuScreen implements Screen {
 
@@ -53,7 +53,7 @@ public class MainMenuScreen implements Screen {
 			public void clicked(InputEvent event, float x, float y) {
 				//game.setScreen(new testGame(game));
 	            //dispose();
-				game.setScreen(new nivel1(game));
+				game.setScreen(new nivel(game,1));
 			}
 		});
 		
@@ -64,7 +64,7 @@ public class MainMenuScreen implements Screen {
 			public void clicked(InputEvent event, float x, float y) {
 				//dispose();
 	            //Gdx.app.exit();
-				game.setScreen(new StageSelector(mmScreen));
+				game.setScreen(new StageSelector(mmScreen, game));
 			}
 		});
 		
