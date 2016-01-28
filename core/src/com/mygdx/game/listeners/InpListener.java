@@ -22,7 +22,7 @@ public class InpListener extends InputAdapter{
 		if (i < game.numComidasMax){
 			Vector3 v = game.camera.unproject(new Vector3((float)screenX,(float)screenY,0));
 			if(v.x > 85 && v.y < game.height - 20){
-				ComidaBasic cb = new ComidaBasic(game.entities.createSprite("ballDefenderPurple"), game.world, game);
+				ComidaBasic cb = new ComidaBasic(game.entities.createSprite("pezbasic"), game.world, game);
 				game.comidas.add(cb);
 				i = game.comidas.indexOf(cb, true);
 				game.comidas.get(i).setPosition(v.x - game.comidas.get(i).getWidth()/2, 

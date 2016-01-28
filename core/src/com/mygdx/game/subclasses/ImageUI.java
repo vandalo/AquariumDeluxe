@@ -22,13 +22,15 @@ public class ImageUI extends Image{
 		super(region);
 		addListener(new InputListener(){
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons){
-                System.out.println("Touched: " + event.getListenerActor().getY() + "position: " + position);
+               // System.out.println("Touched: " + event.getListenerActor().getY() + "position: " + position);
                 if (game.pecesDisponibles.size > position && game.pecesDisponibles.get(position) != null){
                 	switch (game.pecesDisponibles.get(position)) {
                 	// game.pecesDisponibles.get(position) tendrea el id del pc que se deve crear
             		case 1:   
             			//Pez Basic
-            			PezBasic pb = new PezBasic(game.entities.createSprite("ballBasicBlue"), game.world, game, game.entities);
+            			
+            			//TODO CAMBIAR EL GET1 Y GET2 POR LOS NUM K LE PASEMOS POR EL CONSTRUCTOR
+            			PezBasic pb = new PezBasic(game.entities.createSprite("pezbasic"), game.world, game, game.spritesPeces.get(1), game.spritesPeces.get(2));
             			if(game.dinero >= pb.precioPez){
 	            			pb.recentCreat = true;
 	            			game.peces.add(pb);
@@ -40,7 +42,7 @@ public class ImageUI extends Image{
             			break;
             		case 2:
             			//Pez ?? (basic too por el momento)
-            			PezBasic pb2 = new PezBasic(game.entities.createSprite("ballBasicBlue"), game.world, game, game.entities);
+            			PezBasic pb2 = new PezBasic(game.entities.createSprite("pezbasic"), game.world, game, game.spritesPeces.get(1), game.spritesPeces.get(2));
             			if(game.dinero >= pb2.precioPez){
 	            			pb2.recentCreat = true;
 	            			game.peces.add(pb2);

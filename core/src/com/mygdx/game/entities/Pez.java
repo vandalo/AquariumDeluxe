@@ -36,13 +36,12 @@ public abstract class Pez extends Sprite {
     public static int TIME_HASTA_HAMBRE = 10, TIME_HASTA_MUERTE = 25;
     public int precioPez;
 	
-	public Pez(Sprite sprite, World world, testGame game, Sprite derecha, Sprite izquierda,
+	public Pez(World world, testGame game, Sprite derecha, Sprite izquierda,
 			Sprite hambrientoDerecha, Sprite hambrientoIzquierda, Sprite muerto){
-		super(sprite);
+		super(derecha);
 		alive = true;
 		recentCreat = false;
-		spriteW = getWidth(); 
-		spriteH = getHeight(); 
+		
 		tamanoPez = 0;
 		tiempoPez = 0;
 		precioPez = 0;
@@ -59,11 +58,14 @@ public abstract class Pez extends Sprite {
 		randomSteep = (int) (530 + ran.nextInt(150));
 		if (randomSteep % 2 != 0) randomSteep++;
 		width = Gdx.graphics.getWidth()*9/10;
-		height = Gdx.graphics.getHeight()*3/4;
+		height = Gdx.graphics.getHeight()*6/7;
 		aliveShown = false;
 		this.game = game;
 		tiempoUltimaMoneda = ran.nextInt(500);
 		haHabidoComida = false;
+		setSize(width/8, width/(int)(8*1.487));
+		spriteW = getWidth(); 
+		spriteH = getHeight(); 
 	}
 	
 	public abstract void initBody(World world, int playerNum);
@@ -180,11 +182,17 @@ public abstract class Pez extends Sprite {
 			aliveShown = true;
 		}
 		else if(tiempoDesdeComida > TIME_HASTA_HAMBRE){
-			if (body.getLinearVelocity().x < 0) set(spriteHambIzq);
-			else set(spriteHambDer);
+			set(spriteHambDer);
+			setSize(width/8, width/(int)(8*1.487));
+			if (body.getLinearVelocity().x < 0) setFlip(true, false);
+			else setFlip(false, false);
 		}
-		else if (body.getLinearVelocity().x < 0) set(spriteIzq);
-		else set(spriteDer);
+		else {
+			set(spriteDer);
+			setSize(width/8, width/(int)(8*1.487));
+			if (body.getLinearVelocity().x < 0) setFlip(true, false);//set(spriteIzq);
+			else setFlip(false, false);
+		}
 		setPosition(body.getPosition().x - spriteW/2, body.getPosition().y - spriteH/2);
 	}
 	

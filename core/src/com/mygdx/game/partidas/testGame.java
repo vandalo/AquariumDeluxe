@@ -58,6 +58,8 @@ public class testGame implements Screen {
 	public int objetivoPartida;
 	public boolean win = false;
 	
+	public Array<Sprite> spritesPeces;
+	
 	public testGame(final AquariumDeluxe game) {
 		this.game = game;
 		 w = Gdx.graphics.getWidth();
@@ -67,7 +69,7 @@ public class testGame implements Screen {
 		world = new World(new Vector2(0, 0),true);
 		//world.setContactListener(new ContListener(this));
 		gameUI = new TextureAtlas(Gdx.files.internal("skins/gameUI.pack"));
-		entities = new TextureAtlas(Gdx.files.internal("skins/entities.pack"));
+		entities = new TextureAtlas(Gdx.files.internal("skins/fish.pack"));
 		
         debugRenderer = new Box2DDebugRenderer();
         setupActors();
@@ -97,7 +99,7 @@ public class testGame implements Screen {
 		//scrollPane.setFlickScroll(false);
 		ImageUI[] image = new ImageUI[6];
 		for (int i = 0; i < 6; i++){
-			image[i] = new ImageUI(gameUI.findRegion("dissabledbutton"), entities.findRegion("ballBasicRed"), true, i, this);
+			image[i] = new ImageUI(gameUI.findRegion("dissabledbutton"), entities.findRegion("pezbasic"), true, i, this);
 //			table.add(image[i]).minSize(Gdx.graphics.getWidth()/16, Gdx.graphics.getWidth()/16).spaceRight(20);
 			table.add(image[i]).minSize(60, 60).spaceBottom(10);
 			table.row();
@@ -119,8 +121,8 @@ public class testGame implements Screen {
 		
 		container.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		monedasView = new TextButton("PLAY", skinButtons, "mainMenuBlack");
-		objetivo = new ImageUI(gameUI.findRegion("dissabledbutton"), entities.findRegion("ballBasicRed"), true, 7, this);
-		menu = new ImageUI(gameUI.findRegion("dissabledbutton"), entities.findRegion("ballBasicRed"), true, 8, this);
+		objetivo = new ImageUI(gameUI.findRegion("dissabledbutton"), entities.findRegion("pezbasic"), true, 7, this);
+		menu = new ImageUI(gameUI.findRegion("dissabledbutton"), entities.findRegion("pezbasic"), true, 8, this);
 		monedasView.pad(10);
 		container.add(monedasView);
 		container.add(menu);
@@ -216,6 +218,7 @@ public class testGame implements Screen {
     	mapSprite.getTexture().dispose();
     	skin.dispose();
     	skinButtons.dispose();
+    	for (int i = 0; i < spritesPeces.size;i++) spritesPeces.get(i).getTexture().dispose();
     }
 
 	@Override

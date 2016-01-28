@@ -27,11 +27,17 @@ public class nivel extends testGame{
         objetivoPartida = ops.objetivo;
         dinero = ops.dineroInicial;
         
-        peces.add( new PezBasic(entities.createSprite("ballBasicBlue"), world, this, entities));
+        spritesPeces = new Array<Sprite>(3);
+        spritesPeces.add(entities.createSprite("pezbasic"));
+        spritesPeces.add(entities.createSprite("pezhambriento"));
+        spritesPeces.add(entities.createSprite("pezmuerto"));
+        
+        peces.add( new PezBasic(spritesPeces.get(0), world, this, spritesPeces.get(1), spritesPeces.get(2)));
+        
         peces.get(0).setPosition(Gdx.graphics.getWidth()/2 - 10, Gdx.graphics.getHeight()/2);
         peces.get(0).initBody(world, 0);
         
-        peces.add(new PezBasic(entities.createSprite("ballBasicBlue"), world, this, entities));
+        peces.add(new PezBasic(spritesPeces.get(0), world, this, spritesPeces.get(1), spritesPeces.get(2)));
         peces.get(1).setPosition(Gdx.graphics.getWidth()/2 + 20, Gdx.graphics.getHeight()/2);
         peces.get(1).initBody(world, 0);
         tiempoJugado = 0;

@@ -56,10 +56,10 @@ public class StageSelector implements Screen {
 		stage.addActor(backArrow);
 		backArrow.setPosition(10, 326);
 		
-		entities = new TextureAtlas(Gdx.files.internal("skins/entities.pack"));
+		entities = new TextureAtlas(Gdx.files.internal("skins/fish.pack"));
 		ImageUI[] image = new ImageUI[6];
 		for (int i = 0; i < 6; i++){
-			image[i] = new ImageUI(gameUI.findRegion("dissabledbutton"), entities.findRegion("ballBasicRed"), true, i, Agame);
+			image[i] = new ImageUI(gameUI.findRegion("dissabledbutton"), entities.findRegion("pezbasic"), true, i, Agame);
 //			table.add(image[i]).minSize(Gdx.graphics.getWidth()/16, Gdx.graphics.getWidth()/16).spaceRight(20);
 			//table.add(image[i]).minSize(60, 60).spaceBottom(10);
 			stage.addActor(image[i]);

@@ -13,12 +13,8 @@ public class PezBasic extends Pez{
 	private float xc, yc, distAux, dist, xComida, yComida, Vel, x, y;
 	int res, i;
 	
-	public PezBasic(Sprite sprite, World world, testGame game, TextureAtlas entities) {
-		super(sprite, world, game, entities.createSprite("ballBasicBlue"), 
-							 entities.createSprite("ballBasicBlue"),
-							 entities.createSprite("ballBasicRed"),
-							 entities.createSprite("ballBasicRed"),
-							 entities.createSprite("ballBasicPurple"));
+	public PezBasic(Sprite sprite, World world, testGame game, Sprite pezhambre, Sprite pezmuerto) {
+		super(world, game, sprite,sprite,pezhambre,pezhambre,pezmuerto);
 		xSpeed = 35;
 		ySpeed = 20;
 		precioPez = 200;
@@ -70,7 +66,7 @@ public class PezBasic extends Pez{
 			tiempoUltimaMoneda = 300 + ran.nextInt(450);
 			int i = game.numMonedasActual;
 			if (i < game.numMonedasMax){
-				Moneda m = new Moneda(game.entities.createSprite("shieldBall"), game.world, game);
+				Moneda m = new Moneda(game.entities.createSprite("pezbasic"), game.world, game);
 				int valMoneda = getValueMoneda();
 				m.valor = valMoneda;
 				game.monedas.add(m);

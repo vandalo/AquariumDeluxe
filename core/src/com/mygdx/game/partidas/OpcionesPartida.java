@@ -6,7 +6,6 @@ public class OpcionesPartida {
 
 	public int numPeces, numComidas, numMonedas, timepoPartida, objetivo, dineroInicial;
 	public OpcionesPartida(int nivel) {
-		System.out.println(nivel);
 		switch (nivel) {
 		case 0:
 			numPeces = 20;
@@ -17,7 +16,6 @@ public class OpcionesPartida {
 			dineroInicial = 10;
 			break;
 		case 1:
-			System.out.println("entra a 1");
 			numPeces = 100;
 			numComidas = 4;
 			numMonedas = 200;
@@ -26,7 +24,6 @@ public class OpcionesPartida {
 			dineroInicial = 1000;
 			break;
 		default:
-			System.out.println("entra a default");
 			numPeces = 20;
 			numComidas = 3;
 			numMonedas = 50;

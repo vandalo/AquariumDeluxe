@@ -1,0 +1,26 @@
+
+fish.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+pezbasic
+  rotate: false
+  xy: 0, 0
+  size: 171, 115
+  orig: 171, 115
+  offset: 0, 0
+  index: -1
+pezhambriento
+  rotate: false
+  xy: 171, 0
+  size: 171, 115
+  orig: 171, 115
+  offset: 0, 0
+  index: -1
+pezmuerto
+  rotate: false
+  xy: 342, 0
+  size: 171, 115
+  orig: 171, 115
+  offset: 0, 0
+  index: -1
