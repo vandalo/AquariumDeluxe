@@ -16,7 +16,8 @@ public class nivel extends testGame{
 	public nivel(AquariumDeluxe game, int i) {//le pasamos num de opciones partida, array de peces
 		super(game);
 		OpcionesPartida ops = new OpcionesPartida(i);
-		mapSprite = new Sprite(new Texture("backgroundd.png"));
+		//mapSprite = new Sprite(new Texture("backgroundd.png"));
+		mapSprite = new Sprite(new Texture("fondo1-01.png"));
         mapSprite.setPosition(0, 0);                                            
         mapSprite.setSize(w, Gdx.graphics.getHeight()); 
         peces = new Array<Pez>(false, ops.numPeces);
