@@ -2,7 +2,6 @@ package com.mygdx.game.entities;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -66,7 +65,7 @@ public class PezBasic extends Pez{
 			tiempoUltimaMoneda = 300 + ran.nextInt(450);
 			int i = game.numMonedasActual;
 			if (i < game.numMonedasMax){
-				Moneda m = new Moneda(game.entities.createSprite("pezbasic"), game.world, game);
+				Moneda m = new Moneda(game.spriteMonedas.get(tamanoPez), game.world, game);
 				int valMoneda = getValueMoneda();
 				m.valor = valMoneda;
 				game.monedas.add(m);
@@ -81,16 +80,16 @@ public class PezBasic extends Pez{
 	}
 
 	public void setNivelPez(){
-		if(tiempoPez > 180)tamanoPez = 3;
-		else if(tiempoPez > 70)tamanoPez = 2;
-		else if(tiempoPez > 30)tamanoPez = 1;	
+		if(tiempoPez > 180)tamanoPez = 0;
+		else if(tiempoPez > 70)tamanoPez = 1;
+		else if(tiempoPez > 30)tamanoPez = 2;	
 	}
 	
 	public int getValueMoneda(){
 		int value = 0;
-		if(tamanoPez == 1) value = 50;
-		else if(tamanoPez == 2)value = 100;
-		else if(tamanoPez == 3)value = 175;
+		if(tamanoPez == 2) value = 50;
+		else if(tamanoPez == 1)value = 100;
+		else if(tamanoPez == 0)value = 175;
 		return value;		
 	}
 	

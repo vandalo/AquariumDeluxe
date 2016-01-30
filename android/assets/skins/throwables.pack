@@ -1,0 +1,47 @@
+
+throwables.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+moneda
+  rotate: false
+  xy: 0, 5
+  size: 116, 116
+  orig: 116, 116
+  offset: 0, 0
+  index: -1
+monedabronze
+  rotate: false
+  xy: 116, 5
+  size: 116, 116
+  orig: 116, 116
+  offset: 0, 0
+  index: -1
+monedaplata
+  rotate: false
+  xy: 232, 5
+  size: 116, 116
+  orig: 116, 116
+  offset: 0, 0
+  index: -1
+menjar3
+  rotate: false
+  xy: 348, 46
+  size: 76, 75
+  orig: 76, 75
+  offset: 0, 0
+  index: -1
+menjar1
+  rotate: false
+  xy: 424, 58
+  size: 64, 63
+  orig: 64, 63
+  offset: 0, 0
+  index: -1
+menjar2
+  rotate: false
+  xy: 424, 0
+  size: 60, 58
+  orig: 60, 58
+  offset: 0, 0
+  index: -1

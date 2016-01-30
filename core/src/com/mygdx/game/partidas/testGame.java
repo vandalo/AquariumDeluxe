@@ -11,11 +11,9 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
@@ -26,7 +24,6 @@ import com.mygdx.game.entities.Pez;
 import com.mygdx.game.listeners.ContListener;
 import com.mygdx.game.listeners.InpListener;
 import com.mygdx.game.subclasses.ImageUI;
-import com.sun.glass.events.TouchEvent;
 
 public class testGame implements Screen {
 	public OrthographicCamera camera;
@@ -37,7 +34,7 @@ public class testGame implements Screen {
 	protected float w;
     protected Sprite mapSprite;
 	public Array<Body> bodiesToDestroy = new Array<Body>(false, 16);
-	public TextureAtlas gameUI, entities, atlas;
+	public TextureAtlas gameUI, entities, atlas, throwables;
 	
 	private Table container, table;
 	private Skin skin;
@@ -58,7 +55,7 @@ public class testGame implements Screen {
 	public int objetivoPartida;
 	public boolean win = false;
 	
-	public Array<Sprite> spritesPeces;
+	public Array<Sprite> spritesPeces, spriteMonedas;
 	
 	public testGame(final AquariumDeluxe game) {
 		this.game = game;
@@ -70,6 +67,7 @@ public class testGame implements Screen {
 		//world.setContactListener(new ContListener(this));
 		gameUI = new TextureAtlas(Gdx.files.internal("skins/gameUI.pack"));
 		entities = new TextureAtlas(Gdx.files.internal("skins/fish.pack"));
+		throwables = new TextureAtlas(Gdx.files.internal("skins/throwables.pack"));
 		
         debugRenderer = new Box2DDebugRenderer();
         setupActors();
@@ -84,6 +82,11 @@ public class testGame implements Screen {
   		numComidasActual = 0;
   		width = Gdx.graphics.getWidth();
   		height = Gdx.graphics.getHeight();
+  		
+  		spriteMonedas = new Array<Sprite>(3);
+  		spriteMonedas.add(throwables.createSprite("moneda"));
+  		spriteMonedas.add(throwables.createSprite("monedaplata"));
+  		spriteMonedas.add(throwables.createSprite("monedabronze"));
 	}
 
 
@@ -219,6 +222,7 @@ public class testGame implements Screen {
     	skin.dispose();
     	skinButtons.dispose();
     	for (int i = 0; i < spritesPeces.size;i++) spritesPeces.get(i).getTexture().dispose();
+    	throwables.dispose();
     }
 
 	@Override
