@@ -1,6 +1,5 @@
 package com.mygdx.game.subclasses;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -35,7 +34,7 @@ public class ImageUI extends Image{
 	            			pb.recentCreat = true;
 	            			game.peces.add(pb);
 	            			int i = game.peces.indexOf(pb, true);
-	            	        game.peces.get(i).setPosition(Gdx.graphics.getWidth()/2 - 10, Gdx.graphics.getHeight());
+	            	        game.peces.get(i).setPosition(game.width/2 - 10, game.height);
 	            	        game.peces.get(i).initBody(game.world, 0);
 	            	        game.dinero -= pb.precioPez;
             			}
@@ -47,7 +46,7 @@ public class ImageUI extends Image{
 	            			pb2.recentCreat = true;
 	            			game.peces.add(pb2);
 	            			int i = game.peces.indexOf(pb2, true);
-	            	        game.peces.get(i).setPosition(Gdx.graphics.getWidth()/2 - 10, Gdx.graphics.getHeight());
+	            	        game.peces.get(i).setPosition(game.width/2 - 10, game.height);
 	            	        game.peces.get(i).initBody(game.world, 0);
 	            	        game.dinero -= pb2.precioPez;
             			}

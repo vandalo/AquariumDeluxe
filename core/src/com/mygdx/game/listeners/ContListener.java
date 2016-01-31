@@ -42,10 +42,11 @@ public class ContListener implements com.badlogic.gdx.physics.box2d.ContactListe
     		pez = (Pez) contact.getFixtureA().getBody().getUserData();
     		//if (contact.getFixtureB().getBody().getUserData() instanceof Comida) {
     			comida = (Comida) contact.getFixtureB().getBody().getUserData();
-    			if (!game.bodiesToDestroy.contains(comida.body, true))
+    			if (!game.bodiesToDestroy.contains(comida.body, true)){
     				game.bodiesToDestroy.add(comida.body);
-    			game.numComidasActual--;
-    			game.comidas.removeValue(comida, true);
+    				game.numComidasActual--;
+    				game.comidas.removeValue(comida, true);
+	    		}
     			pez.tiempoDesdeComida = 0;
     			comida.alive = false;
     			pez.steps = 0;
@@ -55,10 +56,11 @@ public class ContListener implements com.badlogic.gdx.physics.box2d.ContactListe
     		comida = (Comida) contact.getFixtureA().getBody().getUserData();
     		//if (contact.getFixtureB().getBody().getUserData() instanceof Pez){
 	    		pez = (Pez) contact.getFixtureB().getBody().getUserData();
-	    		if (!game.bodiesToDestroy.contains(comida.body, true))
+	    		if (!game.bodiesToDestroy.contains(comida.body, true)){
     				game.bodiesToDestroy.add(comida.body);
-	    		game.numComidasActual--;
-	    		game.comidas.removeValue(comida, true);
+    				game.numComidasActual--;
+    				game.comidas.removeValue(comida, true);
+	    		}
 	    		pez.tiempoDesdeComida = 0;
 	    		comida.alive = false;
 	    		pez.steps = 0;

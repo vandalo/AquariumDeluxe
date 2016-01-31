@@ -25,7 +25,7 @@ public abstract class Pez extends Sprite {
     protected int tamanoPez;
     public float tiempoDesdeComida, tiempoPez;
     protected Random ran;
-    private float dirX, dirY;
+    protected float dirX, dirY;
     public int steps;
     protected float xSpeed, ySpeed;
     Sprite spriteDer, spriteIzq, spriteMuerto, spriteHambDer, spriteHambIzq;
@@ -33,7 +33,7 @@ public abstract class Pez extends Sprite {
     protected int width, height;
     testGame game;
     protected int tiempoUltimaMoneda;
-    public static int TIME_HASTA_HAMBRE = 10, TIME_HASTA_MUERTE = 25;
+    public static int TIME_HASTA_HAMBRE = 2, TIME_HASTA_MUERTE = 25;
     public int precioPez;
 	
 	public Pez(World world, testGame game, Sprite derecha, Sprite izquierda,
@@ -48,8 +48,7 @@ public abstract class Pez extends Sprite {
 		tiempoDesdeComida = 0f;
 		ran = new Random();
 		steps = 0;
-		dirX = 35;
-		dirY = 5;
+		
 		spriteDer = derecha;
 		spriteIzq = izquierda;
 		spriteHambDer = hambrientoDerecha;
@@ -57,8 +56,8 @@ public abstract class Pez extends Sprite {
 		spriteMuerto = muerto;
 		randomSteep = (int) (530 + ran.nextInt(150));
 		if (randomSteep % 2 != 0) randomSteep++;
-		width = Gdx.graphics.getWidth()*9/10;
-		height = Gdx.graphics.getHeight()*6/7;
+		width = game.width*9/10;
+		height = game.height*6/7;
 		aliveShown = false;
 		this.game = game;
 		tiempoUltimaMoneda = ran.nextInt(500);
@@ -74,11 +73,7 @@ public abstract class Pez extends Sprite {
 	public abstract int comida_cercana();
 	public abstract int getValueMoneda();
 	public abstract void setNivelPez();
-	
-	public void updateSizes(int width, int height){
-		/*this.width = width * 5 / 10;
-		this.height = height * 2/4;*/
-	}
+
 
 	public void draw(Batch spriteBatch){
 		if (alive) {
@@ -182,6 +177,7 @@ public abstract class Pez extends Sprite {
 		
 		if(tiempoDesdeComida > TIME_HASTA_MUERTE){
 			set(spriteMuerto);
+			setSize(width/8, width/(int)(8*1.487));
 			aliveShown = true;
 		}
 		else if(tiempoDesdeComida > TIME_HASTA_HAMBRE){

@@ -17,6 +17,9 @@ public class PezBasic extends Pez{
 		xSpeed = 35;
 		ySpeed = 20;
 		precioPez = 200;
+		Vel = 20;
+		dirX = 35;
+		dirY = 5;
 	}
 	
 	
@@ -116,9 +119,9 @@ public class PezBasic extends Pez{
 		if(i >= 0){
 			xComida = game.comidas.get(i).getX();
 			yComida = game.comidas.get(i).getY();
-			Vel = 20;
-			body.setLinearVelocity(-((getX()-xComida) * Vel), -((getY()-yComida) * Vel));
-			//System.out.println("Entra x: " + getX() + ". XComida: " + xComida + ". Val i: " + i);
+			body.setLinearVelocity(-((getX()-xComida)) * Vel, -((getY()-yComida)) * Vel);
+			
+			//System.out.println("Entra x: " + body.getLinearVelocity().x + ". XComida: " + body.getLinearVelocity().y + ". Val i: " + i);
 			//body.setLinearVelocity(xSpeed*3, ySpeed*3);
 		}
 	}

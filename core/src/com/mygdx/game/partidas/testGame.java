@@ -146,12 +146,12 @@ public class testGame implements Screen {
 
 	@Override
 	public void render(float delta) {
-		//delta = Math.min(0.06f, delta);
+		delta = Math.min(0.06f, delta);
 		//Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		//Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
-		world.step(1f/30f, 6, 2);
+		world.step(1/30f, 6, 2);
 		for (Body body : bodiesToDestroy){
 			body.setActive(false);
 			world.destroyBody(body);
