@@ -178,7 +178,7 @@ public class testGame implements Screen {
 		        loadingBar.draw(game.batch, (int)(width*0.25), (int)(height*0.02), (int)(width*0.6875)*(1-tiempoJugado/tiempoTotal), (int)(height*0.08));//progress * 700
 			game.batch.end();
 			
-			debugRenderer.render(world, camera.combined);
+			//debugRenderer.render(world, camera.combined);
 			monedasView.setText("Balance: " + dinero);	
 			monedasView.setSize(monedasView.getPrefWidth(), monedasView.getPrefHeight());
 			

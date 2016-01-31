@@ -33,7 +33,7 @@ public abstract class Pez extends Sprite {
     protected int width, height;
     testGame game;
     protected int tiempoUltimaMoneda;
-    public static int TIME_HASTA_HAMBRE = 2, TIME_HASTA_MUERTE = 25;
+    public static int TIME_HASTA_HAMBRE = 15, TIME_HASTA_MUERTE = 35;
     public int precioPez;
 	
 	public Pez(World world, testGame game, Sprite derecha, Sprite izquierda,
