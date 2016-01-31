@@ -154,9 +154,8 @@ public class testGame implements Screen {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 		world.step(1f/30f, 6, 2);
 		for (Body body : bodiesToDestroy){
-			world.destroyBody(body);
-			//body.getBody().destroyFixture(body);
 			body.setActive(false);
+			world.destroyBody(body);
 			bodiesToDestroy.removeValue(body, true);
 		}
 		tiempoJugado+=delta;
@@ -181,7 +180,6 @@ public class testGame implements Screen {
 			game.batch.end();
 			
 			debugRenderer.render(world, camera.combined);
-			//container.debugTable();
 			monedasView.setText("Balance: " + dinero);	
 			monedasView.setSize(monedasView.getPrefWidth(), monedasView.getPrefHeight());
 			
@@ -200,19 +198,6 @@ public class testGame implements Screen {
 
 	public void resize (int width, int height) { 
 		stage.getViewport().update(width, height,true);
-		//this.width = width;
-		//this.height = height;
-		/*pez.updateSizes(width, height);
-		pez2.updateSizes(width, height);*/
-	    //
-	    //new Stage(new StretchViewport(width,Gdx.graphics.getHeight()));
-	    //pez.body.setTransform(pez.getX(), pez.getY(), pez.body.getAngle());
-	    /*camera.viewportWidth = width;
-		camera.viewportHeight = height;
-		camera.setToOrtho(false,width,Gdx.graphics.getHeight());
-		camera.update();
-
-		game.batch.setProjectionMatrix(camera.combined);*/
 	}
 
 	public void pause () { 

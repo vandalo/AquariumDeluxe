@@ -9,7 +9,6 @@ import com.mygdx.game.partidas.testGame;
 
 public class ContListener implements com.badlogic.gdx.physics.box2d.ContactListener{
 	private testGame game;
-	
 	public ContListener(testGame game){
 		this.game = game;
 	}
@@ -39,26 +38,31 @@ public class ContListener implements com.badlogic.gdx.physics.box2d.ContactListe
     public void postSolve(Contact contact, ContactImpulse impulse) {
     	Pez pez = null;
     	Comida comida = null;
-    	boolean hayComida = false;
     	if (contact.getFixtureA().getBody().getUserData() instanceof Pez) {
     		pez = (Pez) contact.getFixtureA().getBody().getUserData();
-    		comida = (Comida) contact.getFixtureB().getBody().getUserData();
-    		game.bodiesToDestroy.add(contact.getFixtureB().getBody());
-    		hayComida = true;
+    		//if (contact.getFixtureB().getBody().getUserData() instanceof Comida) {
+    			comida = (Comida) contact.getFixtureB().getBody().getUserData();
+    			if (!game.bodiesToDestroy.contains(comida.body, true))
+    				game.bodiesToDestroy.add(comida.body);
+    			game.numComidasActual--;
+    			game.comidas.removeValue(comida, true);
+    			pez.tiempoDesdeComida = 0;
+    			comida.alive = false;
+    			pez.steps = 0;
+    		//}
 		}
     	else if (contact.getFixtureA().getBody().getUserData() instanceof Comida){
     		comida = (Comida) contact.getFixtureA().getBody().getUserData();
-    		game.bodiesToDestroy.add(contact.getFixtureA().getBody());
-    		pez = (Pez) contact.getFixtureB().getBody().getUserData();
-    		hayComida = true;
+    		//if (contact.getFixtureB().getBody().getUserData() instanceof Pez){
+	    		pez = (Pez) contact.getFixtureB().getBody().getUserData();
+	    		if (!game.bodiesToDestroy.contains(comida.body, true))
+    				game.bodiesToDestroy.add(comida.body);
+	    		game.numComidasActual--;
+	    		game.comidas.removeValue(comida, true);
+	    		pez.tiempoDesdeComida = 0;
+	    		comida.alive = false;
+	    		pez.steps = 0;
+    		//}
     	}
-    	if (hayComida){
-    		pez.tiempoDesdeComida = 0;
-    		comida.alive = false;
-    		game.numComidasActual--;
-    		pez.steps = 0;
-    		game.comidas.removeValue(comida, true);
-    	}
-    	
     }
 }

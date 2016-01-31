@@ -33,7 +33,7 @@ public abstract class Pez extends Sprite {
     protected int width, height;
     testGame game;
     protected int tiempoUltimaMoneda;
-    public static int TIME_HASTA_HAMBRE = 10, TIME_HASTA_MUERTE = 25;
+    public static int TIME_HASTA_HAMBRE = 2, TIME_HASTA_MUERTE = 25;
     public int precioPez;
 	
 	public Pez(World world, testGame game, Sprite derecha, Sprite izquierda,
@@ -99,14 +99,17 @@ public abstract class Pez extends Sprite {
 		
 		//CALCULATE VELOCITY AND COLLISIONS FOR AI
 		//COLISIONES HORIZONTALES
+		//si ha comido reinicie la IA de direccion
 		if (haHabidoComida && game.numComidasActual < 1){
 			haHabidoComida = false;
 			steps = 0;
 		}
+		//colocar el pez en el centro
 		if(recentCreat == true){
 			body.setLinearVelocity(0, (getY()-(height/2))*(-10));
 			if(getY() < height/2)recentCreat = false;
 		}
+		//si esta muerto de hambre (literalmente)
 		else if (tiempoDesdeComida > TIME_HASTA_MUERTE){
 			body.setLinearVelocity(0,15);
 			if (collidesTop(getX(), getY()-50)){
