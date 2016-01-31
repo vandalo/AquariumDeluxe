@@ -49,8 +49,7 @@ public class testGame implements Screen {
 	public Array<Comida> comidas;
 	public Array<Moneda> monedas;
 	protected float tiempoJugado, tiempoTotal;
-	private int width;
-	public int height;
+	public int height, width;
 	public Array<Integer> pecesDisponibles;
 	public int objetivoPartida;
 	public boolean win = false;

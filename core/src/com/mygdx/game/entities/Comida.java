@@ -24,12 +24,11 @@ public abstract class Comida extends Sprite {
 	public Comida(Sprite sprite, World world, testGame game){
 		super(sprite);
 		alive = true;
+		poderComida = 0;
+		this.game = game;
+		setSize(game.width/20, game.width/20);
 		spriteW = getWidth(); 
 		spriteH = getHeight(); 
-		poderComida = 0;
-		width = Gdx.graphics.getWidth()*9/10;
-		height = Gdx.graphics.getHeight()*3/4;
-		this.game = game;
 	}
 	
 	public abstract void initBody(World world);

@@ -32,15 +32,16 @@ public class Moneda extends Sprite {
 	public Moneda(Sprite sprite, World world, testGame game){
 		super(sprite);
 		alive = true;
-		spriteW = getWidth(); 
-		spriteH = getHeight(); 
 		valor = 0;
 		tiempoDesdeCaida = 0f;
 		spriteMoneda = sprite;
-		width = Gdx.graphics.getWidth()*9/10;
-		height = Gdx.graphics.getHeight()*3/4;
+		width = game.width*9/10;
+		height = game.height*3/4;
 		this.game = game;
 		startCount = false;
+		setSize(game.width/18, game.width/18);
+		spriteW = getWidth(); 
+		spriteH = getHeight(); 
 	}
 	
 
