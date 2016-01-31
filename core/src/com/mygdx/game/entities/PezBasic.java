@@ -65,9 +65,8 @@ public class PezBasic extends Pez{
 			tiempoUltimaMoneda = 300 + ran.nextInt(450);
 			int i = game.numMonedasActual;
 			if (i < game.numMonedasMax){
-				Moneda m = new Moneda(game.spriteMonedas.get(tamanoPez), game.world, game);
-				int valMoneda = getValueMoneda();
-				m.valor = valMoneda;
+				Moneda m = new Moneda(game.spriteMonedas.get(tamanoPez-1), game.world, game);
+				m.valor = getValueMoneda();
 				game.monedas.add(m);
 				i = game.monedas.indexOf(m, true);
 				game.monedas.get(i).setPosition(getX(), getY()-5);
@@ -80,17 +79,15 @@ public class PezBasic extends Pez{
 	}
 
 	public void setNivelPez(){
-		if(tiempoPez > 180)tamanoPez = 0;
-		else if(tiempoPez > 70)tamanoPez = 1;
-		else if(tiempoPez > 30)tamanoPez = 2;	
+		if(tiempoPez > 180)tamanoPez = 3;
+		else if(tiempoPez > 70)tamanoPez = 2;
+		else if(tiempoPez > 20) tamanoPez = 1;	
 	}
 	
 	public int getValueMoneda(){
-		int value = 0;
-		if(tamanoPez == 2) value = 50;
-		else if(tamanoPez == 1)value = 100;
-		else if(tamanoPez == 0)value = 175;
-		return value;		
+		if(tamanoPez == 1) return 50;
+		else if(tamanoPez == 2)return 100;
+		else return 175;		
 	}
 	
 	@Override

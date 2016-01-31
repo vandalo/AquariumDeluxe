@@ -30,7 +30,7 @@ public class ImageUI extends Image{
             			//Pez Basic
             			
             			//TODO CAMBIAR EL GET1 Y GET2 POR LOS NUM K LE PASEMOS POR EL CONSTRUCTOR
-            			PezBasic pb = new PezBasic(game.entities.createSprite("pezbasic"), game.world, game, game.spritesPeces.get(1), game.spritesPeces.get(2));
+            			PezBasic pb = new PezBasic(game.spritesPeces.get(0), game.world, game, game.spritesPeces.get(1), game.spritesPeces.get(2));
             			if(game.dinero >= pb.precioPez){
 	            			pb.recentCreat = true;
 	            			game.peces.add(pb);
@@ -42,7 +42,7 @@ public class ImageUI extends Image{
             			break;
             		case 2:
             			//Pez ?? (basic too por el momento)
-            			PezBasic pb2 = new PezBasic(game.entities.createSprite("pezbasic"), game.world, game, game.spritesPeces.get(1), game.spritesPeces.get(2));
+            			PezBasic pb2 = new PezBasic(game.spritesPeces.get(0), game.world, game, game.spritesPeces.get(1), game.spritesPeces.get(2));
             			if(game.dinero >= pb2.precioPez){
 	            			pb2.recentCreat = true;
 	            			game.peces.add(pb2);

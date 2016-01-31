@@ -1,7 +1,5 @@
 package com.mygdx.game.partidas;
 
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-
 public class OpcionesPartida {
 
 	public int numPeces, numComidas, numMonedas, timepoPartida, objetivo, dineroInicial;
@@ -13,7 +11,7 @@ public class OpcionesPartida {
 			numMonedas = 50;
 			timepoPartida = 300;
 			objetivo = 500;
-			dineroInicial = 10;
+			dineroInicial = 100000;
 			break;
 		case 1:
 			numPeces = 100;

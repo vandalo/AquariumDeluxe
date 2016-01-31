@@ -56,7 +56,7 @@ public class MainMenuScreen implements Screen {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				//game.setScreen(new testGame(game));
-	            //dispose();
+	            dispose();
 				game.setScreen(new nivel(game,0));
 			}
 		});
@@ -69,7 +69,7 @@ public class MainMenuScreen implements Screen {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				//game.setScreen(new testGame(game));
-	            //dispose();
+	            dispose();
 				game.setScreen(new nivel(game,1));
 			}
 		});
@@ -82,7 +82,7 @@ public class MainMenuScreen implements Screen {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				//game.setScreen(new testGame(game));
-	            //dispose();
+	            dispose();
 				game.setScreen(new nivel(game,1));
 			}
 		});
@@ -94,9 +94,8 @@ public class MainMenuScreen implements Screen {
 		buttonExit.addListener(new ClickListener(){
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				//dispose();
-	            //Gdx.app.exit();
-				game.setScreen(new StageSelector(mmScreen, game));
+				dispose();
+	            Gdx.app.exit();
 			}
 		});
 		

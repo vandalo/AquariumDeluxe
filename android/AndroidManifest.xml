@@ -2,9 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.noxer.aquarium"
     android:versionCode="1"
+	android:hardwareAccelerated="false"
     android:versionName="1.0" >
-
-    <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="23" />
+    <uses-sdk android:minSdkVersion="11" android:targetSdkVersion="23" />
     <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application

@@ -36,7 +36,7 @@ public class testGame implements Screen {
 	public Array<Body> bodiesToDestroy = new Array<Body>(false, 16);
 	public TextureAtlas gameUI, entities, atlas, throwables;
 	
-	private Table container, table;
+	private Table table;
 	private Skin skin;
 	private TextButton monedasView;
 	protected ImageUI objetivo, menu;
@@ -55,7 +55,7 @@ public class testGame implements Screen {
 	public int objetivoPartida;
 	public boolean win = false;
 	
-	public Array<Sprite> spritesPeces, spriteMonedas;
+	public Array<Sprite> spritesPeces, spriteMonedas, spriteComidas;
 	
 	public testGame(final AquariumDeluxe game) {
 		this.game = game;
@@ -69,9 +69,12 @@ public class testGame implements Screen {
 		entities = new TextureAtlas(Gdx.files.internal("skins/fish.pack"));
 		throwables = new TextureAtlas(Gdx.files.internal("skins/throwables.pack"));
 		
+		
         debugRenderer = new Box2DDebugRenderer();
         setupActors();
         
+        width = Gdx.graphics.getWidth();
+        height = Gdx.graphics.getHeight();
       //setting up processors
   		InputMultiplexer inp = new InputMultiplexer();
   		inp.addProcessor(stage);
@@ -80,13 +83,16 @@ public class testGame implements Screen {
   		Gdx.input.setInputProcessor(inp);
   		world.setContactListener(new ContListener(this));
   		numComidasActual = 0;
-  		width = Gdx.graphics.getWidth();
-  		height = Gdx.graphics.getHeight();
   		
   		spriteMonedas = new Array<Sprite>(3);
-  		spriteMonedas.add(throwables.createSprite("moneda"));
-  		spriteMonedas.add(throwables.createSprite("monedaplata"));
   		spriteMonedas.add(throwables.createSprite("monedabronze"));
+  		spriteMonedas.add(throwables.createSprite("monedaplata"));
+  		spriteMonedas.add(throwables.createSprite("moneda"));
+  		
+  		spriteComidas = new Array<Sprite>(3);
+  		spriteComidas.add(throwables.createSprite("menjar1"));
+  		spriteComidas.add(throwables.createSprite("menjar2"));
+  		spriteComidas.add(throwables.createSprite("menjar3"));
 	}
 
 
@@ -120,27 +126,31 @@ public class testGame implements Screen {
         
         atlas = new TextureAtlas("skins/userInterface.pack");
 		skinButtons = new Skin(Gdx.files.internal("skins/userInterface.json"), atlas);
-		container = new Table(skinButtons);
+		//container = new Table(skinButtons);
 		
-		container.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		monedasView = new TextButton("PLAY", skinButtons, "mainMenuBlack");
+		//container.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		monedasView = new TextButton("BALANCE", skinButtons, "mainMenuBlack");
 		objetivo = new ImageUI(gameUI.findRegion("dissabledbutton"), entities.findRegion("pezbasic"), true, 7, this);
 		menu = new ImageUI(gameUI.findRegion("dissabledbutton"), entities.findRegion("pezbasic"), true, 8, this);
+		
 		monedasView.pad(10);
-		container.add(monedasView);
-		container.add(menu);
-		container.add(objetivo);
-		container.getCell(monedasView).spaceBottom(5);
-		stage.addActor(container);
+		stage.addActor(monedasView);
+		stage.addActor(menu);
+		stage.addActor(objetivo);
+		
+		monedasView.setPosition(100, 380);
+		objetivo.setPosition(100, 25);
+		menu.setPosition(750, 430);
+		
 	}
 
 
 	@Override
 	public void render(float delta) {
-		delta = Math.min(0.06f, delta);
-		Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		//delta = Math.min(0.06f, delta);
+		//Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		Gdx.gl.glClearColor(0, 0, 0, 1);
-		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+		//Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 		world.step(1f/30f, 6, 2);
 		for (Body body : bodiesToDestroy){
@@ -150,6 +160,7 @@ public class testGame implements Screen {
 			bodiesToDestroy.removeValue(body, true);
 		}
 		tiempoJugado+=delta;
+		
 		
 		//COMPROBAMOS SI HEMOS PERDIDO
 		if(!checkLost() && !win){
@@ -171,11 +182,10 @@ public class testGame implements Screen {
 			
 			debugRenderer.render(world, camera.combined);
 			//container.debugTable();
-			monedasView.setPosition(100, height - 100);
 			monedasView.setText("Balance: " + dinero);	
-			objetivo.setPosition(100, 25);
-			menu.setPosition(width - 50, height - 50);
-			stage.getViewport().apply();
+			monedasView.setSize(monedasView.getPrefWidth(), monedasView.getPrefHeight());
+			
+			//stage.getViewport().apply();
 			stage.draw();
 			stage.act(delta);
 		}
