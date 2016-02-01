@@ -8,6 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.mygdx.game.AquariumDeluxe;
+import com.mygdx.game.PrePartida;
+import com.mygdx.game.StageSelector;
 import com.mygdx.game.entities.PezBasic;
 import com.mygdx.game.partidas.nivel;
 import com.mygdx.game.partidas.testGame;
@@ -17,17 +19,16 @@ public class ImageUI extends Image{
 	private boolean draw;
 	final public int position;
 	
+	//COMPRAR PEZ
 	public ImageUI(TextureRegion region, TextureRegion ball, boolean draw, final int position, final testGame game){
 		super(region);
 		addListener(new InputListener(){
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons){
-               // System.out.println("Touched: " + event.getListenerActor().getY() + "position: " + position);
                 if (game.pecesDisponibles.size > position && game.pecesDisponibles.get(position) != null){
                 	switch (game.pecesDisponibles.get(position)) {
                 	// game.pecesDisponibles.get(position) tendrea el id del pc que se deve crear
             		case 1:   
             			//Pez Basic
-            			
             			//TODO CAMBIAR EL GET1 Y GET2 POR LOS NUM K LE PASEMOS POR EL CONSTRUCTOR
             			PezBasic pb = new PezBasic(game.spritesPeces.get(0), game.world, game, game.spritesPeces.get(1), game.spritesPeces.get(2));
             			if(game.dinero >= pb.precioPez){
@@ -55,7 +56,7 @@ public class ImageUI extends Image{
             			break;
             		}              	
                 }
-                else{
+                else if (position == 7){
                 	//Objetivo de la partida
                 	if(game.dinero >= game.objetivoPartida) game.win = true;
                 }
@@ -81,6 +82,40 @@ public class ImageUI extends Image{
         			break;
         		case 1:  
         			game.setScreen(new nivel(game,1));
+        			break;
+        		case 2:  
+        			game.setScreen(new nivel(game,2));
+        			break;
+        		case 3:  
+        			game.setScreen(new nivel(game,3));
+        			break;
+        		case 4:  
+        			game.setScreen(new nivel(game,4));
+        			break;
+                default:
+                	break;
+            	}
+            	return true;
+            }
+        });
+		this.draw = draw;
+		this.ball = new Sprite(ball);
+		this.position = position;
+		this.ball.setSize(getWidth(), getHeight());
+		this.ball.setAlpha(0.8f);
+	}
+	
+	public ImageUI(TextureRegion region, TextureRegion ball, boolean draw, final int position, 
+			final AquariumDeluxe game, final StageSelector stg){
+		super(region);
+		addListener(new InputListener(){
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons){
+            	switch (position) {
+        		case 0:  
+        			game.setScreen(new PrePartida(game,0, stg));
+        			break;
+        		case 1:  
+        			game.setScreen(new PrePartida(game,1, stg));
         			break;
         		case 2:  
         			game.setScreen(new nivel(game,2));

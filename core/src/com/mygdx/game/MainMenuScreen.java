@@ -16,7 +16,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.partidas.nivel;
-import com.mygdx.game.subclasses.ImageUI;
 
 public class MainMenuScreen implements Screen {
 
@@ -29,7 +28,6 @@ public class MainMenuScreen implements Screen {
 	private Label heading;
 	private TextButton buttonPlay, buttonExit, buttonInventory, buttonAquarium;
 	protected Sprite background;
-	private ImageUI menuOpciones;
 	//private List<String> list;
 	//private ScrollPane scrollPane;
 	
@@ -56,7 +54,7 @@ public class MainMenuScreen implements Screen {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				//game.setScreen(new testGame(game));
-	            dispose();
+	            //dispose();
 				game.setScreen(new StageSelector(mmScreen, game));
 			}
 		});
@@ -69,7 +67,7 @@ public class MainMenuScreen implements Screen {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				//game.setScreen(new testGame(game));
-	            dispose();
+	            //dispose();
 				game.setScreen(new Inventory(mmScreen, game));
 			}
 		});
@@ -82,7 +80,7 @@ public class MainMenuScreen implements Screen {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				//game.setScreen(new testGame(game));
-	            dispose();
+	            //dispose();
 				game.setScreen(new nivel(game,1));
 			}
 		});

@@ -3,68 +3,74 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.mygdx.game.subclasses.ImageUI;
+import com.mygdx.game.partidas.nivel;
 
-public class StageSelector implements Screen {
-	private MainMenuScreen game;
+public class PrePartida implements Screen {
+	private StageSelector gameStage;
 	private Stage stage;
 	private Table table;
 	private ImageButton backArrow;
-	private TextureAtlas gameUI, atlas, entities;
-	private Skin skinButtons;
+	private TextureAtlas atlas;
+	private TextButton buttonPlay;
+	private int nivel;
+	private Sprite background;
+	private Skin skin;
 	final AquariumDeluxe Agame;
 	
 	
-	public StageSelector(MainMenuScreen game, AquariumDeluxe gam) {
-		this.game = game;
+	public PrePartida(AquariumDeluxe gam, int nivel, StageSelector gameStage) {
 		Agame = gam;
+		this.nivel = nivel;
+		this.gameStage = gameStage;
 	}
 
 	@Override
 	public void show() {//addActor lo a�ade al centro, add lo a�ade al medio 
 		stage = new Stage(new StretchViewport(800, 400));
 		Gdx.input.setInputProcessor(stage);
-		gameUI = new TextureAtlas(Gdx.files.internal("skins/gameUI.pack"));
-		backArrow = new ImageButton(game.skin, "backArrow");
 		atlas = new TextureAtlas("skins/userInterface.pack");
-		skinButtons = new Skin(Gdx.files.internal("skins/userInterface.json"), atlas);
-		table = new Table(skinButtons);
-		table.setBackground(new Image(game.background.getTexture()).getDrawable());
-		table.setFillParent(true);
+		skin = new Skin(Gdx.files.internal("skins/userInterface.json"), atlas);
+		backArrow = new ImageButton(skin, "backArrow");
+		table = new Table(skin);
+		table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		
 		
 		backArrow.addListener(new ClickListener(){
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				game.game.setScreen(game);//TODO GO BACK
+				Agame.setScreen(gameStage);//TODO GO BACK
 			}
 		});
 		
+		buttonPlay = new TextButton("PLAY", skin, "mainMenuBlack");
+		buttonPlay.pad(10);
+		buttonPlay.padRight(30);
+		buttonPlay.padLeft(30);
+		buttonPlay.addListener(new ClickListener(){
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				//game.setScreen(new testGame(game));
+	            //dispose();
+				Agame.setScreen(new nivel(Agame, nivel));
+			}
+		});
+		
+		table.add(buttonPlay);
 		//stage
 		stage.addActor(table);
 		stage.addActor(backArrow);
 		backArrow.setPosition(10, 326);
 		
-		entities = new TextureAtlas(Gdx.files.internal("skins/fish.pack"));
-		ImageUI[] image = new ImageUI[6];
-		for (int i = 0; i < 6; i++){
-			image[i] = new ImageUI(gameUI.findRegion("dissabledbutton"), entities.findRegion("pezbasic"), true, i, Agame, this);
-//			table.add(image[i]).minSize(Gdx.graphics.getWidth()/16, Gdx.graphics.getWidth()/16).spaceRight(20);
-			//table.add(image[i]).minSize(60, 60).spaceBottom(10);
-			stage.addActor(image[i]);
-			image[i].setPosition(i*60, i*25);
-		}	
-		
-		
-//		table.add(backArrow).align(Align.topLeft).pad(10);
 	}
 
 	@Override
@@ -102,8 +108,9 @@ public class StageSelector implements Screen {
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
-
+		background.getTexture().dispose();
+		stage.dispose();
+		skin.dispose();
 	}
 
 }
