@@ -108,15 +108,10 @@ public class testGame implements Screen {
 		ImageUI[] image = new ImageUI[6];
 		for (int i = 0; i < 6; i++){
 			image[i] = new ImageUI(gameUI.findRegion("dissabledbutton"), entities.findRegion("pezbasic"), true, i, this);
-//			table.add(image[i]).minSize(Gdx.graphics.getWidth()/16, Gdx.graphics.getWidth()/16).spaceRight(20);
 			table.add(image[i]).minSize(60, 60).spaceBottom(10);
 			table.row();
 		}	
 		table.getColor().mul(1, 1, 1, 0.85f);
-		//container.setBounds(0, 0, 80, 480);
-		//container.bottom();
-		//container.add(scrollPane).padLeft(10).padRight(10);
-		//container.getColor().mul(1, 1, 1, 0.65f);
 		
 		NinePatch loadingBarBackgroundPatch = new NinePatch(gameUI.findRegion("lifeBack"), 2, 2, 2, 2);
         NinePatch loadingBarPatch = new NinePatch(gameUI.findRegion("lifeRed"), 2, 2, 2, 2);
