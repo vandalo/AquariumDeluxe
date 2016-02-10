@@ -76,9 +76,18 @@ public class ImageUI extends Image{
 		super(region);
 		addListener(new InputListener(){
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons){
-            	if (tgame.contadorImagen < 6){
+            	if (tgame.contadorImagen < 6 && tgame.peixos_seleccionats.size < 6){
+            		if(tgame.peixos_seleccionats.size == 0){
 	            	((ImageUI)tgame.image[tgame.contadorImagen]).setDrawable(new TextureRegionDrawable(ball));
 	            	++tgame.contadorImagen;
+	            	tgame.peixos_seleccionats.add(pointer);
+            		}
+            		else if(!tgame.peixos_seleccionats.contains(pointer, false)){
+            			((ImageUI)tgame.image[tgame.contadorImagen]).setDrawable(new TextureRegionDrawable(ball));
+    	            	++tgame.contadorImagen;
+    	            	tgame.peixos_seleccionats.add(pointer);
+            		}
+	            	
             	}
             	return true;
             }

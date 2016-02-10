@@ -65,6 +65,7 @@ public class testGame implements Screen {
 	
 	public ImageUI[] image;
 	public int contadorImagen;
+	public Array<Integer> peixos_seleccionats;
 	
 	public Array<Sprite> spritesPeces, spriteMonedas, spriteComidas;
 	
@@ -98,7 +99,7 @@ public class testGame implements Screen {
   		Gdx.input.setInputProcessor(inp);
   		world.setContactListener(new ContListener(this));
   		numComidasActual = 0;
-  		
+  		peixos_seleccionats = new Array<Integer>(0);
   		spriteMonedas = new Array<Sprite>(3);
   		spriteMonedas.add(throwables.createSprite("monedabronze"));
   		spriteMonedas.add(throwables.createSprite("monedaplata"));
@@ -161,9 +162,14 @@ public class testGame implements Screen {
 				inventary.add(imagePossibles[i]).maxSize(60, 60).spaceTop(20).spaceLeft(25);
 				if((i+1)%4 == 0)inventary.row();
 				break;
-
+			case 1:
+				imagePossibles[i] = new ImageUI(gameUI.findRegion("espasa_requadre"), gameUI.findRegion("espasapreu"), true,i+200, game, this);
+				//inventary.add(imagePossibles[i]).maxSize(60, 60).spaceTop(20).spaceLeft(25);
+				inventary.add(imagePossibles[i]).maxSize(60, 60).spaceTop(20).spaceLeft(25);
+				if((i+1)%4 == 0)inventary.row();
+				break;
 			default:
-				imagePossibles[i] = new ImageUI(gameUI.findRegion("requadre_opac"), gameUI.findRegion("fonspallasopreu"), true,i+200, game, this);
+				imagePossibles[i] = new ImageUI(gameUI.findRegion("requadre_opac"), gameUI.findRegion("requadre_opac"), true,i+200, game, this);
 				inventary.add(imagePossibles[i]).maxSize(60, 60).spaceTop(20).spaceLeft(25);
 				if((i+1)%4 == 0)inventary.row();
 				break;
