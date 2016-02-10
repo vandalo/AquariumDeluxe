@@ -5,22 +5,57 @@ filter: Nearest,Nearest
 repeat: none
 pezbasic
   rotate: false
-  xy: 0, 0
-  size: 171, 115
-  orig: 171, 115
+  xy: 0, 289
+  size: 266, 218
+  orig: 266, 218
   offset: 0, 0
   index: -1
 pezhambriento
   rotate: false
-  xy: 171, 0
-  size: 171, 115
-  orig: 171, 115
+  xy: 0, 71
+  size: 266, 218
+  orig: 266, 218
   offset: 0, 0
   index: -1
 pezmuerto
   rotate: false
-  xy: 342, 0
-  size: 171, 115
-  orig: 171, 115
+  xy: 266, 289
+  size: 266, 218
+  orig: 266, 218
+  offset: 0, 0
+  index: -1
+espasa
+  rotate: false
+  xy: 532, 334
+  size: 278, 173
+  orig: 278, 173
+  offset: 0, 0
+  index: -1
+espasa_gana
+  rotate: false
+  xy: 266, 117
+  size: 278, 172
+  orig: 278, 172
+  offset: 0, 0
+  index: -1
+espasa_mort
+  rotate: false
+  xy: 544, 162
+  size: 278, 172
+  orig: 278, 172
+  offset: 0, 0
+  index: -1
+barracuda
+  rotate: false
+  xy: 266, 0
+  size: 280, 117
+  orig: 280, 117
+  offset: 0, 0
+  index: -1
+barracuda_mort
+  rotate: false
+  xy: 546, 45
+  size: 280, 117
+  orig: 280, 117
   offset: 0, 0
   index: -1

@@ -75,7 +75,7 @@ public class Inventory implements Screen {
 		//Peixos triats
 		ImageUI[] image = new ImageUI[6];
 		for (int i = 0; i < 6; i++){
-			image[i] = new ImageUI(gameUI.findRegion("dissabledbutton"), entities.findRegion("pezbasic"), true,i+100, Agame);
+			//image[i] = new ImageUI(gameUI.findRegion("dissabledbutton"), entities.findRegion("pezbasic"), true,i+100, Agame);
 			table.add(image[i]).minSize(60, 60).spaceBottom(10);
 		}	
 		table.getColor().mul(1, 1, 1, 0.85f);
@@ -85,7 +85,7 @@ public class Inventory implements Screen {
 		ImageUI[] imagePossibles = new ImageUI[24];
 		inventary.padTop(15);
 		for (int i = 0; i < 24; i++){
-			imagePossibles[i] = new ImageUI(gameUI.findRegion("dissabledbutton"), entities.findRegion("pezbasic"), true,i+200, Agame);
+			//imagePossibles[i] = new ImageUI(gameUI.findRegion("dissabledbutton"), entities.findRegion("pezbasic"), true,i+200, Agame);
 			inventary.add(imagePossibles[i]).minSize(60, 60).spaceTop(20).spaceLeft(25);
 			if((i+1)%4 == 0)inventary.row();
 		}	
