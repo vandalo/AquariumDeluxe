@@ -42,7 +42,7 @@ public class PrePartida implements Screen {
 		skin = new Skin(Gdx.files.internal("skins/userInterface.json"), atlas);
 		backArrow = new ImageButton(skin, "backArrow");
 		table = new Table(skin);
-		table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		table.setBounds(0, 0, 800, 400);
 		
 		
 		backArrow.addListener(new ClickListener(){
@@ -64,7 +64,7 @@ public class PrePartida implements Screen {
 				Agame.setScreen(new nivel(Agame, nivel));
 			}
 		});
-		
+		buttonPlay.setPosition(370, 190);
 		table.add(buttonPlay);
 		//stage
 		stage.addActor(table);
