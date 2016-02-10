@@ -80,12 +80,12 @@ public class ImageUI extends Image{
             		if(tgame.peixos_seleccionats.size == 0){
 	            	((ImageUI)tgame.image[tgame.contadorImagen]).setDrawable(new TextureRegionDrawable(ball));
 	            	++tgame.contadorImagen;
-	            	tgame.peixos_seleccionats.add(pointer);
+	            	tgame.peixos_seleccionats.add(position);
             		}
-            		else if(!tgame.peixos_seleccionats.contains(pointer, false)){
+            		else if(!tgame.peixos_seleccionats.contains(position, false)){
             			((ImageUI)tgame.image[tgame.contadorImagen]).setDrawable(new TextureRegionDrawable(ball));
     	            	++tgame.contadorImagen;
-    	            	tgame.peixos_seleccionats.add(pointer);
+    	            	tgame.peixos_seleccionats.add(position);
             		}
 	            	
             	}
