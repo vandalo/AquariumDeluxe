@@ -26,24 +26,40 @@ public class nivel extends testGame{
         numComidasMax = ops.numComidas;
         numMonedasMax = ops.numMonedas;
         objetivoPartida = ops.objetivo;
+        enemigosIndex = ops.enemigosIndex;
+        enemigosTiempo = ops.enemigosTiempo;
+    	numEnemigos = ops.numEnemigos;
         dinero = ops.dineroInicial;
         
-        spritesPeces = new Array<Sprite>(3);
+        spritesPeces = new Array<Sprite>(7);
+        //Pez Basic 200
+        //0,1,2
         spritesPeces.add(entities.createSprite("pezbasic"));
         spritesPeces.add(entities.createSprite("pezhambriento"));
         spritesPeces.add(entities.createSprite("pezmuerto"));
         
-        peces.add( new PezBasic(spritesPeces.get(0), world, this, spritesPeces.get(1), spritesPeces.get(2)));
+        //Pez Espada 201
+        //3,4,5
+        spritesPeces.add(entities.createSprite("espasa"));
+        spritesPeces.add(entities.createSprite("espasa_gana"));
+        spritesPeces.add(entities.createSprite("espasa_mort"));
         
+        //Pez Barracuda
+        //6,7
+        spritesPeces.add(entities.createSprite("barracuda"));
+        spritesPeces.add(entities.createSprite("barracuda_mort"));
+        
+        peces.add( new PezBasic(spritesPeces.get(0), world, this, spritesPeces.get(1), spritesPeces.get(2)));       
         peces.get(0).setPosition(Gdx.graphics.getWidth()/2 - 10, Gdx.graphics.getHeight()/2);
         peces.get(0).initBody(world, 0);
         
         peces.add(new PezBasic(spritesPeces.get(0), world, this, spritesPeces.get(1), spritesPeces.get(2)));
         peces.get(1).setPosition(Gdx.graphics.getWidth()/2 + 20, Gdx.graphics.getHeight()/2);
         peces.get(1).initBody(world, 0);
+        
         tiempoJugado = 0;
         tiempoTotal = ops.timepoPartida;
-        pecesDisponibles = new Array<Integer>(1); //en vez de 6 sera el array k le pasemos a nivel
+        pecesDisponibles = new Array<Integer>(6); //en vez de 6 sera el array k le pasemos a nivel
         pecesDisponibles.add(1);
 	}
 

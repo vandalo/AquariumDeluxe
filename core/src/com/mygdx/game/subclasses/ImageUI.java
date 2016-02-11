@@ -12,24 +12,28 @@ import com.mygdx.game.AquariumDeluxe;
 import com.mygdx.game.PrePartida;
 import com.mygdx.game.StageSelector;
 import com.mygdx.game.entities.PezBasic;
+import com.mygdx.game.entities.PezEspada;
 import com.mygdx.game.partidas.nivel;
 import com.mygdx.game.partidas.testGame;
 
 public class ImageUI extends Image{
 	private boolean draw;
 	final public int position;
+	public int index_pez;
 	
 	//COMPRAR PEZ
 	public ImageUI(TextureRegion region, TextureRegion ball, boolean draw, final int position, final testGame game){
 		super(region);
+		index_pez = 0;
 		addListener(new InputListener(){
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons){
-                if (game.pecesDisponibles.size > position && game.pecesDisponibles.get(position) != null){
-                	switch (game.pecesDisponibles.get(position)) {
+            	// && game.pecesDisponibles.get(position) != null
+                if (position < 7){
+                	//switch (game.pecesDisponibles.get(position)) {
+                	switch (index_pez) {
                 	// game.pecesDisponibles.get(position) tendrea el id del pc que se deve crear
-            		case 1:   
+            		case 200:   
             			//Pez Basic
-            			//TODO CAMBIAR EL GET1 Y GET2 POR LOS NUM K LE PASEMOS POR EL CONSTRUCTOR
             			PezBasic pb = new PezBasic(game.spritesPeces.get(0), game.world, game, game.spritesPeces.get(1), game.spritesPeces.get(2));
             			if(game.dinero >= pb.precioPez){
 	            			pb.recentCreat = true;
@@ -40,17 +44,18 @@ public class ImageUI extends Image{
 	            	        game.dinero -= pb.precioPez;
             			}
             			break;
-            		case 2:
-            			//Pez ?? (basic too por el momento)
-            			PezBasic pb2 = new PezBasic(game.spritesPeces.get(0), game.world, game, game.spritesPeces.get(1), game.spritesPeces.get(2));
-            			if(game.dinero >= pb2.precioPez){
-	            			pb2.recentCreat = true;
-	            			game.peces.add(pb2);
-	            			int i = game.peces.indexOf(pb2, true);
+            		case 201:
+            			//Pez Espada
+            			PezEspada pespada = new PezEspada(game.spritesPeces.get(3), game.world, game, game.spritesPeces.get(4), game.spritesPeces.get(5));
+            			if(game.dinero >= pespada.precioPez){
+            				pespada.recentCreat = true;
+	            			game.peces.add(pespada);
+	            			int i = game.peces.indexOf(pespada, true);
 	            	        game.peces.get(i).setPosition(game.width/2 - 10, game.height);
 	            	        game.peces.get(i).initBody(game.world, 0);
-	            	        game.dinero -= pb2.precioPez;
+	            	        game.dinero -= pespada.precioPez;
             			}
+
             			break;
             		default:
             			break;
@@ -78,12 +83,14 @@ public class ImageUI extends Image{
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons){
             	if (tgame.contadorImagen < 6 && tgame.peixos_seleccionats.size < 6){
             		if(tgame.peixos_seleccionats.size == 0){
-	            	((ImageUI)tgame.image[tgame.contadorImagen]).setDrawable(new TextureRegionDrawable(ball));
-	            	++tgame.contadorImagen;
-	            	tgame.peixos_seleccionats.add(position);
+		            	((ImageUI)tgame.image[tgame.contadorImagen]).setDrawable(new TextureRegionDrawable(ball));
+		            	tgame.image[tgame.contadorImagen].index_pez = position;
+		            	++tgame.contadorImagen;
+		            	tgame.peixos_seleccionats.add(position);
             		}
             		else if(!tgame.peixos_seleccionats.contains(position, false)){
             			((ImageUI)tgame.image[tgame.contadorImagen]).setDrawable(new TextureRegionDrawable(ball));
+            			tgame.image[tgame.contadorImagen].index_pez = position;
     	            	++tgame.contadorImagen;
     	            	tgame.peixos_seleccionats.add(position);
             		}

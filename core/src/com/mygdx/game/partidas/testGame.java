@@ -29,6 +29,8 @@ import com.mygdx.game.StageSelector;
 import com.mygdx.game.entities.Comida;
 import com.mygdx.game.entities.Moneda;
 import com.mygdx.game.entities.Pez;
+import com.mygdx.game.entities.PezBarracuda;
+import com.mygdx.game.entities.PezBasic;
 import com.mygdx.game.listeners.ContListener;
 import com.mygdx.game.listeners.InpListener;
 import com.mygdx.game.subclasses.ImageUI;
@@ -60,6 +62,9 @@ public class testGame implements Screen {
 	protected float tiempoJugado, tiempoTotal;
 	public int height, width;
 	public Array<Integer> pecesDisponibles;
+	public float[] enemigosIndex;
+	public float[] enemigosTiempo;
+	public int numEnemigos;
 	public int objetivoPartida;
 	public boolean win = false;
 	
@@ -258,6 +263,24 @@ public class testGame implements Screen {
 			}
 			tiempoJugado+=delta;
 			
+			//miro temps dels enemics
+			for(int n = 0; n < numEnemigos; n++){
+				System.out.println(enemigosTiempo[n]);
+				//Si encara no s'han de crear
+				if(enemigosTiempo[n] > 1){
+					enemigosTiempo[n] = (enemigosTiempo[n] - delta);
+				}
+				//si s'ha de crear
+				else if(enemigosTiempo[n] < 1 && enemigosTiempo[n] > 0){
+					PezBarracuda pb = new PezBarracuda(spritesPeces.get(6), world, this, spritesPeces.get(6), spritesPeces.get(7));
+					pb.recentCreat = true;
+        			peces.add(pb);
+        			int i = peces.indexOf(pb, true);
+        	        peces.get(i).setPosition(width/2 - 10, height);
+        	        peces.get(i).initBody(world, 0);
+        	        enemigosTiempo[n] = -1;
+				}
+			}
 			
 			//COMPROBAMOS SI HEMOS PERDIDO
 			if(!checkLost() && !win){
