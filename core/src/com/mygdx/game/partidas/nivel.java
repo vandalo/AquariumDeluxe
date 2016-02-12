@@ -44,7 +44,7 @@ public class nivel extends testGame{
         spritesPeces.add(entities.createSprite("espasa_gana"));
         spritesPeces.add(entities.createSprite("espasa_mort"));
         
-        //Pez Barracuda
+        //Pez Barracuda 1
         //6,7
         spritesPeces.add(entities.createSprite("barracuda"));
         spritesPeces.add(entities.createSprite("barracuda_mort"));

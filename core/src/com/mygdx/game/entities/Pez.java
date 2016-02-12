@@ -196,7 +196,7 @@ public abstract class Pez extends Sprite {
 	}
 	
 	
-	private void choseDirection() {
+	protected void choseDirection() {
 		if(alive && !aliveShown){
 		//random horizontal
 			if (steps % randomSteep == 0){
@@ -221,7 +221,7 @@ public abstract class Pez extends Sprite {
 		steps++;
 	}
 
-	private boolean isCellBlocked(float x, float y){
+	protected boolean isCellBlocked(float x, float y){
 		if(recentCreat)return false;
 		if (x < 85 || (x > width) || (y > height) || y < 20){
 			steps = 1; 
@@ -231,25 +231,25 @@ public abstract class Pez extends Sprite {
 	}
 	
 	
-	private boolean collidesRight(float x, float y) {
+	protected boolean collidesRight(float x, float y) {
         for(float step = 0; step < spriteH+2; step += spriteH/2)
                 if(isCellBlocked(x + spriteW, y + step)) return true;
         return false;
 	}
 	 
-	private boolean collidesLeft(float x, float y) {
+	protected boolean collidesLeft(float x, float y) {
         for(float step = 0; step < spriteH+2; step += spriteH/2)
                 if(isCellBlocked(x, y + step)) return true;
         return false;
 	}
 	 
-	private boolean collidesTop(float x, float y) {
+	protected boolean collidesTop(float x, float y) {
         for(float step = 0; step < spriteW+2; step += spriteW/2)
                 if(isCellBlocked(x + step, y + spriteH)) return true;
         return false;
 	}
 	 
-	private boolean collidesBottom(float x, float y) {
+	protected boolean collidesBottom(float x, float y) {
         for(float step = 0; step < spriteW+2; step += spriteW/2)
                 if(isCellBlocked(x + step, y)) return true;
         return false;

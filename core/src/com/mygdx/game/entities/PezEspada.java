@@ -64,66 +64,137 @@ public class PezEspada extends Pez{
 
 	@Override
 	public void crearMoneda(World world) {
-		if(tamanoPez > 0 && tiempoUltimaMoneda <= 0 && !aliveShown){
-			tiempoUltimaMoneda = 300 + ran.nextInt(450);
-			int i = game.numMonedasActual;
-			if (i < game.numMonedasMax){
-				Moneda m = new Moneda(game.spriteMonedas.get(tamanoPez-1), game.world, game);
-				m.valor = getValueMoneda();
-				game.monedas.add(m);
-				i = game.monedas.indexOf(m, true);
-				game.monedas.get(i).setPosition(getX(), getY()-5);
-				game.monedas.get(i).initBody(game.world);
-				game.monedas.get(i).setSpeed();
-				game.numMonedasActual++;
-			}
-		}
 		
 	}
 
 	public void setNivelPez(){
-		if(tiempoPez > 180)tamanoPez = 3;
-		else if(tiempoPez > 70)tamanoPez = 2;
-		else if(tiempoPez > 20) tamanoPez = 1;	
+	
 	}
 	
 	public int getValueMoneda(){
-		if(tamanoPez == 1) return 50;
-		else if(tamanoPez == 2)return 100;
-		else return 175;		
+		return 1;
 	}
 	
 	@Override
 	public int comida_cercana() {
-		x = getX();
-		y = getY();
-		dist = 999999999;
-		res = -1;
-		for(int i = 0; i < game.comidas.size; i++){
-			if (game.comidas.get(i) != null){
-				xc = game.comidas.get(i).getX();
-				yc = game.comidas.get(i).getY();
-				distAux = (x-xc)*(x-xc)+(y-yc)*(y-yc);
-				if (distAux < dist){
-					dist = distAux;
-					res = i;
-				}
-			}
-		}
-		return res;		
+		return 1;
 	}
 	
 	@Override
 	public void ir_a_comida() {
-		i = comida_cercana();	
-		if(i >= 0){
-			xComida = game.comidas.get(i).getX();
-			yComida = game.comidas.get(i).getY();
-			body.setLinearVelocity(-((getX()-xComida)) * Vel, -((getY()-yComida)) * Vel);
-			
-			//System.out.println("Entra x: " + body.getLinearVelocity().x + ". XComida: " + body.getLinearVelocity().y + ". Val i: " + i);
-			//body.setLinearVelocity(xSpeed*3, ySpeed*3);
+		
+	}
+	
+	protected void update(float deltaTime) {		
+		//setNivelPez();
+		collisionX = false;
+		collisionY = false;
+		tiempoDesdeComida += deltaTime;
+		tiempoUltimaMoneda -= deltaTime;
+		tiempoPez += deltaTime;
+		//crearMoneda(game.world);
+		
+		//CALCULATE VELOCITY AND COLLISIONS FOR AI
+		//COLISIONES HORIZONTALES
+		//si ha comido reinicie la IA de direccion
+		if (haHabidoComida && game.numComidasActual < 1){
+			haHabidoComida = false;
+			steps = 0;
 		}
+		//colocar el pez en el centro
+		if(recentCreat == true){
+			body.setLinearVelocity(0, (getY()-(height/2))*(-10));
+			if(getY() < height/2)recentCreat = false;
+		}
+		//si esta muerto de hambre (literalmente)
+		else if (tiempoDesdeComida > TIME_HASTA_MUERTE){
+			body.setLinearVelocity(0,15);
+			if (collidesTop(getX(), getY()-50)){
+				alive = false;
+				game.bodiesToDestroy.add(body);
+				body.setActive(false);
+				game.peces.removeValue(this, true);
+			}
+		}
+		
+		else if (tiempoDesdeComida > TIME_HASTA_HAMBRE && game.numComidasActual > 0){
+			haHabidoComida = true;
+			ir_a_comida();
+		}
+		else{
+			choseDirection();
+			if (body.getLinearVelocity().x < 0) {
+				collisionX = collidesLeft(getX() + velocity.x * deltaTime, getY());
+	
+			} else if (body.getLinearVelocity().x > 0) {
+				//Top Right
+				collisionX = collidesRight(getX() + velocity.x * deltaTime, getY());
+			}
+			if (collisionX) {
+				if (body.getLinearVelocity().x < 0) {
+					
+					//HA CHOCADO CON LA IZQUIERDA, VAMOS HACIA LA DERECHA
+					body.setLinearVelocity(-body.getLinearVelocity().x, body.getLinearVelocity().y);
+					body.setTransform(body.getPosition().x + 1, body.getPosition().y, body.getAngle()); 
+				}
+				else {
+					//HA CHOCADO CON LA DERECHA, VAMOS HACIA LA IZQUIERDA
+					body.setLinearVelocity(-body.getLinearVelocity().x, body.getLinearVelocity().y);
+					body.setTransform(body.getPosition().x - 1, body.getPosition().y, body.getAngle());
+				}
+			}
+			float valX = (!collisionX) ? getX() + body.getLinearVelocity().x * deltaTime : getX();
+			
+			
+			//COLISIONES VERTICALES
+			if (body.getLinearVelocity().y < 0) {
+				//Bottom left
+				collisionY = collidesBottom(valX, getY() + body.getLinearVelocity().y * deltaTime);
+				
+				//SI EL PEZ MUERE BORRAMOS EL BODY
+				if (aliveShown && collisionY) {
+					body.setActive(false);
+					alive = false;
+					game.bodiesToDestroy.add(body);
+				}
+			} else if (body.getLinearVelocity().y > 0) {
+				//Top Left
+				collisionY = collidesTop(valX, getY() + body.getLinearVelocity().y * deltaTime);
+			}
+			
+			if (collisionY) {
+				if (body.getLinearVelocity().y < 0) {
+					body.setLinearVelocity(body.getLinearVelocity().x, -body.getLinearVelocity().y);
+					body.setTransform(body.getPosition().x, body.getPosition().y + 1, body.getAngle()); 
+				}
+				else {
+					body.setLinearVelocity(body.getLinearVelocity().x, -body.getLinearVelocity().y);
+					body.setTransform(body.getPosition().x, body.getPosition().y - 1, body.getAngle());
+				}
+			}
+		}
+		//}
+		
+		//SET POSITION DE LA IMAGEN K ACOMPANA AL BODY
+		
+		if(tiempoDesdeComida > TIME_HASTA_MUERTE){
+			set(spriteMuerto);
+			setSize(width/8, width/(int)(8*1.487));
+			aliveShown = true;
+		}
+		else if(tiempoDesdeComida > TIME_HASTA_HAMBRE){
+			set(spriteHambDer);
+			setSize(width/8, width/(int)(8*1.487));
+			if (body.getLinearVelocity().x < 0) setFlip(true, false);
+			else setFlip(false, false);
+		}
+		else {
+			set(spriteDer);
+			setSize(width/8, width/(int)(8*1.487));
+			if (body.getLinearVelocity().x < 0) setFlip(true, false);//set(spriteIzq);
+			else setFlip(false, false);
+		}
+		setPosition(body.getPosition().x - spriteW/2, body.getPosition().y - spriteH/2);
 	}
 
 }
