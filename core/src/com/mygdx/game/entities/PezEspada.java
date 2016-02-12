@@ -75,22 +75,14 @@ public class PezEspada extends Pez{
 		return 1;
 	}
 	
-	@Override
-	public int comida_cercana() {
-		return 1;
-	}
 	
-	@Override
-	public void ir_a_comida() {
-		
-	}
 	
 	protected void update(float deltaTime) {		
 		//setNivelPez();
 		collisionX = false;
 		collisionY = false;
 		tiempoDesdeComida += deltaTime;
-		tiempoUltimaMoneda -= deltaTime;
+		//tiempoUltimaMoneda -= deltaTime;
 		tiempoPez += deltaTime;
 		//crearMoneda(game.world);
 		
@@ -195,6 +187,37 @@ public class PezEspada extends Pez{
 			else setFlip(false, false);
 		}
 		setPosition(body.getPosition().x - spriteW/2, body.getPosition().y - spriteH/2);
+	}
+
+
+	@Override
+	public void ir_a_comida() {
+		i = comida_cercana();	
+		if(i >= 0){
+			xComida = game.comidas.get(i).getX();
+			yComida = game.comidas.get(i).getY();
+			body.setLinearVelocity(-((getX()-xComida)) * Vel, -((getY()-yComida)) * Vel);
+		}
+	}
+
+
+	public int comida_cercana() {
+		x = getX();
+		y = getY();
+		dist = 999999999;
+		res = -1;
+		for(int i = 0; i < game.comidas.size; i++){
+			if (game.comidas.get(i) != null){
+				xc = game.comidas.get(i).getX();
+				yc = game.comidas.get(i).getY();
+				distAux = (x-xc)*(x-xc)+(y-yc)*(y-yc);
+				if (distAux < dist){
+					dist = distAux;
+					res = i;
+				}
+			}
+		}
+		return res;		
 	}
 
 }

@@ -21,6 +21,7 @@ public class nivel extends testGame{
         mapSprite.setPosition(0, 0);                                            
         mapSprite.setSize(w, Gdx.graphics.getHeight()); 
         peces = new Array<Pez>(false, ops.numPeces);
+        enemigosPeces = new Array<Pez>(false, ops.numEnemigos);
         comidas = new Array<Comida>(false, ops.numComidas);
         monedas = new Array<Moneda>(false, ops.numMonedas);
         numComidasMax = ops.numComidas;

@@ -57,6 +57,7 @@ public class testGame implements Screen {
 	public int dinero;
 	private NinePatchDrawable loadingBarBackground, loadingBar;
 	public Array<Pez> peces;
+	public Array<Pez> enemigosPeces;
 	public Array<Comida> comidas;
 	public Array<Moneda> monedas;
 	protected float tiempoJugado, tiempoTotal;
@@ -275,10 +276,10 @@ public class testGame implements Screen {
 					case 1:
 						PezBarracuda pb = new PezBarracuda(spritesPeces.get(6), world, this, spritesPeces.get(6), spritesPeces.get(7));
 						pb.recentCreat = true;
-	        			peces.add(pb);
-	        			int i = peces.indexOf(pb, true);
-	        	        peces.get(i).setPosition(width/2 - 10, height);
-	        	        peces.get(i).initBody(world, 0);
+						enemigosPeces.add(pb);
+	        			int i = enemigosPeces.indexOf(pb, true);
+	        			enemigosPeces.get(i).setPosition(width/2 - 10, height);
+	        			enemigosPeces.get(i).initBody(world, 0);
 	        	        enemigosTiempo[n] = -1;
 						break;
 					default:
@@ -300,6 +301,9 @@ public class testGame implements Screen {
 					}
 					for (int i = 0; i < monedas.size; ++i){
 						if (monedas.get(i) != null) monedas.get(i).draw(game.batch);
+					}
+					for (int i = 0; i < enemigosPeces.size; i++){
+						enemigosPeces.get(i).draw(game.batch);
 					}
 					loadingBarBackground.draw(game.batch, (int)(width*0.25), (int)(height*0.02), (int)(width*0.6875), (int)(height*0.08));
 			        loadingBar.draw(game.batch, (int)(width*0.25), (int)(height*0.02), (int)(width*0.6875)*(1-tiempoJugado/tiempoTotal), (int)(height*0.08));//progress * 700

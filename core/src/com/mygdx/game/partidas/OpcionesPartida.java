@@ -18,13 +18,13 @@ public class OpcionesPartida {
 			timepoPartida = 180;
 			objetivo = 500;
 			dineroInicial = 200;
-			numEnemigos = 0;
+			numEnemigos = 2;
 			enemigosIndex = new int[numEnemigos];
 			enemigosTiempo = new float[numEnemigos];
-			//enemigosIndex[0] = 1;
-			//enemigosTiempo[0] = 5;
-			//enemigosIndex[1] = 1;
-			//enemigosTiempo[1] = 5;
+			enemigosIndex[0] = 1;
+			enemigosTiempo[0] = 5;
+			enemigosIndex[1] = 1;
+			enemigosTiempo[1] = 5;
 			break;
 		case 1:
 			numPeces = 100;

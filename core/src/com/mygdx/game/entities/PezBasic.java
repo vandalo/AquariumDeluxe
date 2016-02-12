@@ -120,9 +120,6 @@ public class PezBasic extends Pez{
 			xComida = game.comidas.get(i).getX();
 			yComida = game.comidas.get(i).getY();
 			body.setLinearVelocity(-((getX()-xComida)) * Vel, -((getY()-yComida)) * Vel);
-			
-			//System.out.println("Entra x: " + body.getLinearVelocity().x + ". XComida: " + body.getLinearVelocity().y + ". Val i: " + i);
-			//body.setLinearVelocity(xSpeed*3, ySpeed*3);
 		}
 	}
 

@@ -14,8 +14,8 @@ import com.mygdx.game.partidas.testGame;
 
 public abstract class Pez extends Sprite {
 	
-	private Vector2 velocity = new Vector2();
-	private float spriteW, spriteH;
+	protected Vector2 velocity = new Vector2();
+	protected float spriteW, spriteH;
 	public boolean alive, aliveShown, haHabidoComida, recentCreat;
 	protected boolean collisionX, collisionY;
 	public Body body;
