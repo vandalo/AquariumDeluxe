@@ -11,11 +11,9 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -25,12 +23,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.mygdx.game.AquariumDeluxe;
-import com.mygdx.game.StageSelector;
 import com.mygdx.game.entities.Comida;
 import com.mygdx.game.entities.Moneda;
 import com.mygdx.game.entities.Pez;
 import com.mygdx.game.entities.PezBarracuda;
-import com.mygdx.game.entities.PezBasic;
 import com.mygdx.game.listeners.ContListener;
 import com.mygdx.game.listeners.InpListener;
 import com.mygdx.game.subclasses.ImageUI;
@@ -42,7 +38,7 @@ public class testGame implements Screen {
 	public World world;
 	Box2DDebugRenderer debugRenderer;
 	Stage stage, stageInventario;
-	protected float w;
+	//protected float w;
     protected Sprite mapSprite;
 	public Array<Body> bodiesToDestroy = new Array<Body>(false, 16);
 	public TextureAtlas gameUI, entities, atlas, throwables;
@@ -77,10 +73,10 @@ public class testGame implements Screen {
 	
 	public testGame(final AquariumDeluxe game) {
 		this.game = game;
-		 w = Gdx.graphics.getWidth();
+		 //w = Gdx.graphics.getWidth();
 		//setting up camera and world
 	    camera = new OrthographicCamera();
-	    camera.setToOrtho(false,w,Gdx.graphics.getHeight());
+	    camera.setToOrtho(false,800,480);
 		world = new World(new Vector2(0, 0),true);
 		//world.setContactListener(new ContListener(this));
 		gameUI = new TextureAtlas(Gdx.files.internal("skins/gameUI.pack"));
@@ -93,9 +89,11 @@ public class testGame implements Screen {
         debugRenderer = new Box2DDebugRenderer();
         setupActors();
         showInventario();
+        /*width = Gdx.graphics.getWidth();
+        height = Gdx.graphics.getHeight();*/
+        width = 800;
+        height = 480;
         
-        width = Gdx.graphics.getWidth();
-        height = Gdx.graphics.getHeight();
       //setting up processors
   		InputMultiplexer inp = new InputMultiplexer();
   		inp.addProcessor(stageInventario);
@@ -271,7 +269,7 @@ public class testGame implements Screen {
 					enemigosTiempo[n] = (enemigosTiempo[n] - delta);
 				}
 				//si s'ha de crear
-				else if(enemigosTiempo[n] < 1 && enemigosTiempo[n] > 0){
+				else if(enemigosTiempo[n] > 0 && enemigosTiempo[n] < 1){
 					switch(enemigosIndex[n]){
 					case 1:
 						PezBarracuda pb = new PezBarracuda(spritesPeces.get(6), world, this, spritesPeces.get(6), spritesPeces.get(7));
@@ -345,6 +343,7 @@ public class testGame implements Screen {
 
 	public void resize (int width, int height) { 
 		stage.getViewport().update(width, height,true);
+		stageInventario.getViewport().update(width, height,true);
 	}
 
 	public void pause () { 

@@ -1,7 +1,5 @@
 package com.mygdx.game.partidas;
 
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.utils.Array;
 
 public class OpcionesPartida {
 
@@ -24,7 +22,7 @@ public class OpcionesPartida {
 			enemigosIndex[0] = 1;
 			enemigosTiempo[0] = 5;
 			enemigosIndex[1] = 1;
-			enemigosTiempo[1] = 5;
+			enemigosTiempo[1] = 15;
 			break;
 		case 1:
 			numPeces = 100;

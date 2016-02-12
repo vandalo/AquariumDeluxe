@@ -9,25 +9,23 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.mygdx.game.partidas.nivel;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 
 public class MainMenuScreen implements Screen {
 
 	final AquariumDeluxe game;
 	final MainMenuScreen mmScreen;
-	private TextureAtlas atlas;
-	protected Skin skin;
+	private TextureAtlas atlas, gameUI;
+	protected Skin skin, skin2;
 	private Stage stage;
 	private Table table;
-	private Label heading;
-	private TextButton buttonPlay, buttonExit, buttonInventory, buttonAquarium;
+	//private Label heading;
 	protected Sprite background;
+	private ImageButton menu;
 	//private List<String> list;
 	//private ScrollPane scrollPane;
 	
@@ -38,89 +36,43 @@ public class MainMenuScreen implements Screen {
     
 	@Override
 	public void show() {
-		stage = new Stage(new FitViewport(800, 480)); //CON STRETCH Y BACKGROUND EN LA TABLA SE VE BN
+		//stage = new Stage(new FitViewport(800, 480)); //CON STRETCH Y BACKGROUND EN LA TABLA SE VE BN
+		stage = new Stage(new StretchViewport(800, 480));
 		Gdx.input.setInputProcessor(stage);
-		//((OrthographicCamera)stage.getCamera()).setToOrtho(false, 800, 480);
 		atlas = new TextureAtlas("skins/userInterface.pack");
+		gameUI = new TextureAtlas("skins/gameUI.pack");
 		skin = new Skin(Gdx.files.internal("skins/userInterface.json"), atlas);
+		skin2 = new Skin(Gdx.files.internal("skins/gameUI.json"), gameUI);
 		table = new Table(skin);
-		table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		table.setBounds(0, 0, 800, 480);
 		
-		buttonPlay = new TextButton("PLAY", skin, "mainMenuBlack");
-		buttonPlay.pad(10);
-		buttonPlay.padRight(30);
-		buttonPlay.padLeft(30);
-		buttonPlay.addListener(new ClickListener(){
+		menu = new ImageButton(skin2, "timon");
+		
+		//buttonPlay = new TextButton("PLAY", skin, "mainMenuBlack");
+
+		
+		
+		//heading = new Label("Aquarium Deluxe", skin, "default");
+		//heading.setFontScale(2);
+		
+		//table.add(heading);
+		//table.getCell(heading).padBottom(30);
+		menu.setPosition(700, 410);
+		//menu.setSize(150, 150);
+		menu.addListener(new ClickListener(){
 			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				//game.setScreen(new testGame(game));
-	            //dispose();
+			public void clicked(InputEvent event, float x, float y){
+				gameUI.dispose();
 				game.setScreen(new StageSelector(mmScreen, game));
 			}
 		});
 		
-		buttonInventory = new TextButton("INVENTORY", skin, "mainMenuBlack");
-		buttonInventory.pad(10);
-		buttonInventory.padRight(30);
-		buttonInventory.padLeft(30);
-		buttonInventory.addListener(new ClickListener(){
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				//game.setScreen(new testGame(game));
-	            //dispose();
-				game.setScreen(new Inventory(mmScreen, game));
-			}
-		});
-		
-		buttonAquarium = new TextButton("AQUARIUM", skin, "mainMenuBlack");
-		buttonAquarium.pad(10);
-		buttonAquarium.padRight(30);
-		buttonAquarium.padLeft(30);
-		buttonAquarium.addListener(new ClickListener(){
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				//game.setScreen(new testGame(game));
-	            //dispose();
-				game.setScreen(new nivel(game,1));
-			}
-		});
-		
-		buttonExit = new TextButton("EXIT", skin, "mainMenuBlack");
-		buttonExit.pad(10);
-		buttonExit.padRight(30);
-		buttonExit.padLeft(30);
-		buttonExit.addListener(new ClickListener(){
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				dispose();
-	            Gdx.app.exit();
-			}
-		});
-		
-		heading = new Label("Aquarium Deluxe", skin, "default");
-		//heading.setFontScale(2);
-		
-		table.add(heading);
-		table.getCell(heading).padBottom(30);
-		//table.setBackground(new Image(new Texture("globe.png")).getDrawable());
-		table.row();
-		table.add(buttonPlay);
-		table.getCell(buttonPlay).spaceBottom(10);
-		table.row();
-		table.add(buttonInventory);
-		table.getCell(buttonInventory).spaceBottom(10);
-		table.row();
-		table.add(buttonAquarium);
-		table.getCell(buttonAquarium).spaceBottom(10);
-		table.row();
-		table.add(buttonExit);
-		//table.debug();
-		table.setOrigin(table.getWidth()/2, table.getHeight()/2);
-		table.setFillParent(true);
+		//table.add(menu);
 		stage.addActor(table);
+		table.addActor(menu);
 		
-		background = new Sprite(new Texture("background.png"));
-		background.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		background = new Sprite(new Texture("fondo2.png"));
+		background.setBounds(0, 0, 800, 480);
 		
 		/*list = new List<String>(skin);
 		list.setItems(new String[]{"Uno", "dos", "tres"});
@@ -132,14 +84,14 @@ public class MainMenuScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
-		Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		//Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		Gdx.gl.glClearColor(0, 0, 0.2f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		game.batch.begin();
 			background.draw(game.batch);
 		game.batch.end();
         //table.debugTable();
-		stage.getViewport().apply();
+		//stage.getViewport().apply();
         stage.act(delta);
         stage.draw();
 	}
@@ -169,6 +121,7 @@ public class MainMenuScreen implements Screen {
 		atlas.dispose();
 		skin.dispose();
 		stage.dispose();
+		gameUI.dispose();
 		background.getTexture().dispose();
 	}
 

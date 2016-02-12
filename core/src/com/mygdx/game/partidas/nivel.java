@@ -19,7 +19,7 @@ public class nivel extends testGame{
 		//mapSprite = new Sprite(new Texture("backgroundd.png"));
 		mapSprite = new Sprite(new Texture("fondo1-01.png"));
         mapSprite.setPosition(0, 0);                                            
-        mapSprite.setSize(w, Gdx.graphics.getHeight()); 
+        mapSprite.setSize(800, 480); 
         peces = new Array<Pez>(false, ops.numPeces);
         enemigosPeces = new Array<Pez>(false, ops.numEnemigos);
         comidas = new Array<Comida>(false, ops.numComidas);
@@ -51,12 +51,9 @@ public class nivel extends testGame{
         spritesPeces.add(entities.createSprite("barracuda_mort"));
         
         peces.add( new PezBasic(spritesPeces.get(0), world, this, spritesPeces.get(1), spritesPeces.get(2)));       
-        peces.get(0).setPosition(Gdx.graphics.getWidth()/2 - 10, Gdx.graphics.getHeight()/2);
+        peces.get(0).setPosition(800/2 - 10, 480/2);
         peces.get(0).initBody(world, 0);
-        
-        peces.add(new PezBasic(spritesPeces.get(0), world, this, spritesPeces.get(1), spritesPeces.get(2)));
-        peces.get(1).setPosition(Gdx.graphics.getWidth()/2 + 20, Gdx.graphics.getHeight()/2);
-        peces.get(1).initBody(world, 0);
+
         
         tiempoJugado = 0;
         tiempoTotal = ops.timepoPartida;

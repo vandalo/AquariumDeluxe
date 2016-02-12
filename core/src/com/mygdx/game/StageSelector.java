@@ -31,7 +31,7 @@ public class StageSelector implements Screen {
 
 	@Override
 	public void show() {//addActor lo a�ade al centro, add lo a�ade al medio 
-		stage = new Stage(new StretchViewport(800, 400));
+		stage = new Stage(new StretchViewport(800, 480));
 		Gdx.input.setInputProcessor(stage);
 		gameUI = new TextureAtlas(Gdx.files.internal("skins/gameUI.pack"));
 		backArrow = new ImageButton(game.skin, "backArrow");
@@ -51,7 +51,7 @@ public class StageSelector implements Screen {
 		//stage
 		stage.addActor(table);
 		stage.addActor(backArrow);
-		backArrow.setPosition(10, 326);
+		backArrow.setPosition(10, 376);
 		
 		entities = new TextureAtlas(Gdx.files.internal("skins/fish.pack"));
 		ImageUI[] image = new ImageUI[6];

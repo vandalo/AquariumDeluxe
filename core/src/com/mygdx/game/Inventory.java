@@ -21,7 +21,7 @@ public class Inventory implements Screen {
 	private Stage stage;
 	private Table table, inventary;
 	private ImageButton backArrow;
-	private TextureAtlas gameUI, atlas, entities;
+	private TextureAtlas atlas;
 	private Skin skinButtons;
 	final AquariumDeluxe Agame;
 	protected Actor background;
@@ -37,7 +37,7 @@ public class Inventory implements Screen {
 	public void show() {//addActor lo a�ade al centro, add lo a�ade al medio 
 		stage = new Stage(new StretchViewport(800, 480));
 		Gdx.input.setInputProcessor(stage);
-		gameUI = new TextureAtlas(Gdx.files.internal("skins/gameUI.pack"));
+		//gameUI = new TextureAtlas(Gdx.files.internal("skins/gameUI.pack"));
 		backArrow = new ImageButton(game.skin, "backArrow");
 		atlas = new TextureAtlas("skins/userInterface.pack");
 		skinButtons = new Skin(Gdx.files.internal("skins/userInterface.json"), atlas);
@@ -70,7 +70,7 @@ public class Inventory implements Screen {
 		
 		stage.addActor(tableInvent);
 		*/
-		entities = new TextureAtlas(Gdx.files.internal("skins/fish.pack"));
+		//entities = new TextureAtlas(Gdx.files.internal("skins/fish.pack"));
 		
 		//Peixos triats
 		ImageUI[] image = new ImageUI[6];

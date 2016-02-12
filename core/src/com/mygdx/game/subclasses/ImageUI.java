@@ -1,7 +1,6 @@
 package com.mygdx.game.subclasses;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -17,7 +16,6 @@ import com.mygdx.game.partidas.nivel;
 import com.mygdx.game.partidas.testGame;
 
 public class ImageUI extends Image{
-	private boolean draw;
 	final public int position;
 	public int index_pez;
 	
@@ -34,6 +32,7 @@ public class ImageUI extends Image{
                 	// game.pecesDisponibles.get(position) tendrea el id del pc que se deve crear
             		case 200:   
             			//Pez Basic
+            			//el spritepeces gt0 es el k hemos creado en nivel el sprite
             			PezBasic pb = new PezBasic(game.spritesPeces.get(0), game.world, game, game.spritesPeces.get(1), game.spritesPeces.get(2));
             			if(game.dinero >= pb.precioPez){
 	            			pb.recentCreat = true;
@@ -66,10 +65,11 @@ public class ImageUI extends Image{
                 	if(game.dinero >= game.objetivoPartida) game.win = true;
                 }
                 //setVisible(false);
+                else return false;
                 return true;
             }
         });
-		this.draw = draw;
+		//this.draw = draw;
 		//this.ball = new Sprite(ball);
 		this.position = position;
 		//this.ball.setSize(getWidth(), getHeight());
@@ -99,7 +99,7 @@ public class ImageUI extends Image{
             	return true;
             }
         });
-		this.draw = draw;
+		//this.draw = draw;
 		//this.ball = new Sprite(ball);
 		this.position = position;
 		//this.ball.setSize(getWidth(), getHeight());
@@ -133,7 +133,7 @@ public class ImageUI extends Image{
             	return true;
             }
         });
-		this.draw = draw;
+		//this.draw = draw;
 		//this.ball = new Sprite(ball);
 		this.position = position;
 		//this.ball.setSize(getWidth(), getHeight());
