@@ -33,6 +33,8 @@ public class nivel extends testGame{
         dinero = ops.dineroInicial;
         
         spritesPeces = new Array<Sprite>(7);
+        //TODO CREAR LOS SPRITES UNA VEZ SELECCIONADOS LOS PECES EN EL INVENTARIO Y DADO AL PLAY, DE MANERA QUE 
+        //TODO SOLO CREEMOS LOS SPRITES DE PECES QUE VAMOS A USAR, NO TODOS
         //Pez Basic 200
         //0,1,2
         spritesPeces.add(entities.createSprite("pezbasic"));
