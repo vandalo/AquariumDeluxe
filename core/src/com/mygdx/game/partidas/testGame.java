@@ -76,7 +76,7 @@ public class testGame implements Screen {
 		 //w = Gdx.graphics.getWidth();
 		//setting up camera and world
 	    camera = new OrthographicCamera();
-	    camera.setToOrtho(false,800,480);
+	    camera.setToOrtho(false,AquariumDeluxe.width,AquariumDeluxe.height);
 		world = new World(new Vector2(0, 0),true);
 		//world.setContactListener(new ContListener(this));
 		gameUI = new TextureAtlas(Gdx.files.internal("skins/gameUI.pack"));
@@ -91,8 +91,8 @@ public class testGame implements Screen {
         showInventario();
         /*width = Gdx.graphics.getWidth();
         height = Gdx.graphics.getHeight();*/
-        width = 800;
-        height = 480;
+        width = AquariumDeluxe.width;
+        height = AquariumDeluxe.height;
         
       //setting up processors
   		InputMultiplexer inp = new InputMultiplexer();
@@ -288,7 +288,7 @@ public class testGame implements Screen {
 			
 			//COMPROBAMOS SI HEMOS PERDIDO
 			if(!checkLost() && !win){
-				camera.update();
+				//camera.update();
 				game.batch.begin();
 					mapSprite.draw(game.batch);
 					for (int i = 0; i < peces.size; i++){

@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -23,11 +24,8 @@ public class MainMenuScreen implements Screen {
 	protected Skin skin, skin2;
 	private Stage stage;
 	private Table table;
-	//private Label heading;
 	protected Sprite background;
 	private ImageButton menu;
-	//private List<String> list;
-	//private ScrollPane scrollPane;
 	
     public MainMenuScreen(final AquariumDeluxe gam) {
         game = gam;
@@ -46,18 +44,24 @@ public class MainMenuScreen implements Screen {
 		table = new Table(skin);
 		table.setBounds(0, 0, 800, 480);
 		
-		menu = new ImageButton(skin2, "timon");
+		//menu = new ImageButton(skin2, "timon");
 		
 		//buttonPlay = new TextButton("PLAY", skin, "mainMenuBlack");
-
-		
-		
+		//SpriteDrawable
+		ImageButtonStyle b = new ImageButtonStyle();
+		b.imageUp = skin2.getDrawable("options");
+		//b.imageDown = skin2.getDrawable("options");
+		b.pressedOffsetX = 1;
+		b.pressedOffsetY = -1;
+		b.imageUp.setMinHeight(65);
+		b.imageUp.setMinWidth(65);
+		menu = new ImageButton(b);
 		//heading = new Label("Aquarium Deluxe", skin, "default");
 		//heading.setFontScale(2);
 		
 		//table.add(heading);
 		//table.getCell(heading).padBottom(30);
-		menu.setPosition(700, 410);
+		menu.setPosition(700, 400);
 		//menu.setSize(150, 150);
 		menu.addListener(new ClickListener(){
 			@Override
@@ -72,14 +76,8 @@ public class MainMenuScreen implements Screen {
 		table.addActor(menu);
 		
 		background = new Sprite(new Texture("fondo2.png"));
-		background.setBounds(0, 0, 800, 480);
-		
-		/*list = new List<String>(skin);
-		list.setItems(new String[]{"Uno", "dos", "tres"});
-		scrollPane = new ScrollPane(list, skin);
-		table.add("Select Level");
-		table.add(scrollPane);*/
-
+		background.setBounds(0, 0, AquariumDeluxe.width, AquariumDeluxe.height);
+		//background.setBounds(0, 0, 800, 480);
 	}
 
 	@Override
@@ -126,6 +124,11 @@ public class MainMenuScreen implements Screen {
 	}
 
 }
+	
+	/*
+		table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		*/
+
 
 /*private ScheduledExecutorService programador;
 programador = Executors.newSingleThreadScheduledExecutor();

@@ -36,13 +36,13 @@ public class PrePartida implements Screen {
 
 	@Override
 	public void show() {//addActor lo a�ade al centro, add lo a�ade al medio 
-		stage = new Stage(new StretchViewport(800, 400));
+		stage = new Stage(new StretchViewport(800, 480));
 		Gdx.input.setInputProcessor(stage);
 		atlas = new TextureAtlas("skins/userInterface.pack");
 		skin = new Skin(Gdx.files.internal("skins/userInterface.json"), atlas);
 		backArrow = new ImageButton(skin, "backArrow");
 		table = new Table(skin);
-		table.setBounds(0, 0, 800, 400);
+		table.setBounds(0, 0, 800, 480);
 		
 		
 		backArrow.addListener(new ClickListener(){

@@ -73,7 +73,7 @@ public class StageSelector implements Screen {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		stage.act(delta);
 		stage.draw();
-		table.debugTable();
+		//table.debugTable();
 	}
 
 	@Override

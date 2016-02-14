@@ -1,7 +1,6 @@
 package com.mygdx.game.partidas;
 
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.Array;
@@ -19,7 +18,7 @@ public class nivel extends testGame{
 		//mapSprite = new Sprite(new Texture("backgroundd.png"));
 		mapSprite = new Sprite(new Texture("fondo1-01.png"));
         mapSprite.setPosition(0, 0);                                            
-        mapSprite.setSize(800, 480); 
+        mapSprite.setSize(AquariumDeluxe.width, AquariumDeluxe.height);
         peces = new Array<Pez>(false, ops.numPeces);
         enemigosPeces = new Array<Pez>(false, ops.numEnemigos);
         comidas = new Array<Comida>(false, ops.numComidas);
@@ -64,3 +63,4 @@ public class nivel extends testGame{
 	}
 
 }
+
